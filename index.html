@@ -28,6 +28,8 @@
     --tekst: "Atkinson Hyperlegible", "Verdana", system-ui, sans-serif;
   }
   html { font-size: 125%; }               /* 20px grunnstørrelse */
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  [id] { scroll-margin-top: 1rem; }
   html.stor-tekst { font-size: 150%; }    /* 24px når «Større tekst» er på */
   *, *::before, *::after { box-sizing: border-box; }
   body {
@@ -57,13 +59,18 @@
   /* ---------- Topp ---------- */
   .topp { background: var(--papir); border-bottom: 1px solid var(--strek); }
   .topp .ramme { display: flex; align-items: center; gap: 1rem; min-height: 4.2rem; flex-wrap: wrap; padding-top: .5rem; padding-bottom: .5rem; }
-  .merke { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--lilla); font-weight: 700; font-size: 1.15rem; margin-right: auto; }
+  .merke { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--lilla); font-weight: 700; font-size: 1.15rem; margin-right: auto; flex-shrink: 0; }
   .merke img { width: 2.6rem; height: 2.6rem; border-radius: 22%; }
-  .topp nav ul { list-style: none; display: none; gap: 1.1rem; margin: 0; padding: 0; }
+  .topp nav { order: 2; }
+  .topp nav ul { list-style: none; display: none; flex-wrap: wrap; gap: .4rem 1.1rem; margin: 0; padding: 0; }
   .topp nav a { color: var(--blekk); text-decoration: none; font-size: .85rem; white-space: nowrap; }
   .topp nav a:hover { text-decoration: underline; }
-  @media (min-width: 1200px) { .topp nav ul { display: flex; } .topp .ramme { flex-wrap: nowrap; } }
+  @media (min-width: 1200px) { .topp nav ul { display: flex; } }
+  /* Med større tekst får menyen sin egen linje under logoen, så ingenting går i hverandre */
+  html.stor-tekst .topp nav { order: 4; flex-basis: 100%; padding-bottom: .3rem; }
+  html.stor-tekst .topp nav ul { justify-content: flex-start; }
   .tekstknapp {
+    order: 3; flex-shrink: 0; white-space: nowrap;
     font: inherit; font-size: .85rem; font-weight: 700; color: var(--blekk);
     background: var(--bakgrunn); border: 2px solid var(--strek); border-radius: 999px;
     padding: .35em .9em; cursor: pointer; min-height: 2.6rem;
@@ -238,6 +245,61 @@
   .kvittering.vis { display: block; }
   .kvittering.feil { background: #FCE8E6; border-color: #B3261E; }
 
+  /* Bilder */
+  .foto { width: 100%; height: auto; aspect-ratio: 701 / 382; object-fit: cover; border-radius: 16px; background: var(--lavendel-lys); }
+  figure { margin: 0; }
+  figcaption { font-size: .85rem; color: var(--hint); margin-top: .5rem; }
+  .bilder-to { display: grid; gap: 1.2rem; margin-top: 2rem; }
+  @media (min-width: 760px) { .bilder-to { grid-template-columns: 1fr 1fr; } }
+  .ungdom figcaption { color: #E9E1F0; }
+  .ungdom .foto { margin-bottom: 1.4rem; }
+  .brev-rad { display: grid; gap: 2rem; margin-top: 2.5rem; align-items: center; }
+  @media (min-width: 900px) { .brev-rad { grid-template-columns: 1fr 1fr; } }
+  .brev-rad .brev { margin-top: 0; }
+
+  /* Chat */
+  .lenkeknapp { font: inherit; font-weight: 700; color: var(--lilla); background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
+  .chat-knapp {
+    position: fixed; right: 1rem; bottom: 1rem; z-index: 20;
+    display: inline-flex; align-items: center; gap: .5rem;
+    font: inherit; font-weight: 700; font-size: 1rem; color: #fff; background: var(--lilla);
+    border: 3px solid #fff; border-radius: 999px; padding: .7rem 1.2rem; min-height: 3.2rem; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(42,31,48,.25);
+  }
+  .chat-knapp:hover { background: var(--lilla-mork); }
+  .chat-knapp svg { width: 1.4rem; height: 1.4rem; }
+  .chat-knapp[hidden] { display: none; }
+  .chat {
+    position: fixed; right: 1rem; bottom: 1rem; z-index: 30;
+    width: min(26rem, calc(100vw - 2rem)); height: min(36rem, calc(100vh - 2rem));
+    background: var(--papir); border-radius: 18px; box-shadow: 0 12px 40px rgba(42,31,48,.3);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .chat[hidden] { display: none; }
+  .chat-topp { background: var(--lilla); color: #fff; padding: .8rem 1rem; display: flex; align-items: center; gap: .7rem; }
+  .chat-topp img { width: 2.2rem; height: 2.2rem; border-radius: 22%; }
+  .chat-topp h2 { font-size: 1rem; margin: 0; color: #fff; }
+  .chat-topp p { font-size: .75rem; margin: 0; color: #E9E1F0; }
+  .chat-lukk { margin-left: auto; font: inherit; font-size: 1.6rem; line-height: 1; color: #fff; background: none; border: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; cursor: pointer; }
+  .chat-lukk:hover { background: rgba(255,255,255,.15); }
+  .chat-logg { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .7rem; background: var(--bakgrunn); }
+  .melding { max-width: 88%; padding: .6rem .9rem; border-radius: 16px; font-size: .95rem; line-height: 1.45; }
+  .melding p { margin: 0 0 .4em; } .melding p:last-child { margin: 0; }
+  .melding.bot { background: var(--papir); border: 1px solid var(--strek); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .melding.meg { background: var(--lilla); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .forslag { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .forslag button { font: inherit; font-size: .85rem; color: var(--lilla); background: var(--papir); border: 2px solid var(--lavendel); border-radius: 999px; padding: .35rem .8rem; min-height: 2.4rem; cursor: pointer; }
+  .forslag button:hover { background: var(--lavendel-lys); }
+  .chat-skjema { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid var(--strek); background: var(--papir); }
+  .chat-skjema input { flex: 1; font: inherit; font-size: 1rem; border: 2px solid #8A7D93; border-radius: 10px; padding: .5rem .7rem; min-height: 3rem; min-width: 0; }
+  .chat-skjema input:focus { border-color: var(--lilla); outline: 3px solid var(--lilla); outline-offset: 1px; }
+  .chat-skjema button { font: inherit; font-weight: 700; color: #fff; background: var(--lilla); border: 0; border-radius: 10px; padding: 0 1rem; min-height: 3rem; cursor: pointer; }
+  .chat-merknad { font-size: .72rem; color: var(--hint); text-align: center; padding: 0 .7rem .6rem; background: var(--papir); margin: 0; max-width: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .chat:not([hidden]) { animation: chatInn .22s ease-out; }
+    @keyframes chatInn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  }
+
   /* Bunn */
   .bunn { background: var(--lilla-mork); color: #E9E1F0; padding: 3rem 0 2rem; font-size: .95rem; }
   .bunn a { color: #fff; }
@@ -279,12 +341,12 @@
       <div>
         <h1>En hjelpende hånd.</h1>
         <p class="undertittel">Fra ungdommen i nabolaget, når du trenger det.</p>
-        <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller bare en kopp kaffe og en prat. I Hverdagshelten-appen finner du en ungdom fra [ditt nærmiljø] som kan komme innom.</p>
+        <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller bare en kopp kaffe og en prat. I Hverdagshelten-appen finner du en ungdom fra nabolaget ditt i Oslo som kan komme innom.</p>
         <div class="knapper">
           <a class="knapp knapp-hoved" href="#bestill">Bestill hjelp</a>
           <a class="knapp knapp-sekundar" href="#appen">Se hvordan appen fungerer</a>
         </div>
-        <p class="ring-linje">Vil du heller snakke med et menneske? Ring oss på <a href="tel:46633243">466 33 243</a></p>
+        <p class="ring-linje">Lurer du på noe? <button type="button" class="lenkeknapp" data-apne-chat>Still et spørsmål</button> til chatten vår, som svarer på enkle spørsmål.</p>
       </div>
 
       <div class="lapp-holder" aria-hidden="true">
@@ -320,6 +382,10 @@
     <div class="ramme">
       <h2>Dette kan vi hjelpe med</h2>
       <p>Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
+      <div class="bilder-to">
+        <figure><img class="foto" src="bilde-handling.jpg" alt="En ungdom triller handlevognen for en eldre dame utenfor butikken" width="701" height="382" loading="lazy"><figcaption>Handling og bæring</figcaption></figure>
+        <figure><img class="foto" src="bilde-hage.jpg" alt="En jente klipper plenen mens en eldre mann raker i hagen" width="701" height="382" loading="lazy"><figcaption>Plenklipping og hagearbeid</figcaption></figure>
+      </div>
       <ul class="tjenester">
         <li>
           <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.3 11.1a1 1 0 0 1-1 .9H7.3a1 1 0 0 1-1-.9z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
@@ -352,7 +418,7 @@
   <section class="seksjon seksjon-hvit" id="appen">
     <div class="ramme">
       <h2>Slik fungerer appen</h2>
-      <p>Hverdagshelten er en app som kobler sammen eldre som trenger litt hjelp, og ungdommer i nærmiljøet som vil tjene litt penger. Vi står for den digitale delen, slik at det blir enkelt og trygt for begge.</p>
+      <p>Hverdagshelten er en app som kobler sammen eldre som trenger litt hjelp, og ungdommer i nabolaget som vil tjene litt penger. Vi står for den digitale delen, slik at det blir enkelt og trygt for begge.</p>
 
       <div class="app-spalter">
         <div class="app-boks">
@@ -423,12 +489,15 @@
         <p>Tjen penger når det passer deg, i ditt eget nabolag. Du bestemmer selv hvor mye du vil jobbe, og du får en god referanse til CV-en.</p>
         <a class="knapp knapp-hoved" href="#bestill">Meld deg som hjelper</a>
       </div>
+      <div>
+      <figure><img class="foto" src="bilde-kjokkenhage.jpg" alt="To ungdommer og en eldre dame planter grønnsaker sammen i en kjøkkenhage" width="701" height="380" loading="lazy"></figure>
       <ul>
         <li>Du får 150 kr per time, rett til deg.</li>
         <li>Du velger selv hvilke oppdrag du tar.</li>
         <li>Du logger inn trygt med Vipps.</li>
         <li>Du kan alltid ringe oss hvis du lurer på noe.</li>
       </ul>
+      </div>
     </div>
   </section>
 
@@ -464,10 +533,13 @@
         </li>
       </ul>
 
+      <div class="brev-rad">
+      <figure><img class="foto" src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></figure>
       <div class="brev">
         <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
         <p>Har du spørsmål, kan du alltid ringe oss.</p>
         <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
+      </div>
       </div>
     </div>
   </section>
@@ -482,7 +554,7 @@
         </details>
         <details>
           <summary>Hvem er hjelperne?</summary>
-          <p>Ungdommer mellom 15 og 19 år som bor i nærmiljøet ditt. Alle logger inn med Vipps, så vi vet hvem de er.</p>
+          <p>Ungdommer mellom 15 og 19 år som bor i nærheten av deg i Oslo. Alle logger inn med Vipps, så vi vet hvem de er.</p>
         </details>
         <details>
           <summary>Hvorfor må jeg logge inn med Vipps?</summary>
@@ -549,7 +621,7 @@
   <div class="ramme">
     <div>
       <a class="merke" href="#"><img src="logo.png" alt="" width="52" height="52">Hverdagshelten</a>
-      <p>En hjelpende hånd. Vi setter eldre og unge i [ditt nærmiljø] i kontakt med hverandre.</p>
+      <p>En hjelpende hånd. Vi setter eldre og unge i Oslo i kontakt med hverandre.</p>
       <span class="app-merke">Appen kommer snart</span>
     </div>
     <div>
@@ -571,6 +643,27 @@
     </div>
   </div>
 </footer>
+
+<!-- Chat: svarer på enkle spørsmål direkte i nettleseren. Ingen data sendes noe sted. -->
+<button type="button" class="chat-knapp" id="chat-knapp" data-apne-chat aria-haspopup="dialog" aria-controls="chat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+  Still et spørsmål
+</button>
+<section class="chat" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-tittel" hidden>
+  <div class="chat-topp">
+    <img src="logo.png" alt="" width="44" height="44">
+    <div><h2 id="chat-tittel">Spør Hverdagshelten</h2><p>Svarer på enkle spørsmål</p></div>
+    <button type="button" class="chat-lukk" id="chat-lukk" aria-label="Lukk chatten">×</button>
+  </div>
+  <div class="chat-logg" id="chat-logg" role="log" aria-live="polite"></div>
+  <form class="chat-skjema" id="chat-skjema" autocomplete="off">
+    <label for="chat-input" class="hopp">Skriv spørsmålet ditt</label>
+    <input id="chat-input" type="text" placeholder="Skriv spørsmålet ditt her" enterkeyhint="send">
+    <button type="submit">Send</button>
+  </form>
+  <p class="chat-merknad">Automatiske svar. For alt annet, ring 466 33 243.</p>
+</section>
+
 
 <script>
   // «Større tekst»-knappen. Valget huskes i nettleseren hvis det er mulig.
@@ -607,6 +700,123 @@
       kvittering.classList.remove('feil');
       kvittering.textContent = 'Takk, ' + navn + '! Forespørselen er sendt. Vi ringer deg på ' + tlf + ' innen én arbeidsdag.';
       skjema.reset();
+    });
+  })();
+
+  // Chat som svarer på enkle spørsmål. Alt skjer i nettleseren, ingenting sendes videre.
+  (function () {
+    var TLF = '<a href="tel:46633243">466 33 243</a>';
+    var SVAR = [
+      { ord: ['pris', 'koste', 'koster', 'betale', 'dyr', 'kr', 'kroner', 'gebyr', 'timepris'],
+        svar: '<p>Hjelp koster 150 kr per time. I tillegg kommer et gebyr på 29 kr per bestilling.</p><p>En time med handling koster altså 179 kr. Varene betaler du som vanlig.</p>' },
+      { ord: ['bestille', 'bestilling', 'bestiller', 'booke', 'hvordan få hjelp', 'få hjelp', 'trenger hjelp'],
+        svar: '<p>Du kan bestille på to måter:</p><p>1. I appen: logg inn med Vipps, velg hva du trenger og når det passer.</p><p>2. På telefon: ring ' + TLF + ' (hverdager 09–17), så ordner vi det for deg.</p>' },
+      { ord: ['trygg', 'trygt', 'sikker', 'sikkert', 'svindel', 'vipps', 'verifis', 'id', 'hvem kommer', 'stole'],
+        svar: '<p>Alle som bruker Hverdagshelten logger inn med Vipps, så vi vet hvem de er. Du får vite hvem som kommer før besøket.</p><p>En hjelper ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Skjer det, si nei og ring oss på ' + TLF + '.</p>' },
+      { ord: ['jobb', 'jobbe', 'hjelper', 'tjene', 'penger', 'søke', 'melde', 'ungdom', 'bli med'],
+        svar: '<p>Er du mellom 15 og 19 år, kan du bli hverdagshelt! Du logger inn med Vipps, velger selv hvilke oppdrag du tar, og får 150 kr per time.</p><p>Fyll ut skjemaet nederst på siden og kryss av for «Jeg vil bli hjelper», så tar vi kontakt.</p>' },
+      { ord: ['avbestill', 'avlys', 'kansel', 'endre tid', 'flytte'],
+        svar: '<p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller ring oss på ' + TLF + '.</p>' },
+      { ord: ['alder', 'gammel', 'år', 'hvor gamle'],
+        svar: '<p>Hjelperne våre er ungdommer mellom 15 og 19 år som bor i nærheten av deg i Oslo.</p>' },
+      { ord: ['smarttelefon', 'mobil uten', 'ikke app', 'uten app', 'liker ikke apper', 'ingen app', 'datamaskin'],
+        svar: '<p>Du trenger ikke appen. Ring oss på ' + TLF + ', så legger vi inn bestillingen for deg.</p>' },
+      { ord: ['pårørende', 'mor', 'far', 'mamma', 'pappa', 'bestemor', 'bestefar', 'besteforeldre', 'foreldre', 'på vegne'],
+        svar: '<p>Ja, pårørende kan bestille hjelp på vegne av noen de er glad i. Ring ' + TLF + ' eller bruk appen.</p>' },
+      { ord: ['handle', 'handling', 'butikk', 'innkjøp', 'varer', 'mat'],
+        svar: '<p>Ja! Vi kan handle for deg, eller bli med og bære posene hjem.</p>' },
+      { ord: ['plen', 'hage', 'gress', 'rake', 'luke', 'snø', 'måke'],
+        svar: '<p>Ja, vi hjelper med plenklipping, raking, luking og snømåking om vinteren.</p>' },
+      { ord: ['hund', 'lufte', 'lufting', 'tur'],
+        svar: '<p>Ja, vi kan gå tur med hunden din når det passer deg.</p>' },
+      { ord: ['kaffe', 'selskap', 'prat', 'ensom', 'besøk', 'kort'],
+        svar: '<p>Ja! Mange setter pris på en kopp kaffe og en prat, et spill kort eller en tur i nabolaget.</p>' },
+      { ord: ['nettbrett', 'telefon hjelp', 'teknisk', 'facetime', 'videosamtale', 'apper', 'bilder', 'ipad'],
+        svar: '<p>Ja, vi hjelper gjerne med mobil og nettbrett, for eksempel videosamtaler med barnebarna, bilder og apper, i ditt tempo.</p>' },
+      { ord: ['hva gjør', 'tjenester', 'hjelpe med', 'hva kan'],
+        svar: '<p>Vi hjelper med handling, hagearbeid, hundelufting, kaffe og selskap, mobil og nettbrett, og småjobber i huset.</p>' },
+      { ord: ['hvor', 'område', 'oslo', 'bydel', 'sted'],
+        svar: '<p>Vi starter i Oslo. Hjelperne er ungdommer som bor i nærheten av deg.</p>' },
+      { ord: ['betal', 'faktura', 'kontant'],
+        svar: '<p>Du betaler i appen etter besøket. Bestiller du på telefon, finner vi en løsning som passer deg.</p>' },
+      { ord: ['ringe', 'kontakt', 'telefon', 'nummer', 'e-post', 'epost', 'åpningstid', 'åpent', 'snakke med'],
+        svar: '<p>Ring oss på ' + TLF + ' (hverdager 09–17), eller send e-post til <a href="mailto:joakim.purnell@gmail.com">joakim.purnell@gmail.com</a>.</p>' },
+      { ord: ['hvem er dere', 'om dere', 'gründer', 'team', 'startet'],
+        svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo. Du kan lese mer om oss under «Om oss» på siden.</p>' },
+      { ord: ['samme hjelper', 'fast hjelper'],
+        svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper.</p>' },
+      { ord: ['hei', 'hallo', 'heisann', 'god dag', 'god morgen'],
+        svar: '<p>Hei! Hva lurer du på?</p>' },
+      { ord: ['takk', 'tusen takk'],
+        svar: '<p>Bare hyggelig! Ha en fin dag.</p>' }
+    ];
+    var FORSLAG = ['Hva koster det?', 'Hvordan bestiller jeg?', 'Er det trygt?', 'Jeg vil bli hjelper'];
+    var VET_IKKE = '<p>Det vet jeg dessverre ikke svaret på. Ring oss på ' + TLF + ' (hverdager 09–17), så hjelper vi deg.</p>';
+
+    var chat = document.getElementById('chat');
+    var knapp = document.getElementById('chat-knapp');
+    var logg = document.getElementById('chat-logg');
+    var skjema = document.getElementById('chat-skjema');
+    var input = document.getElementById('chat-input');
+    var startet = false, sistApnet = null;
+
+    function vask(t) { return t.toLowerCase().replace(/[^a-zæøå0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim(); }
+    function finnSvar(sporsmal) {
+      var t = ' ' + vask(sporsmal) + ' ';
+      var best = null, bestPoeng = 0;
+      SVAR.forEach(function (s) {
+        var poeng = 0;
+        s.ord.forEach(function (o) { if (t.indexOf(o) !== -1) poeng += o.length > 4 ? 2 : 1; });
+        if (poeng > bestPoeng) { bestPoeng = poeng; best = s; }
+      });
+      return best ? best.svar : VET_IKKE;
+    }
+    function leggTil(html, hvem) {
+      var m = document.createElement('div');
+      m.className = 'melding ' + hvem;
+      if (hvem === 'meg') m.textContent = html; else m.innerHTML = html;
+      logg.appendChild(m);
+      logg.scrollTop = logg.scrollHeight;
+      return m;
+    }
+    function visForslag() {
+      var f = document.createElement('div');
+      f.className = 'forslag';
+      FORSLAG.forEach(function (tekst) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.textContent = tekst;
+        b.addEventListener('click', function () { spor(tekst); });
+        f.appendChild(b);
+      });
+      logg.appendChild(f);
+    }
+    function spor(tekst) {
+      leggTil(tekst, 'meg');
+      setTimeout(function () { leggTil(finnSvar(tekst), 'bot'); }, 350);
+    }
+    function apne(e) {
+      sistApnet = e && e.currentTarget ? e.currentTarget : knapp;
+      chat.hidden = false; knapp.hidden = true;
+      if (!startet) {
+        startet = true;
+        leggTil('<p>Hei! Jeg svarer på enkle spørsmål om Hverdagshelten. Velg et spørsmål, eller skriv ditt eget.</p>', 'bot');
+        visForslag();
+      }
+      input.focus();
+    }
+    function lukk() {
+      chat.hidden = true; knapp.hidden = false;
+      (sistApnet && document.body.contains(sistApnet) && !sistApnet.hidden ? sistApnet : knapp).focus();
+    }
+    document.querySelectorAll('[data-apne-chat]').forEach(function (b) { b.addEventListener('click', apne); });
+    document.getElementById('chat-lukk').addEventListener('click', lukk);
+    chat.addEventListener('keydown', function (e) { if (e.key === 'Escape') lukk(); });
+    skjema.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var t = input.value.trim();
+      if (!t) return;
+      input.value = '';
+      spor(t);
     });
   })();
 </script>
