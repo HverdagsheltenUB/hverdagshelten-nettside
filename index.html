@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hverdagshelten – hjelp fra ungdommen i nabolaget</title>
+<meta name="description" content="Hverdagshelten setter eldre i kontakt med trygge ungdommer i nabolaget som kan hjelpe med handling, hagearbeid, hundelufting, mobilhjelp og en kopp kaffe.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blekk: #15233A;      /* tekst */
+    --fjord: #1F4E8C;      /* hovedfarge, knapper, lenker */
+    --fjord-mork: #173B6B;
+    --lapp: #FFE38A;       /* den gule lappen */
+    --papir: #FFFFFF;
+    --taake: #EDF1F4;      /* bakgrunn */
+    --gress: #2E7D4F;      /* trygghet, haker */
+    --strek: #C9D3DD;
+    --hand: "Kalam", "Comic Sans MS", cursive;
+    --tekst: "Atkinson Hyperlegible", "Verdana", system-ui, sans-serif;
+  }
+  html { font-size: 125%; }               /* 20px grunnstørrelse */
+  html.stor-tekst { font-size: 150%; }    /* 24px når «Større tekst» er på */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--taake);
+    color: var(--blekk);
+    font-family: var(--tekst);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: var(--fjord); text-underline-offset: .15em; }
+  a:hover { color: var(--fjord-mork); }
+  :focus-visible { outline: 4px solid var(--blekk); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  h2 { font-size: clamp(1.6rem, 3.6vw, 2.1rem); }
+  h3 { font-size: 1.15rem; }
+  p { margin: 0 0 1em; max-width: 36em; }
+
+  .hopp { position: absolute; left: -999px; top: 0; background: var(--blekk); color: #fff; padding: .6em 1em; z-index: 10; }
+  .hopp:focus { left: 1rem; top: 1rem; }
+
+  .ramme { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1rem; }
+  @media (min-width: 700px) { .ramme { padding: 0 2rem; } }
+
+  /* ---------- Topp ---------- */
+  .topp { background: var(--papir); border-bottom: 1px solid var(--strek); }
+  .topp .ramme { display: flex; align-items: center; gap: 1rem; min-height: 4.2rem; flex-wrap: wrap; padding-top: .5rem; padding-bottom: .5rem; }
+  .merke { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--blekk); font-weight: 700; font-size: 1.15rem; margin-right: auto; }
+  .merke img { width: 2.4rem; height: 2.4rem; }
+  .topp nav ul { list-style: none; display: none; gap: 1.4rem; margin: 0; padding: 0; }
+  .topp nav a { color: var(--blekk); text-decoration: none; font-size: .9rem; }
+  .topp nav a:hover { text-decoration: underline; }
+  @media (min-width: 1000px) { .topp nav ul { display: flex; } }
+  .tekstknapp {
+    font: inherit; font-size: .85rem; font-weight: 700; color: var(--blekk);
+    background: var(--taake); border: 2px solid var(--strek); border-radius: 999px;
+    padding: .35em .9em; cursor: pointer; min-height: 2.6rem;
+  }
+  .tekstknapp[aria-pressed="true"] { background: var(--lapp); border-color: var(--blekk); }
+
+  /* ---------- Knapper ---------- */
+  .knapp {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+    min-height: 3.2rem; padding: .6em 1.4em; border-radius: 12px;
+    font: inherit; font-weight: 700; font-size: 1.05rem; text-decoration: none; cursor: pointer;
+    border: 3px solid var(--fjord);
+  }
+  .knapp-hoved { background: var(--fjord); color: #fff; }
+  .knapp-hoved:hover { background: var(--fjord-mork); border-color: var(--fjord-mork); color: #fff; }
+  .knapp-sekundar { background: var(--papir); color: var(--fjord); }
+  .knapp-sekundar:hover { background: #E4ECF6; }
+  .knapper { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 3rem 0 3.5rem; }
+  .hero .ramme { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 900px) { .hero .ramme { grid-template-columns: 1.15fr .85fr; } }
+  .hero .ingress { font-size: 1.2rem; }
+  .ring-linje { margin-top: 1.4rem; font-size: 1rem; }
+  .ring-linje a { font-weight: 700; font-size: 1.25rem; white-space: nowrap; }
+
+  /* Lappen */
+  .lapp-holder { display: flex; justify-content: center; padding: 1rem 0; }
+  .lapp {
+    position: relative; width: min(100%, 22rem);
+    background: var(--lapp); color: var(--blekk);
+    padding: 2.2rem 1.6rem 0; transform: rotate(-2deg);
+    box-shadow: 0 1px 0 rgba(21,35,58,.15), 6px 10px 0 rgba(21,35,58,.08);
+    font-family: var(--hand);
+  }
+  .lapp::before { /* tegnestift */
+    content: ""; position: absolute; top: .7rem; left: 50%; width: 1.1rem; height: 1.1rem; margin-left: -.55rem;
+    border-radius: 50%; background: #C8382F; box-shadow: inset -3px -3px 0 rgba(0,0,0,.18), 0 2px 2px rgba(0,0,0,.2);
+  }
+  .lapp .overskrift { font-size: 1.75rem; font-weight: 700; line-height: 1.15; margin: 0 0 .5rem; }
+  .lapp ul { margin: 0 0 1rem; padding-left: 1.1em; font-size: 1.2rem; line-height: 1.45; }
+  .lapp .hilsen { font-size: 1.15rem; margin: 0 0 1.1rem; }
+  .lapper { display: flex; margin: 0 -1.6rem; border-top: 2px dashed rgba(21,35,58,.35); }
+  .lapper span {
+    flex: 1 1 0; writing-mode: vertical-rl; transform: rotate(180deg);
+    font-size: .85rem; font-weight: 700; padding: .7rem 0; text-align: center;
+    border-left: 2px dashed rgba(21,35,58,.35); white-space: nowrap;
+  }
+  .lapper span:last-child { border-left: 0; }
+  .lapper span.revet { color: transparent; background: var(--taake); margin-bottom: -2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .lapp { animation: heng .9s cubic-bezier(.2,.8,.3,1.2) both .2s; }
+    @keyframes heng { from { transform: rotate(-9deg) translateY(-14px); opacity: 0; } to { transform: rotate(-2deg); opacity: 1; } }
+  }
+
+  /* ---------- Trygghetsstripe ---------- */
+  .stripe { background: var(--papir); border-top: 1px solid var(--strek); border-bottom: 1px solid var(--strek); }
+  .stripe ul { list-style: none; margin: 0; padding: 1.4rem 0; display: grid; gap: 1rem 2rem; }
+  @media (min-width: 800px) { .stripe ul { grid-template-columns: repeat(3, 1fr); } }
+  .stripe li { display: flex; gap: .7rem; align-items: flex-start; font-weight: 700; }
+  .hake { flex: none; width: 1.6rem; height: 1.6rem; margin-top: .1rem; }
+
+  /* ---------- Seksjoner ---------- */
+  .seksjon { padding: 4.5rem 0; }
+  .seksjon-hvit { background: var(--papir); }
+  .seksjon > .ramme > p:first-of-type { font-size: 1.1rem; }
+
+  /* Tjenester: rolig liste, ikke kort */
+  .tjenester { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 0 3rem; }
+  @media (min-width: 760px) { .tjenester { grid-template-columns: 1fr 1fr; } }
+  .tjenester li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.3rem 0; border-top: 2px solid var(--strek); }
+  .tjenester h3 { margin: 0 0 .2rem; }
+  .tjenester p { margin: 0; }
+  .ikon { width: 3.2rem; height: 3.2rem; border-radius: 50%; background: #E4ECF6; display: grid; place-items: center; }
+  .ikon svg { width: 1.8rem; height: 1.8rem; stroke: var(--fjord); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Slik fungerer det: en ekte rekkefølge */
+  .steg { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 2rem; counter-reset: steg; }
+  @media (min-width: 860px) { .steg { grid-template-columns: repeat(3, 1fr); } }
+  .steg li { counter-increment: steg; }
+  .steg li::before {
+    content: counter(steg); display: grid; place-items: center;
+    width: 3rem; height: 3rem; border-radius: 50%; margin-bottom: .9rem;
+    background: var(--fjord); color: #fff; font-weight: 700; font-size: 1.3rem;
+  }
+  .steg p { margin: 0; }
+
+  /* Trygghet */
+  .to-spalter { display: grid; gap: 2.5rem; }
+  @media (min-width: 900px) { .to-spalter { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .sjekkliste { list-style: none; padding: 0; margin: 0; }
+  .sjekkliste li { display: flex; gap: .8rem; padding: .8rem 0; border-bottom: 1px solid var(--strek); }
+  .sjekkliste li:last-child { border-bottom: 0; }
+  .advarsel {
+    background: var(--papir); border-left: 6px solid #C8382F; padding: 1.2rem 1.4rem; border-radius: 0 12px 12px 0;
+  }
+  .advarsel h3 { margin-bottom: .4rem; }
+  .advarsel p { margin: 0; }
+
+  /* Priser */
+  .pris { background: var(--papir); border: 2px solid var(--strek); border-radius: 16px; padding: 1.6rem; max-width: 34rem; }
+  .pris dl { margin: 0; }
+  .pris .rad { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--strek); }
+  .pris .rad:last-of-type { border-bottom: 0; }
+  .pris dt { margin: 0; }
+  .pris dd { margin: 0; font-weight: 700; white-space: nowrap; }
+  .pris .eksempel { margin: 1rem 0 0; padding-top: 1rem; border-top: 2px solid var(--blekk); font-size: .95rem; }
+
+  /* Ungdom */
+  .ungdom { background: var(--fjord); color: #fff; }
+  .ungdom a:not(.knapp) { color: #fff; }
+  .ungdom .knapp-hoved { background: var(--lapp); border-color: var(--lapp); color: var(--blekk); }
+  .ungdom .knapp-hoved:hover { background: #FFD65C; border-color: #FFD65C; color: var(--blekk); }
+  .ungdom ul { padding-left: 1.2em; margin: 0; }
+  .ungdom li { margin-bottom: .5rem; }
+
+  /* Brev fra gründeren */
+  .brev { background: var(--papir); max-width: 40rem; padding: 2rem; border-radius: 4px; box-shadow: 0 1px 0 var(--strek); }
+  .brev p { font-size: 1.05rem; }
+  .signatur { display: flex; align-items: center; gap: 1rem; margin-top: 1.4rem; }
+  .signatur .bilde { width: 4rem; height: 4rem; border-radius: 50%; background: #E4ECF6; display: grid; place-items: center; font-weight: 700; color: var(--fjord); font-size: .75rem; text-align: center; line-height: 1.1; }
+  .signatur .navn { font-family: var(--hand); font-size: 1.6rem; line-height: 1; }
+
+  /* Spørsmål */
+  .sporsmal { max-width: 46rem; margin-top: 2rem; }
+  details { background: var(--papir); border: 2px solid var(--strek); border-radius: 12px; margin-bottom: .8rem; }
+  details[open] { border-color: var(--fjord); }
+  summary { cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; min-height: 3.2rem; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 1.6rem; line-height: 1; color: var(--fjord); }
+  details[open] summary::after { content: "–"; }
+  details p { padding: 0 1.2rem 1rem; margin: 0; }
+
+  /* Bestill */
+  .bestill .ramme { display: grid; gap: 3rem; }
+  @media (min-width: 900px) { .bestill .ramme { grid-template-columns: .9fr 1.1fr; } }
+  .telefon-stor { display: inline-block; font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 700; text-decoration: none; color: var(--fjord); margin: .2rem 0 .4rem; }
+  form { background: var(--papir); border: 2px solid var(--strek); border-radius: 16px; padding: 1.6rem; }
+  .felt { margin-bottom: 1.2rem; }
+  label, legend { display: block; font-weight: 700; margin-bottom: .35rem; }
+  .hint { display: block; font-weight: 400; font-size: .9rem; color: #46566B; }
+  input[type=text], input[type=tel], textarea, select {
+    width: 100%; font: inherit; color: var(--blekk); background: #fff;
+    border: 2px solid #7D8A99; border-radius: 10px; padding: .65rem .8rem; min-height: 3.2rem;
+  }
+  textarea { min-height: 6rem; resize: vertical; }
+  input:focus, textarea:focus, select:focus { border-color: var(--fjord); outline: 3px solid var(--fjord); outline-offset: 1px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
+  .valg { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .valg label { font-weight: 400; display: flex; align-items: center; gap: .5rem; border: 2px solid var(--strek); border-radius: 999px; padding: .4rem 1rem; min-height: 3rem; cursor: pointer; margin: 0; }
+  .valg input { width: 1.2rem; height: 1.2rem; accent-color: var(--fjord); }
+  .valg label:has(input:checked) { border-color: var(--fjord); background: #E4ECF6; font-weight: 700; }
+  .kvittering { display: none; background: #E3F2E9; border: 2px solid var(--gress); border-radius: 12px; padding: 1.2rem; margin-top: 1rem; }
+  .kvittering.vis { display: block; }
+
+  /* Bunn */
+  .bunn { background: var(--blekk); color: #DCE3EC; padding: 3rem 0 2rem; font-size: .95rem; }
+  .bunn a { color: #fff; }
+  .bunn .ramme { display: grid; gap: 2rem; }
+  @media (min-width: 800px) { .bunn .ramme { grid-template-columns: 1.4fr 1fr 1fr; } }
+  .bunn .merke { color: #fff; }
+  .bunn ul { list-style: none; padding: 0; margin: 0; }
+  .bunn li { margin-bottom: .4rem; }
+  .bunn h2 { font-size: 1rem; color: #fff; }
+  .app-merke { display: inline-block; background: var(--lapp); color: var(--blekk); font-weight: 700; padding: .2em .7em; border-radius: 999px; font-size: .85rem; }
+</style>
+</head>
+<body>
+<a class="hopp" href="#innhold">Hopp til innholdet</a>
+
+<header class="topp">
+  <div class="ramme">
+    <a class="merke" href="#">
+      <img src="logo.svg" alt="" width="48" height="48">
+      Hverdagshelten
+    </a>
+    <nav aria-label="Hovedmeny">
+      <ul>
+        <li><a href="#tjenester">Hva vi hjelper med</a></li>
+        <li><a href="#slik">Slik fungerer det</a></li>
+        <li><a href="#trygghet">Trygghet</a></li>
+        <li><a href="#priser">Priser</a></li>
+        <li><a href="#ungdom">Bli hjelper</a></li>
+      </ul>
+    </nav>
+    <button class="tekstknapp" id="tekststorrelse" type="button" aria-pressed="false">Større tekst</button>
+  </div>
+</header>
+
+<main id="innhold">
+
+  <section class="hero">
+    <div class="ramme">
+      <div>
+        <h1>Hjelp fra ungdommen i nabolaget, når du trenger det.</h1>
+        <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller bare en kopp kaffe og en prat. Hverdagshelten finner en trygg ungdom fra [ditt nærmiljø] som kan komme innom.</p>
+        <div class="knapper">
+          <a class="knapp knapp-hoved" href="#bestill">Bestill hjelp</a>
+          <a class="knapp knapp-sekundar" href="#slik">Se hvordan det fungerer</a>
+        </div>
+        <p class="ring-linje">Vil du heller snakke med et menneske? Ring oss på <a href="tel:00000000">000 00 000</a></p>
+      </div>
+
+      <div class="lapp-holder" aria-hidden="true">
+        <div class="lapp">
+          <p class="overskrift">Trenger du en hjelpende hånd?</p>
+          <ul>
+            <li>Handle på butikken</li>
+            <li>Klippe plenen</li>
+            <li>Gå tur med hunden</li>
+            <li>Fikse mobilen</li>
+            <li>Ta en kaffe sammen</li>
+          </ul>
+          <p class="hilsen">Hilsen ungdommen i nabolaget :)</p>
+          <div class="lapper">
+            <span>000 00 000</span><span>000 00 000</span><span class="revet">000 00 000</span><span>000 00 000</span><span class="revet">000 00 000</span><span>000 00 000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stripe" aria-label="Kort fortalt">
+    <div class="ramme">
+      <ul>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Vi har møtt alle hjelperne våre personlig</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Fast pris, du vet hva det koster på forhånd</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Du kan alltid ringe oss, du trenger ingen app</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seksjon" id="tjenester">
+    <div class="ramme">
+      <h2>Dette kan vi hjelpe med</h2>
+      <p>Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
+      <ul class="tjenester">
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.3 11.1a1 1 0 0 1-1 .9H7.3a1 1 0 0 1-1-.9z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+          <div><h3>Handling</h3><p>Vi handler for deg, eller blir med og bærer posene hjem.</p></div>
+        </li>
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-7"/><path d="M12 14c-4 0-6-3-6-7 3 0 6 2 6 7z"/><path d="M12 14c4 0 6-3 6-7-3 0-6 2-6 7z"/><path d="M5 21h14"/></svg></span>
+          <div><h3>Hage og uteområde</h3><p>Plenklipping, raking, luking og snømåking om vinteren.</p></div>
+        </li>
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="6" r="1.8"/><circle cx="12" cy="4.5" r="1.8"/><circle cx="17" cy="6" r="1.8"/><path d="M12 10c-3 0-6 4-6 7 0 2 1.5 3 3 3 1.2 0 1.8-.6 3-.6s1.8.6 3 .6c1.5 0 3-1 3-3 0-3-3-7-6-7z"/></svg></span>
+          <div><h3>Hundelufting</h3><p>En god tur for hunden, når det passer deg.</p></div>
+        </li>
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg></span>
+          <div><h3>Kaffe og selskap</h3><p>En prat, et spill kort eller en tur rundt i nabolaget.</p></div>
+        </li>
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg></span>
+          <div><h3>Hjelp med mobil og nettbrett</h3><p>Videosamtale med barnebarna, BankID, bilder og apper, forklart i ditt tempo.</p></div>
+        </li>
+        <li>
+          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg></span>
+          <div><h3>Småjobber i huset</h3><p>Bære ting opp fra kjelleren, skifte lyspærer eller ta ut søpla.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-hvit" id="slik">
+    <div class="ramme">
+      <h2>Slik fungerer det</h2>
+      <p>Du bestiller på den måten som passer deg: på telefon, her på nettsiden eller i appen.</p>
+      <ol class="steg">
+        <li><h3>Fortell hva du trenger</h3><p>Hva skal gjøres, og når passer det? Ring oss eller fyll ut skjemaet nederst på siden.</p></li>
+        <li><h3>Vi finner en hjelper</h3><p>Vi finner en ungdom som bor i nærheten. Du får navn og bilde på hjelperen før besøket.</p></li>
+        <li><h3>Hjelpen kommer</h3><p>Hjelperen ringer på til avtalt tid. Du betaler enkelt etterpå, med Vipps eller faktura.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="seksjon" id="trygghet">
+    <div class="ramme to-spalter">
+      <div>
+        <h2>Trygghet først</h2>
+        <p>Det skal føles trygt å åpne døren. Derfor har vi noen faste regler for alle hjelpere.</p>
+        <ul class="sjekkliste">
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vi møter hver hjelper og foreldrene deres før første oppdrag.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hjelperen har med seg et kort fra Hverdagshelten med navn og bilde.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Du får vite hvem som kommer, før de kommer.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pårørende kan få beskjed når et besøk er bestilt og gjennomført.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2E7D4F"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Er det noe som ikke føles riktig, ringer du oss. Vi tar det på alvor.</span></li>
+        </ul>
+      </div>
+      <div class="advarsel">
+        <h3>Dette gjør en hjelper aldri</h3>
+        <p>En hjelper fra Hverdagshelten ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Hvis noen gjør det, si nei og ring oss på 000 00 000.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-hvit" id="priser">
+    <div class="ramme">
+      <h2>Hva koster det?</h2>
+      <p>Én enkel pris. Det meste går til ungdommen som hjelper deg, og et lite gebyr går til å drive Hverdagshelten.</p>
+      <div class="pris">
+        <dl>
+          <div class="rad"><dt>Hjelp per time</dt><dd>150 kr</dd></div>
+          <div class="rad"><dt>Gebyr per bestilling</dt><dd>29 kr</dd></div>
+          <div class="rad"><dt>Avbestilling dagen før</dt><dd>Gratis</dd></div>
+        </dl>
+        <p class="eksempel">Eksempel: En time med handling koster 150 kr + 29 kr = 179 kr. Varene betaler du som vanlig.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon">
+    <div class="ramme">
+      <h2>Bestiller du for mamma eller pappa?</h2>
+      <p>Mange pårørende bor et stykke unna. Du kan bestille hjelp på vegne av noen andre, betale for dem og få en melding når besøket er gjort.</p>
+      <a class="knapp knapp-sekundar" href="#bestill">Bestill for en du er glad i</a>
+    </div>
+  </section>
+
+  <section class="seksjon ungdom" id="ungdom">
+    <div class="ramme to-spalter">
+      <div>
+        <h2>Er du mellom 15 og 19? Bli en hverdagshelt.</h2>
+        <p>Tjen penger når det passer deg, i ditt eget nabolag. Du bestemmer selv hvor mye du vil jobbe, og du får en god referanse til CV-en.</p>
+        <a class="knapp knapp-hoved" href="#bestill">Meld deg som hjelper</a>
+      </div>
+      <ul>
+        <li>Du får 150 kr per time, rett til deg.</li>
+        <li>Du velger selv hvilke oppdrag du tar.</li>
+        <li>Vi tar en prat med deg og foreldrene dine før du starter.</li>
+        <li>Du kan alltid ringe oss hvis du lurer på noe.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seksjon">
+    <div class="ramme">
+      <h2>Hvorfor jeg startet Hverdagshelten</h2>
+      <div class="brev">
+        <p>Hei! Jeg startet Hverdagshelten fordi jeg så to ting i nabolaget mitt. Mange eldre trenger litt hjelp innimellom, men liker ikke å spørre. Og mange ungdommer vil gjerne tjene litt penger, men finner ingen jobb.</p>
+        <p>Jeg tror vi kan hjelpe hverandre. Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det.</p>
+        <p>Har du spørsmål, kan du alltid ringe meg direkte.</p>
+        <div class="signatur">
+          <div class="bilde">Bilde av deg</div>
+          <div><div class="navn">[Ditt navn]</div><div>Gründer av Hverdagshelten</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-hvit" id="sporsmal">
+    <div class="ramme">
+      <h2>Spørsmål og svar</h2>
+      <div class="sporsmal">
+        <details>
+          <summary>Jeg har ikke smarttelefon. Kan jeg bruke Hverdagshelten likevel?</summary>
+          <p>Ja. Du kan ringe oss på 000 00 000, så ordner vi resten. Du trenger verken app eller nettside.</p>
+        </details>
+        <details>
+          <summary>Hvem er hjelperne?</summary>
+          <p>Ungdommer mellom 15 og 19 år som bor i nærmiljøet ditt. Vi har møtt alle sammen og foreldrene deres før de får sitt første oppdrag.</p>
+        </details>
+        <details>
+          <summary>Kan jeg få den samme hjelperen hver gang?</summary>
+          <p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>
+        </details>
+        <details>
+          <summary>Hvordan betaler jeg?</summary>
+          <p>Med Vipps etter besøket, eller med faktura i posten en gang i måneden.</p>
+        </details>
+        <details>
+          <summary>Hva om jeg må avbestille?</summary>
+          <p>Det er gratis å avbestille frem til dagen før. Ring oss eller svar på meldingen du har fått.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon bestill" id="bestill">
+    <div class="ramme">
+      <div>
+        <h2>Bestill hjelp</h2>
+        <p>Det enkleste er å ringe. Vi svarer hverdager mellom 09 og 17.</p>
+        <a class="telefon-stor" href="tel:00000000">000 00 000</a>
+        <p>Du kan også fylle ut skjemaet, så ringer vi deg tilbake innen én arbeidsdag.</p>
+      </div>
+
+      <form id="skjema" novalidate>
+        <div class="felt">
+          <label for="navn">Navnet ditt</label>
+          <input id="navn" name="navn" type="text" autocomplete="name" required>
+        </div>
+        <div class="felt">
+          <label for="tlf">Telefonnummer <span class="hint">Vi ringer deg på dette nummeret.</span></label>
+          <input id="tlf" name="tlf" type="tel" autocomplete="tel" inputmode="tel" required>
+        </div>
+        <fieldset>
+          <legend>Hva trenger du hjelp med?</legend>
+          <div class="valg">
+            <label><input type="checkbox" name="hjelp" value="handling"> Handling</label>
+            <label><input type="checkbox" name="hjelp" value="hage"> Hage</label>
+            <label><input type="checkbox" name="hjelp" value="hund"> Hund</label>
+            <label><input type="checkbox" name="hjelp" value="selskap"> Selskap</label>
+            <label><input type="checkbox" name="hjelp" value="mobil"> Mobil</label>
+            <label><input type="checkbox" name="hjelp" value="annet"> Noe annet</label>
+          </div>
+        </fieldset>
+        <div class="felt">
+          <label for="melding">Fortell gjerne litt mer <span class="hint">For eksempel hvilken dag som passer best.</span></label>
+          <textarea id="melding" name="melding"></textarea>
+        </div>
+        <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
+        <div class="kvittering" id="kvittering" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bunn">
+  <div class="ramme">
+    <div>
+      <a class="merke" href="#"><img src="logo.svg" alt="" width="48" height="48">Hverdagshelten</a>
+      <p>Hjelp fra ungdommen i nabolaget. Vi setter eldre og unge i [ditt nærmiljø] i kontakt med hverandre.</p>
+      <span class="app-merke">Appen kommer snart</span>
+    </div>
+    <div>
+      <h2>Kontakt</h2>
+      <ul>
+        <li>Telefon: <a href="tel:00000000">000 00 000</a></li>
+        <li>E-post: <a href="mailto:hei@hverdagshelten.no">hei@hverdagshelten.no</a></li>
+        <li>Hverdager 09–17</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Snarveier</h2>
+      <ul>
+        <li><a href="#bestill">Bestill hjelp</a></li>
+        <li><a href="#ungdom">Bli hjelper</a></li>
+        <li><a href="#trygghet">Trygghet</a></li>
+        <li><a href="#sporsmal">Spørsmål og svar</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // «Større tekst»-knappen. Valget huskes i nettleseren hvis det er mulig.
+  (function () {
+    var knapp = document.getElementById('tekststorrelse');
+    function sett(på) {
+      document.documentElement.classList.toggle('stor-tekst', på);
+      knapp.setAttribute('aria-pressed', på ? 'true' : 'false');
+      knapp.textContent = på ? 'Vanlig tekst' : 'Større tekst';
+    }
+    try { if (localStorage.getItem('hh-stor-tekst') === '1') sett(true); } catch (e) {}
+    knapp.addEventListener('click', function () {
+      var på = !document.documentElement.classList.contains('stor-tekst');
+      sett(på);
+      try { localStorage.setItem('hh-stor-tekst', på ? '1' : '0'); } catch (e) {}
+    });
+  })();
+
+  // Skjemaet. OBS: Dette er bare visning foreløpig – det sender ikke noe ennå.
+  (function () {
+    var skjema = document.getElementById('skjema');
+    var kvittering = document.getElementById('kvittering');
+    skjema.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var navn = skjema.navn.value.trim();
+      var tlf = skjema.tlf.value.trim();
+      if (!navn || !tlf) {
+        kvittering.style.background = '#FDECEA'; kvittering.style.borderColor = '#C8382F';
+        kvittering.textContent = 'Skriv inn navnet ditt og telefonnummeret ditt, så vi kan ringe deg tilbake.';
+        kvittering.classList.add('vis');
+        (navn ? skjema.tlf : skjema.navn).focus();
+        return;
+      }
+      kvittering.style.background = ''; kvittering.style.borderColor = '';
+      kvittering.textContent = 'Takk, ' + navn + '! Forespørselen er sendt. Vi ringer deg på ' + tlf + ' innen én arbeidsdag.';
+      kvittering.classList.add('vis');
+      skjema.reset();
+    });
+  })();
+</script>
+</body>
+</html>
