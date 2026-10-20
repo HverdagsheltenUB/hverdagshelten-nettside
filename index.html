@@ -200,7 +200,8 @@
   @media (min-width: 640px) { .team { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 980px) { .team { grid-template-columns: 1fr 1fr 1fr; } }
   .person { background: var(--papir); border-radius: 18px; padding: 1.8rem 1.4rem 1.6rem; text-align: center; }
-  .portrett { display: block; width: 8.5rem; height: 8.5rem; margin: 0 auto 1rem; border-radius: 50%; object-fit: cover; border: 3px solid var(--lavendel); background: var(--lavendel-lys); }
+  .initialer { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; margin: 0 auto 1rem; border-radius: 50%; background: var(--lavendel); color: var(--lilla-mork); font-weight: 700; font-size: 1.3rem; }
+  .person:nth-child(even) .initialer { background: var(--krem); }
   .person h3 { margin: 0 0 .15rem; overflow-wrap: break-word; hyphens: auto; }
   .person .rolle { margin: 0 auto .5rem; color: var(--lilla); font-weight: 700; font-size: .95rem; }
   .person .styrker { margin: 0 auto; font-size: .9rem; color: var(--hint); }
@@ -256,6 +257,7 @@
   @media (min-width: 600px) { .varsel-skjema .rad > div + div { margin-top: 0; } }
   .varsel-skjema label { font-size: .9rem; margin-bottom: .25rem; }
   .varsel-skjema .liten { font-size: .8rem; color: var(--hint); }
+  .liten-tekst { font-size: .8rem; color: var(--hint); margin: .8rem 0 0; }
   .honning { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   /* Undersøkelsen */
@@ -278,7 +280,7 @@
   .partner { margin-top: 2rem; background: var(--bakgrunn); border-radius: 16px; padding: 1.4rem; display: grid; gap: 1.4rem; align-items: center; }
   @media (min-width: 860px) { .partner { grid-template-columns: 1.1fr 1fr; padding: 1.6rem; } }
   .partner > * { min-width: 0; }
-  .partner-foto { aspect-ratio: 1034 / 664; }
+  .partner-foto { aspect-ratio: 4 / 3; }
   .partner h3 { margin-bottom: .3rem; }
   .partner p { margin: 0; }
 
@@ -437,7 +439,7 @@
           </div>
           <div class="honning" aria-hidden="true"><label for="v-honning">Ikke fyll ut</label><input id="v-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
           <div><button class="knapp knapp-hoved" type="submit">Gi meg beskjed</button></div>
-          <p class="liten">Vi bruker kontaktinformasjonen bare til å gi deg beskjed om appen.</p>
+          <p class="liten">Vi bruker kontaktinformasjonen bare til å gi deg beskjed om appen, og sletter den etterpå. <a href="personvern.html">Les personvernerklæringen</a>.</p>
           <div class="kvittering" id="varsel-kvittering" role="status" aria-live="polite"></div>
         </form>
       </div>
@@ -582,7 +584,7 @@
       </table>
       <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100 %.</p>
       <div class="partner">
-        <figure><img class="foto partner-foto" src="bilde-simensbraten.jpg" alt="Seniorer og ansatte samlet under et «Velkommen!»-banner på Simensbråten seniorsenter" width="1034" height="664" loading="lazy"><figcaption>Fra besøket vårt på Simensbråten seniorsenter</figcaption></figure>
+        <figure><img class="foto partner-foto" src="bilde-simensbraten.jpg" alt="Fem fra Hverdagshelten-teamet sammen med to seniorer rundt et bord på Simensbråten seniorsenter" width="1400" height="1050" loading="lazy"><figcaption>Fra besøket vårt på Simensbråten seniorsenter</figcaption></figure>
         <div>
           <h3>Samarbeidspartner: Simensbråten seniorsenter</h3>
           <p>Takk til Simensbråten seniorsenter, som tok imot oss og lot oss snakke med besøkende. Tilbakemeldingene har hjulpet oss å forme Hverdagshelten.</p>
@@ -599,27 +601,27 @@
 
       <ul class="team">
         <li class="person">
-          <img class="portrett" src="team-joakim.jpg" alt="Portrett av Joakim Skree Robert Purnell" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">JP</span>
           <h3>Joakim Skree Robert Purnell</h3><p class="rolle">Daglig leder</p><p class="styrker">Inkluderende, oversiktlig, hyggelig og tospråklig</p>
         </li>
         <li class="person">
-          <img class="portrett" src="team-didrik.jpg" alt="Portrett av Didrik Thommesen Puskas" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">DP</span>
           <h3>Didrik Thommesen Puskas</h3><p class="rolle">Økonomiansvarlig</p><p class="styrker">Oversiktlig og blid</p>
         </li>
         <li class="person">
-          <img class="portrett" src="team-miriam.jpg" alt="Portrett av Miriam Mathiasen Mårnes" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">MM</span>
           <h3>Miriam Mathiasen Mårnes</h3><p class="rolle">Personalansvarlig</p><p class="styrker">Inkluderende og positiv</p>
         </li>
         <li class="person">
-          <img class="portrett" src="team-isabel.jpg" alt="Portrett av Isabel Sansuan Gulbrandsen" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">IG</span>
           <h3>Isabel Sansuan Gulbrandsen</h3><p class="rolle">Salgsansvarlig</p><p class="styrker">Kreativ, ansvarsfull og observant</p>
         </li>
         <li class="person">
-          <img class="portrett" src="team-frida.jpg" alt="Portrett av Frida Tillnes Jansen" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">FJ</span>
           <h3>Frida Tillnes Jansen</h3><p class="rolle">Markedsansvarlig</p><p class="styrker">Sosial og utadvendt</p>
         </li>
         <li class="person">
-          <img class="portrett" src="team-lisa.jpg" alt="Portrett av Lisa Tveit Hauge" width="400" height="400" loading="lazy">
+          <span class="initialer" aria-hidden="true">LH</span>
           <h3>Lisa Tveit Hauge</h3><p class="rolle">Ansvarlig for sosiale medier og kommunikasjon</p><p class="styrker">Sosial, hyggelig og imøtekommende</p>
         </li>
       </ul>
@@ -701,6 +703,7 @@
         </div>
         <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
         <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
+        <p class="liten-tekst">Vi bruker opplysningene bare til å svare på forespørselen din. <a href="personvern.html">Les personvernerklæringen</a>.</p>
         <div class="kvittering" id="kvittering" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -732,6 +735,7 @@
         <li><a href="#ungdom">Bli hjelper</a></li>
         <li><a href="#undersokelse">Undersøkelsen</a></li>
         <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="personvern.html">Personvern</a></li>
       </ul>
     </div>
   </div>
@@ -905,6 +909,8 @@
         svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo som brenner for å gjøre hverdagen enklere for eldre. Les mer under <a href="#om-oss">«Hvem er vi?»</a>.</p>', rel: ['undersokelse', 'kontakt'] },
       { id: 'undersokelse', sp: 'Hva sa seniorene i undersøkelsen?', ord: ['undersøkelse', 'undersøkelsen', 'seniorsenter', 'simensbråten', 'spurte', 'resultat'],
         svar: '<p>Vi snakket med 16 personer på Simensbråten seniorsenter. 69 % var veldig for ideen. Se alle tallene under <a href="#undersokelse">«Vi spurte seniorene først»</a>.</p>', rel: ['omoss'] },
+      { id: 'personvern', sp: 'Hva gjør dere med opplysningene mine?', ord: ['personvern', 'personopplysninger', 'opplysninger', 'gdpr', 'slette', 'sletting', 'lagre', 'lagrer', 'data om meg'],
+        svar: '<p>Vi bruker opplysningene bare til det du har bedt om: å gi deg beskjed når appen lanseres, eller å svare på forespørselen din. Påmeldinger slettes når vi har gitt beskjed om appen. Les mer i <a href="personvern.html">personvernerklæringen</a>.</p>', rel: ['kontakt', 'app'] },
       { id: 'fast', sp: 'Kan jeg få den samme hjelperen?', ord: ['samme hjelper', 'fast hjelper', 'samme person', 'samme ungdom'],
         svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>', rel: ['trygg', 'bestill'] },
       { id: 'hei', sp: 'Hei', skjult: true, ord: ['hei', 'hallo', 'heisann', 'hey', 'god dag', 'god morgen', 'god kveld'],
