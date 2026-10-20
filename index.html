@@ -118,7 +118,7 @@
   .lapper { display: flex; margin: 0 -1.6rem; border-top: 2px dashed rgba(82,57,94,.4); }
   .lapper span {
     flex: 1 1 0; writing-mode: vertical-rl; transform: rotate(180deg);
-    font-size: .85rem; font-weight: 700; padding: .7rem 0; text-align: center;
+    font-size: .8rem; font-weight: 700; padding: .7rem 0; text-align: center;
     border-left: 2px dashed rgba(82,57,94,.4); white-space: nowrap;
   }
   .lapper span:last-child { border-left: 0; }
@@ -199,7 +199,9 @@
   .team { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 1.2rem; }
   @media (min-width: 640px) { .team { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 980px) { .team { grid-template-columns: 1fr 1fr 1fr; } }
-  .person { background: var(--papir); border-radius: 16px; padding: 1.4rem; display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; align-items: start; }
+  .person { background: var(--papir); border-radius: 16px; padding: 1.4rem; display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+  .person h3 { overflow-wrap: break-word; hyphens: auto; }
+  @media (max-width: 360px) { .person { grid-template-columns: 3rem minmax(0, 1fr); padding: 1.1rem; } .initialer { width: 3rem; height: 3rem; font-size: 1rem; } }
   .initialer { width: 4rem; height: 4rem; border-radius: 50%; background: var(--lavendel); color: var(--lilla-mork); display: grid; place-items: center; font-weight: 700; font-size: 1.2rem; }
   .person:nth-child(even) .initialer { background: var(--krem); }
   .person h3 { margin: 0 0 .1rem; }
@@ -245,6 +247,43 @@
   .kvittering.vis { display: block; }
   .kvittering.feil { background: #FCE8E6; border-color: #B3261E; }
 
+  /* Påmelding til appen */
+  .varsling { padding: 3rem 0 0; }
+  .varsling-boks { display: grid; gap: 1.4rem; background: var(--krem); border-radius: 20px; padding: 1.8rem; }
+  @media (min-width: 900px) { .varsling-boks { grid-template-columns: 1fr 1.1fr; align-items: center; padding: 2.2rem 2.4rem; } }
+  .varsling-boks h2 { color: var(--lilla); margin-bottom: .4rem; }
+  .varsling-boks p { margin: 0; }
+  .varsel-skjema { display: grid; gap: .8rem; }
+  .varsel-skjema .knapp { white-space: nowrap; }
+  @media (max-width: 599px) { .varsling-boks { padding: 1.3rem 1rem; } .varsel-skjema { padding: 1.1rem; } }
+  @media (min-width: 600px) { .varsel-skjema .rad { display: grid; grid-template-columns: 1fr 1.4fr; gap: .8rem; } }
+  .varsel-skjema .rad > div + div { margin-top: .8rem; }
+  @media (min-width: 600px) { .varsel-skjema .rad > div + div { margin-top: 0; } }
+  .varsel-skjema label { font-size: .9rem; margin-bottom: .25rem; }
+  .varsel-skjema .liten { font-size: .8rem; color: var(--hint); }
+  .honning { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* Undersøkelsen */
+  .resultat { width: 100%; max-width: 46rem; border-collapse: separate; border-spacing: 0 .9rem; margin-top: 1.6rem; }
+  .resultat th { text-align: left; font-weight: 400; padding-right: 1rem; width: 40%; vertical-align: middle; }
+  .resultat td { vertical-align: middle; }
+  .resultat .stolpe { display: flex; align-items: center; gap: .7rem; }
+  .resultat .spor { flex: 1; height: 1.4rem; background: var(--lavendel-lys); border-radius: 4px; overflow: hidden; }
+  .resultat .fyll { height: 100%; width: var(--p); background: var(--lilla); border-radius: 0 4px 4px 0; }
+  .resultat .prosent { font-weight: 700; min-width: 3.4rem; text-align: right; }
+  .resultat .antall { color: var(--hint); font-size: .85rem; white-space: nowrap; padding-left: .8rem; }
+  @media (max-width: 640px) {
+    .resultat, .resultat tbody, .resultat tr, .resultat th, .resultat td { display: block; width: 100%; }
+    .resultat tr { margin-bottom: 1rem; }
+    .resultat th { padding: 0 0 .3rem; font-weight: 700; }
+    .resultat .antall { padding: .2rem 0 0; }
+  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .fotnote { font-size: .85rem; color: var(--hint); }
+  .partner { margin-top: 2rem; background: var(--bakgrunn); border-radius: 16px; padding: 1.4rem 1.6rem; max-width: 46rem; border-left: 6px solid var(--lavendel); }
+  .partner h3 { margin-bottom: .3rem; }
+  .partner p { margin: 0; }
+
   /* Bilder */
   .foto { width: 100%; height: auto; aspect-ratio: 701 / 382; object-fit: cover; border-radius: 16px; background: var(--lavendel-lys); }
   figure { margin: 0; }
@@ -256,6 +295,8 @@
   .brev-rad { display: grid; gap: 2rem; margin-top: 2.5rem; align-items: center; }
   @media (min-width: 900px) { .brev-rad { grid-template-columns: 1fr 1fr; } }
   .brev-rad .brev { margin-top: 0; }
+  .brev-rad > * { min-width: 0; }
+  a[href^="mailto"] { overflow-wrap: anywhere; }
 
   /* Chat */
   .lenkeknapp { font: inherit; font-weight: 700; color: var(--lilla); background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
@@ -361,7 +402,7 @@
           </ul>
           <p class="hilsen">Hilsen ungdommen i nabolaget :)</p>
           <div class="lapper">
-            <span>466 33 243</span><span>466 33 243</span><span class="revet">466 33 243</span><span>466 33 243</span><span class="revet">466 33 243</span><span>466 33 243</span>
+            <span>Skann QR-koden</span><span>Skann QR-koden</span><span class="revet">Skann QR-koden</span><span>Skann QR-koden</span><span class="revet">Skann QR-koden</span><span>Skann QR-koden</span>
           </div>
         </div>
       </div>
@@ -373,8 +414,35 @@
       <ul>
         <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Alle brukere er verifisert med Vipps</li>
         <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Fast pris, du vet hva det koster på forhånd</li>
-        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Du kan alltid ringe oss i stedet for å bruke appen</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Liker du ikke apper? Vi hjelper deg i gang</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="varsling" id="varsling" aria-labelledby="varsling-tittel">
+    <div class="ramme">
+      <div class="varsling-boks">
+        <div>
+          <h2 id="varsling-tittel">Er du interessert i appen vår?</h2>
+          <p>Legg igjen kontaktinformasjonen din, så sender vi deg en påminnelse når appen lanseres. Lurer du på noe, er du også velkommen til å ta kontakt.</p>
+        </div>
+        <form class="varsel-skjema" id="varsel-skjema" novalidate>
+          <div class="rad">
+            <div>
+              <label for="v-navn">Fornavn</label>
+              <input id="v-navn" name="v-navn" type="text" autocomplete="given-name" required>
+            </div>
+            <div>
+              <label for="v-kontakt">E-post eller mobilnummer</label>
+              <input id="v-kontakt" name="v-kontakt" type="text" autocomplete="email" inputmode="email" required>
+            </div>
+          </div>
+          <div class="honning" aria-hidden="true"><label for="v-honning">Ikke fyll ut</label><input id="v-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+          <div><button class="knapp knapp-hoved" type="submit">Gi meg beskjed</button></div>
+          <p class="liten">Vi bruker kontaktinformasjonen bare til å gi deg beskjed om appen.</p>
+          <div class="kvittering" id="varsel-kvittering" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -443,7 +511,7 @@
 
       <div class="vipps-linje">
         <svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <p><strong>Liker du ikke apper?</strong> Det går helt fint. Ring oss på <a href="tel:46633243">466 33 243</a>, så legger vi inn bestillingen for deg. Pårørende kan også bestille på vegne av noen de er glad i.</p>
+        <p><strong>Liker du ikke apper?</strong> Fyll ut <a href="#bestill">skjemaet nedenfor</a>, så hjelper vi deg med å komme i gang. Pårørende kan også bestille på vegne av noen de er glad i.</p>
       </div>
     </div>
   </section>
@@ -457,12 +525,12 @@
           <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alle som bruker appen, både de som får og de som gir hjelp, logger inn med Vipps. Da vet vi hvem de er.</span></li>
           <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Du får vite hvem som kommer, før de kommer.</span></li>
           <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Betalingen skjer i appen etter besøket. Ingen kontanter trenger å skifte hender.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Er det noe som ikke føles riktig, ringer du oss. Vi tar det på alvor.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Er det noe som ikke føles riktig, sier du fra til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>. Vi tar det på alvor.</span></li>
         </ul>
       </div>
       <div class="advarsel">
         <h3>Dette gjør en hjelper aldri</h3>
-        <p>En hjelper fra Hverdagshelten ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Hvis noen gjør det, si nei og ring oss på 466 33 243.</p>
+        <p>En hjelper fra Hverdagshelten ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Hvis noen gjør det, si nei og gi beskjed til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
       </div>
     </div>
   </section>
@@ -495,8 +563,30 @@
         <li>Du får 150 kr per time, rett til deg.</li>
         <li>Du velger selv hvilke oppdrag du tar.</li>
         <li>Du logger inn trygt med Vipps.</li>
-        <li>Du kan alltid ringe oss hvis du lurer på noe.</li>
+        <li>Du kan alltid kontakte oss hvis du lurer på noe.</li>
       </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-hvit" id="undersokelse">
+    <div class="ramme">
+      <h2>Vi spurte seniorene først</h2>
+      <p>Før vi startet, besøkte vi Simensbråten seniorsenter i Oslo og snakket med 16 personer om Hverdagshelten. Dette svarte de:</p>
+      <table class="resultat">
+        <caption class="sr">Svar fra 16 personer på Simensbråten seniorsenter, i prosent</caption>
+        <thead class="sr"><tr><th scope="col">Svar</th><th scope="col">Andel</th><th scope="col">Antall</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Ønsket mer informasjon</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:37.5%"></div></div><span class="prosent">38 %</span></div></td><td class="antall">6 av 16</td></tr>
+          <tr><th scope="row">Svarte, men ville være anonyme</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:31.25%"></div></div><span class="prosent">31 %</span></div></td><td class="antall">5 av 16</td></tr>
+          <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19 %</span></div></td><td class="antall">3 av 16</td></tr>
+          <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12 %</span></div></td><td class="antall">2 av 16</td></tr>
+        </tbody>
+      </table>
+      <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100 %.</p>
+      <div class="partner">
+        <h3>Samarbeidspartner: Simensbråten seniorsenter</h3>
+        <p>Takk til Simensbråten seniorsenter, som tok imot oss og lot oss snakke med besøkende. Tilbakemeldingene har hjulpet oss å forme Hverdagshelten.</p>
       </div>
     </div>
   </section>
@@ -504,7 +594,8 @@
   <section class="seksjon" id="om-oss">
     <div class="ramme">
       <h2>Hvem er vi?</h2>
-      <p>Hverdagshelten er startet av seks unge gründere. Vi så at mange eldre trenger litt hjelp innimellom, men ikke liker å spørre, og at mange ungdommer gjerne vil tjene litt penger, men ikke finner jobb. Med Hverdagshelten kan vi hjelpe hverandre.</p>
+      <p>Vi er seks unge gründere som brenner for å gjøre hverdagen enklere for eldre. Engasjementet vårt bygger på personlige erfaringer og et ønske om å skape mer trygghet, selvstendighet og mestring i hverdagen.</p>
+      <p>Vi så at mange eldre trenger litt hjelp innimellom, men ikke liker å spørre, og at mange ungdommer gjerne vil tjene litt penger, men ikke finner jobb. Med Hverdagshelten kan vi hjelpe hverandre.</p>
 
       <ul class="team">
         <li class="person">
@@ -537,7 +628,7 @@
       <figure><img class="foto" src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></figure>
       <div class="brev">
         <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
-        <p>Har du spørsmål, kan du alltid ringe oss.</p>
+        <p>Har du spørsmål, kan du alltid sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
         <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
       </div>
       </div>
@@ -550,7 +641,7 @@
       <div class="sporsmal">
         <details>
           <summary>Jeg har ikke smarttelefon. Kan jeg bruke Hverdagshelten likevel?</summary>
-          <p>Ja. Du kan ringe oss på 466 33 243, så ordner vi resten. Du trenger verken app eller nettside.</p>
+          <p>Ja. Fyll ut <a href="#bestill">skjemaet nederst på siden</a>, eller be en pårørende gjøre det for deg, så tar vi kontakt og hjelper deg i gang.</p>
         </details>
         <details>
           <summary>Hvem er hjelperne?</summary>
@@ -570,7 +661,7 @@
         </details>
         <details>
           <summary>Hva om jeg må avbestille?</summary>
-          <p>Det er gratis å avbestille frem til dagen før. Gjør det i appen eller ring oss.</p>
+          <p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller send oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
         </details>
       </div>
     </div>
@@ -580,9 +671,8 @@
     <div class="ramme">
       <div>
         <h2>Bestill hjelp</h2>
-        <p>Det enkleste er å ringe. Vi svarer hverdager mellom 09 og 17.</p>
-        <a class="telefon-stor" href="tel:46633243">466 33 243</a>
-        <p>Du kan også fylle ut skjemaet, så ringer vi deg tilbake innen én arbeidsdag.</p>
+        <p>Fyll ut skjemaet, så tar vi kontakt med deg for å avtale resten. Liker du ikke apper, hjelper vi deg også med å komme i gang.</p>
+        <p>Du kan også sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
       </div>
 
       <form id="skjema" novalidate>
@@ -591,8 +681,8 @@
           <input id="navn" name="navn" type="text" autocomplete="name" required>
         </div>
         <div class="felt">
-          <label for="tlf">Telefonnummer <span class="hint">Vi ringer deg på dette nummeret.</span></label>
-          <input id="tlf" name="tlf" type="tel" autocomplete="tel" inputmode="tel" required>
+          <label for="kontakt">E-post eller mobilnummer <span class="hint">Slik kan vi nå deg.</span></label>
+          <input id="kontakt" name="kontakt" type="text" autocomplete="email" inputmode="email" required>
         </div>
         <fieldset>
           <legend>Hva trenger du hjelp med?</legend>
@@ -609,6 +699,7 @@
           <label for="melding">Fortell gjerne litt mer <span class="hint">For eksempel hvilken dag som passer best.</span></label>
           <textarea id="melding" name="melding"></textarea>
         </div>
+        <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
         <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
         <div class="kvittering" id="kvittering" role="status" aria-live="polite"></div>
       </form>
@@ -622,14 +713,14 @@
     <div>
       <a class="merke" href="#"><img src="logo.png" alt="" width="52" height="52">Hverdagshelten</a>
       <p>En hjelpende hånd. Vi setter eldre og unge i Oslo i kontakt med hverandre.</p>
-      <span class="app-merke">Appen kommer snart</span>
+      <a class="app-merke" href="#varsling">Appen kommer snart – få beskjed</a>
     </div>
     <div>
       <h2>Kontakt</h2>
       <ul>
-        <li>Telefon: <a href="tel:46633243">466 33 243</a></li>
-        <li>E-post: <a href="mailto:joakim.purnell@gmail.com">joakim.purnell@gmail.com</a></li>
-        <li>Hverdager 09–17</li>
+        <li>E-post: <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a></li>
+        <li>Instagram: <a href="https://www.instagram.com/hverdagshelten123/" rel="noopener">@hverdagshelten123</a></li>
+        <li>TikTok: <a href="https://www.tiktok.com/@hverdagshelten5" rel="noopener">@hverdagshelten5</a></li>
       </ul>
     </div>
     <div>
@@ -638,6 +729,7 @@
         <li><a href="#bestill">Bestill hjelp</a></li>
         <li><a href="#appen">Slik fungerer appen</a></li>
         <li><a href="#ungdom">Bli hjelper</a></li>
+        <li><a href="#undersokelse">Undersøkelsen</a></li>
         <li><a href="#om-oss">Om oss</a></li>
       </ul>
     </div>
@@ -661,7 +753,7 @@
     <input id="chat-input" type="text" placeholder="Skriv spørsmålet ditt her" enterkeyhint="send">
     <button type="submit">Send</button>
   </form>
-  <p class="chat-merknad">Automatiske svar. For alt annet, ring 466 33 243.</p>
+  <p class="chat-merknad">Automatiske svar. For alt annet: hverdagsheltenub@gmail.com</p>
 </section>
 
 
@@ -682,76 +774,189 @@
     });
   })();
 
-  // Skjemaet. OBS: Dette er bare visning foreløpig – det sender ikke noe ennå.
-  (function () {
-    var skjema = document.getElementById('skjema');
-    var kvittering = document.getElementById('kvittering');
+  // ---------- Sending av skjema ----------
+  // Svarene sendes via FormSubmit til Hverdagsheltens Gmail. Ingen ting lagres på nettsiden.
+  var EPOST = 'hverdagsheltenub@gmail.com';
+  var SKJEMA_URL = 'https://formsubmit.co/ajax/' + EPOST;
+
+  function gyldigKontakt(t) {
+    t = t.trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t)) return true;
+    var tall = t.replace(/[\s+()-]/g, '');
+    return /^\d{8,12}$/.test(tall);
+  }
+  function visKvittering(boks, tekst, feil, html) {
+    boks.classList.add('vis');
+    boks.classList.toggle('feil', !!feil);
+    if (html) boks.innerHTML = tekst; else boks.textContent = tekst;
+  }
+  function sendTilOss(data, emne) {
+    data._subject = emne;
+    data._template = 'table';
+    data._captcha = 'false';
+    return fetch(SKJEMA_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.json(); }).then(function (svar) {
+      if (String(svar.success) !== 'true') throw new Error(svar.message || 'Feil');
+      return svar;
+    });
+  }
+  function feilTekst() {
+    return 'Vi fikk ikke sendt skjemaet akkurat nå. Prøv igjen om litt, eller send oss en e-post på <a href="mailto:' + EPOST + '">' + EPOST + '</a>.';
+  }
+  function koble(skjemaId, kvitteringId, lagData, sjekk, takk) {
+    var skjema = document.getElementById(skjemaId);
+    var boks = document.getElementById(kvitteringId);
+    var knapp = skjema.querySelector('button[type=submit]');
+    var knappTekst = knapp.textContent;
     skjema.addEventListener('submit', function (e) {
       e.preventDefault();
-      var navn = skjema.navn.value.trim();
-      var tlf = skjema.tlf.value.trim();
-      kvittering.classList.add('vis');
-      if (!navn || !tlf) {
-        kvittering.classList.add('feil');
-        kvittering.textContent = 'Skriv inn navnet ditt og telefonnummeret ditt, så vi kan ringe deg tilbake.';
-        (navn ? skjema.tlf : skjema.navn).focus();
-        return;
-      }
-      kvittering.classList.remove('feil');
-      kvittering.textContent = 'Takk, ' + navn + '! Forespørselen er sendt. Vi ringer deg på ' + tlf + ' innen én arbeidsdag.';
-      skjema.reset();
+      var problem = sjekk(skjema);
+      if (problem) { visKvittering(boks, problem.tekst, true); problem.felt.focus(); return; }
+      var honning = skjema.querySelector('[name=_honey]');
+      var data = lagData(skjema);
+      if (honning && honning.value) { visKvittering(boks, takk(data), false); skjema.reset(); return; }
+      knapp.disabled = true; knapp.textContent = 'Sender …';
+      sendTilOss(data.felter, data.emne).then(function () {
+        visKvittering(boks, takk(data), false);
+        skjema.reset();
+      }).catch(function () {
+        visKvittering(boks, feilTekst(), true, true);
+      }).then(function () { knapp.disabled = false; knapp.textContent = knappTekst; });
     });
-  })();
+  }
 
-  // Chat som svarer på enkle spørsmål. Alt skjer i nettleseren, ingenting sendes videre.
+  // Påmelding til appen
+  koble('varsel-skjema', 'varsel-kvittering',
+    function (f) {
+      return { emne: 'Ny påmelding: vil ha beskjed når appen lanseres',
+               felter: { 'Fornavn': f['v-navn'].value.trim(), 'E-post eller mobil': f['v-kontakt'].value.trim(), 'Skjema': 'Påmelding til appen' } };
+    },
+    function (f) {
+      if (!f['v-navn'].value.trim()) return { tekst: 'Skriv inn fornavnet ditt.', felt: f['v-navn'] };
+      if (!gyldigKontakt(f['v-kontakt'].value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer.', felt: f['v-kontakt'] };
+      return null;
+    },
+    function (d) { return 'Takk, ' + d.felter['Fornavn'] + '! Vi gir deg beskjed når appen er klar.'; });
+
+  // Bestill hjelp
+  koble('skjema', 'kvittering',
+    function (f) {
+      var valgt = Array.prototype.map.call(f.querySelectorAll('input[name=hjelp]:checked'), function (c) { return c.parentNode.textContent.trim(); });
+      return { emne: 'Ny forespørsel fra nettsiden: ' + (valgt.join(', ') || 'Bestill hjelp'),
+               felter: { 'Navn': f.navn.value.trim(), 'E-post eller mobil': f.kontakt.value.trim(),
+                         'Hjelp med': valgt.join(', ') || 'Ikke valgt', 'Melding': f.melding.value.trim() || '–', 'Skjema': 'Bestill hjelp' } };
+    },
+    function (f) {
+      if (!f.navn.value.trim()) return { tekst: 'Skriv inn navnet ditt.', felt: f.navn };
+      if (!gyldigKontakt(f.kontakt.value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer, så vi kan nå deg.', felt: f.kontakt };
+      return null;
+    },
+    function (d) { return 'Takk, ' + d.felter['Navn'] + '! Forespørselen er sendt. Vi tar kontakt med deg så snart vi kan.'; });
+
+  // ---------- Chat som svarer på enkle spørsmål ----------
+  // Alt skjer i nettleseren. Den tåler skrivefeil og foreslår lignende spørsmål.
   (function () {
-    var TLF = '<a href="tel:46633243">466 33 243</a>';
-    var SVAR = [
-      { ord: ['pris', 'koste', 'koster', 'betale', 'dyr', 'kr', 'kroner', 'gebyr', 'timepris'],
-        svar: '<p>Hjelp koster 150 kr per time. I tillegg kommer et gebyr på 29 kr per bestilling.</p><p>En time med handling koster altså 179 kr. Varene betaler du som vanlig.</p>' },
-      { ord: ['bestille', 'bestilling', 'bestiller', 'booke', 'hvordan få hjelp', 'få hjelp', 'trenger hjelp'],
-        svar: '<p>Du kan bestille på to måter:</p><p>1. I appen: logg inn med Vipps, velg hva du trenger og når det passer.</p><p>2. På telefon: ring ' + TLF + ' (hverdager 09–17), så ordner vi det for deg.</p>' },
-      { ord: ['trygg', 'trygt', 'sikker', 'sikkert', 'svindel', 'vipps', 'verifis', 'id', 'hvem kommer', 'stole'],
-        svar: '<p>Alle som bruker Hverdagshelten logger inn med Vipps, så vi vet hvem de er. Du får vite hvem som kommer før besøket.</p><p>En hjelper ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Skjer det, si nei og ring oss på ' + TLF + '.</p>' },
-      { ord: ['jobb', 'jobbe', 'hjelper', 'tjene', 'penger', 'søke', 'melde', 'ungdom', 'bli med'],
-        svar: '<p>Er du mellom 15 og 19 år, kan du bli hverdagshelt! Du logger inn med Vipps, velger selv hvilke oppdrag du tar, og får 150 kr per time.</p><p>Fyll ut skjemaet nederst på siden og kryss av for «Jeg vil bli hjelper», så tar vi kontakt.</p>' },
-      { ord: ['avbestill', 'avlys', 'kansel', 'endre tid', 'flytte'],
-        svar: '<p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller ring oss på ' + TLF + '.</p>' },
-      { ord: ['alder', 'gammel', 'år', 'hvor gamle'],
-        svar: '<p>Hjelperne våre er ungdommer mellom 15 og 19 år som bor i nærheten av deg i Oslo.</p>' },
-      { ord: ['smarttelefon', 'mobil uten', 'ikke app', 'uten app', 'liker ikke apper', 'ingen app', 'datamaskin'],
-        svar: '<p>Du trenger ikke appen. Ring oss på ' + TLF + ', så legger vi inn bestillingen for deg.</p>' },
-      { ord: ['pårørende', 'mor', 'far', 'mamma', 'pappa', 'bestemor', 'bestefar', 'besteforeldre', 'foreldre', 'på vegne'],
-        svar: '<p>Ja, pårørende kan bestille hjelp på vegne av noen de er glad i. Ring ' + TLF + ' eller bruk appen.</p>' },
-      { ord: ['handle', 'handling', 'butikk', 'innkjøp', 'varer', 'mat'],
-        svar: '<p>Ja! Vi kan handle for deg, eller bli med og bære posene hjem.</p>' },
-      { ord: ['plen', 'hage', 'gress', 'rake', 'luke', 'snø', 'måke'],
-        svar: '<p>Ja, vi hjelper med plenklipping, raking, luking og snømåking om vinteren.</p>' },
-      { ord: ['hund', 'lufte', 'lufting', 'tur'],
-        svar: '<p>Ja, vi kan gå tur med hunden din når det passer deg.</p>' },
-      { ord: ['kaffe', 'selskap', 'prat', 'ensom', 'besøk', 'kort'],
-        svar: '<p>Ja! Mange setter pris på en kopp kaffe og en prat, et spill kort eller en tur i nabolaget.</p>' },
-      { ord: ['nettbrett', 'telefon hjelp', 'teknisk', 'facetime', 'videosamtale', 'apper', 'bilder', 'ipad'],
-        svar: '<p>Ja, vi hjelper gjerne med mobil og nettbrett, for eksempel videosamtaler med barnebarna, bilder og apper, i ditt tempo.</p>' },
-      { ord: ['hva gjør', 'tjenester', 'hjelpe med', 'hva kan'],
-        svar: '<p>Vi hjelper med handling, hagearbeid, hundelufting, kaffe og selskap, mobil og nettbrett, og småjobber i huset.</p>' },
-      { ord: ['hvor', 'område', 'oslo', 'bydel', 'sted'],
-        svar: '<p>Vi starter i Oslo. Hjelperne er ungdommer som bor i nærheten av deg.</p>' },
-      { ord: ['betal', 'faktura', 'kontant'],
-        svar: '<p>Du betaler i appen etter besøket. Bestiller du på telefon, finner vi en løsning som passer deg.</p>' },
-      { ord: ['ringe', 'kontakt', 'telefon', 'nummer', 'e-post', 'epost', 'åpningstid', 'åpent', 'snakke med'],
-        svar: '<p>Ring oss på ' + TLF + ' (hverdager 09–17), eller send e-post til <a href="mailto:joakim.purnell@gmail.com">joakim.purnell@gmail.com</a>.</p>' },
-      { ord: ['hvem er dere', 'om dere', 'gründer', 'team', 'startet'],
-        svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo. Du kan lese mer om oss under «Om oss» på siden.</p>' },
-      { ord: ['samme hjelper', 'fast hjelper'],
-        svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper.</p>' },
-      { ord: ['hei', 'hallo', 'heisann', 'god dag', 'god morgen'],
-        svar: '<p>Hei! Hva lurer du på?</p>' },
-      { ord: ['takk', 'tusen takk'],
-        svar: '<p>Bare hyggelig! Ha en fin dag.</p>' }
+    var ML = '<a href="mailto:' + EPOST + '">' + EPOST + '</a>';
+    var TEMA = [
+      { id: 'pris', sp: 'Hva koster det?', ord: ['pris', 'priser', 'koster', 'kostnad', 'koste', 'betale', 'dyrt', 'billig', 'kroner', 'kr', 'gebyr', 'timepris'],
+        svar: '<p>Hjelp koster 150 kr per time. I tillegg kommer et gebyr på 29 kr per bestilling.</p><p>En time med handling koster altså 179 kr. Varene betaler du som vanlig.</p>', rel: ['betaling', 'avbestill', 'bestill'] },
+      { id: 'bestill', sp: 'Hvordan bestiller jeg?', ord: ['bestille', 'bestilling', 'bestiller', 'booke', 'få hjelp', 'trenger hjelp', 'ordne'],
+        svar: '<p>Du kan bestille på to måter:</p><p>1. I appen: logg inn med Vipps, velg hva du trenger og når det passer.</p><p>2. Uten app: fyll ut <a href="#bestill">skjemaet nederst på siden</a>, så tar vi kontakt.</p>', rel: ['pris', 'utenapp', 'parorende'] },
+      { id: 'trygg', sp: 'Er det trygt?', ord: ['trygg', 'trygt', 'sikker', 'sikkert', 'svindel', 'vipps', 'verifisert', 'stole', 'hvem kommer', 'identitet'],
+        svar: '<p>Alle som bruker Hverdagshelten logger inn med Vipps, så vi vet hvem de er. Du får vite hvem som kommer før besøket.</p><p>En hjelper ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Skjer det, si nei og gi beskjed til oss på ' + ML + '.</p>', rel: ['alder', 'fast', 'kontakt'] },
+      { id: 'hjelper', sp: 'Hvordan blir jeg hjelper?', ord: ['jobb', 'jobbe', 'hjelper', 'tjene', 'søke', 'melde', 'bli med', 'ungdom', 'sommerjobb', 'deltid', 'ekstrajobb'],
+        svar: '<p>Er du mellom 15 og 19 år, kan du bli hverdagshelt! Du logger inn med Vipps, velger selv hvilke oppdrag du tar, og får 150 kr per time.</p><p>Fyll ut <a href="#bestill">skjemaet nederst på siden</a> og kryss av for «Jeg vil bli hjelper», så tar vi kontakt.</p>', rel: ['alder', 'trygg', 'app'] },
+      { id: 'app', sp: 'Når kommer appen?', ord: ['app', 'appen', 'lansering', 'lanseres', 'last ned', 'laste ned', 'når kommer', 'app store', 'google play', 'påminnelse'],
+        svar: '<p>Appen er ikke lansert ennå. <a href="#varsling">Legg igjen fornavn og e-post eller mobilnummer her</a>, så gir vi deg beskjed når den er klar.</p>', rel: ['utenapp', 'bestill'] },
+      { id: 'utenapp', sp: 'Jeg liker ikke apper', ord: ['liker ikke', 'uten app', 'ikke app', 'smarttelefon', 'gammel mobil', 'vanskelig'],
+        svar: '<p>Det går helt fint. Fyll ut <a href="#bestill">skjemaet nedenfor</a>, eller be en pårørende gjøre det, så hjelper vi deg med å komme i gang.</p>', rel: ['parorende', 'bestill'] },
+      { id: 'avbestill', sp: 'Hvordan avbestiller jeg?', ord: ['avbestille', 'avbestilling', 'avlyse', 'kansellere', 'endre tid', 'flytte'],
+        svar: '<p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller send oss en e-post på ' + ML + '.</p>', rel: ['pris', 'kontakt'] },
+      { id: 'alder', sp: 'Hvor gamle er hjelperne?', ord: ['alder', 'gamle', 'gammel', 'år', 'unge', 'tenåring'],
+        svar: '<p>Hjelperne våre er ungdommer mellom 15 og 19 år som bor i nærheten av deg i Oslo.</p>', rel: ['trygg', 'fast'] },
+      { id: 'parorende', sp: 'Kan jeg bestille for noen andre?', ord: ['pårørende', 'mamma', 'pappa', 'mor', 'far', 'bestemor', 'bestefar', 'besteforeldre', 'foreldre', 'vegne', 'nabo'],
+        svar: '<p>Ja, pårørende kan bestille hjelp på vegne av noen de er glad i, i appen eller via <a href="#bestill">skjemaet</a>.</p>', rel: ['bestill', 'pris'] },
+      { id: 'tjenester', sp: 'Hva kan dere hjelpe med?', ord: ['tjenester', 'hjelpe med', 'hva gjør', 'hva kan', 'tilbud', 'tilbyr'],
+        svar: '<p>Vi hjelper med handling, hagearbeid, hundelufting, kaffe og selskap, mobil og nettbrett, og småjobber i huset.</p>', rel: ['handling', 'selskap', 'mobil'] },
+      { id: 'handling', sp: 'Kan dere handle for meg?', ord: ['handle', 'handling', 'butikk', 'butikken', 'innkjøp', 'varer', 'mat', 'dagligvarer', 'bære', 'poser'],
+        svar: '<p>Ja! Vi kan handle for deg, eller bli med og bære posene hjem. Varene betaler du som vanlig.</p>', rel: ['pris', 'bestill'] },
+      { id: 'hage', sp: 'Hjelper dere med hagen?', ord: ['plen', 'plenen', 'hage', 'hagen', 'gress', 'rake', 'luke', 'snø', 'måke', 'klippe', 'gressklipper'],
+        svar: '<p>Ja, vi hjelper med plenklipping, raking, luking og snømåking om vinteren.</p>', rel: ['pris', 'bestill'] },
+      { id: 'hund', sp: 'Kan dere lufte hunden min?', ord: ['hund', 'hunden', 'lufte', 'lufting', 'bikkje', 'valp'],
+        svar: '<p>Ja, vi kan gå tur med hunden din når det passer deg.</p>', rel: ['pris', 'bestill'] },
+      { id: 'selskap', sp: 'Kan noen komme på besøk?', ord: ['kaffe', 'selskap', 'prat', 'prate', 'ensom', 'besøk', 'spill', 'kortspill', 'tur'],
+        svar: '<p>Ja! Mange setter pris på en kopp kaffe og en prat, et spill kort eller en tur i nabolaget.</p>', rel: ['fast', 'bestill'] },
+      { id: 'mobil', sp: 'Kan dere hjelpe med mobil og nettbrett?', ord: ['nettbrett', 'ipad', 'teknisk', 'facetime', 'videosamtale', 'bilder', 'mobilen', 'telefonen', 'data', 'pc'],
+        svar: '<p>Ja, vi hjelper gjerne med mobil og nettbrett, for eksempel videosamtaler med barnebarna, bilder og apper, i ditt tempo.</p>', rel: ['pris', 'bestill'] },
+      { id: 'omrade', sp: 'Hvor holder dere til?', ord: ['område', 'oslo', 'bydel', 'sted', 'nærheten', 'hvor holder'],
+        svar: '<p>Vi starter i Oslo. Hjelperne er ungdommer som bor i nærheten av deg.</p>', rel: ['alder', 'bestill'] },
+      { id: 'betaling', sp: 'Hvordan betaler jeg?', ord: ['betale', 'betaling', 'betaler', 'faktura', 'kontant', 'kontanter', 'bankkort'],
+        svar: '<p>Du betaler i appen etter besøket. Bestiller du via skjemaet, finner vi en løsning som passer deg.</p>', rel: ['pris', 'trygg'] },
+      { id: 'kontakt', sp: 'Hvordan kontakter jeg dere?', ord: ['kontakt', 'kontakte', 'ringe', 'telefon', 'nummer', 'epost', 'mail', 'snakke', 'åpningstid', 'svare'],
+        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram og TikTok.</p>', rel: ['bestill', 'omoss'] },
+      { id: 'omoss', sp: 'Hvem står bak Hverdagshelten?', ord: ['hvem er dere', 'om dere', 'gründer', 'gründere', 'team', 'teamet', 'startet', 'står bak'],
+        svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo som brenner for å gjøre hverdagen enklere for eldre. Les mer under <a href="#om-oss">«Hvem er vi?»</a>.</p>', rel: ['undersokelse', 'kontakt'] },
+      { id: 'undersokelse', sp: 'Hva sa seniorene i undersøkelsen?', ord: ['undersøkelse', 'undersøkelsen', 'seniorsenter', 'simensbråten', 'spurte', 'resultat'],
+        svar: '<p>Vi snakket med 16 personer på Simensbråten seniorsenter. 38 % ønsket mer informasjon. Se alle tallene under <a href="#undersokelse">«Vi spurte seniorene først»</a>.</p>', rel: ['omoss'] },
+      { id: 'fast', sp: 'Kan jeg få den samme hjelperen?', ord: ['samme hjelper', 'fast hjelper', 'samme person', 'samme ungdom'],
+        svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>', rel: ['trygg', 'bestill'] },
+      { id: 'hei', sp: 'Hei', skjult: true, ord: ['hei', 'hallo', 'heisann', 'hey', 'god dag', 'god morgen', 'god kveld'],
+        svar: '<p>Hei! Hva lurer du på?</p>', rel: ['pris', 'bestill', 'trygg', 'app'] },
+      { id: 'takk', sp: 'Takk', skjult: true, ord: ['takk', 'tusen takk', 'flott', 'supert'],
+        svar: '<p>Bare hyggelig! Ha en fin dag.</p>', rel: [] }
     ];
-    var FORSLAG = ['Hva koster det?', 'Hvordan bestiller jeg?', 'Er det trygt?', 'Jeg vil bli hjelper'];
-    var VET_IKKE = '<p>Det vet jeg dessverre ikke svaret på. Ring oss på ' + TLF + ' (hverdager 09–17), så hjelper vi deg.</p>';
+    var START = ['pris', 'bestill', 'trygg', 'app', 'hjelper'];
+    var STOPP = { hva: 1, er: 1, det: 1, jeg: 1, du: 1, dere: 1, kan: 1, en: 1, et: 1, ei: 1, å: 1, på: 1, i: 1, med: 1, for: 1, til: 1, og: 1, som: 1, meg: 1, min: 1, mitt: 1, mine: 1, hvordan: 1, hvor: 1, mye: 1, man: 1, vi: 1, har: 1, om: 1, de: 1, den: 1, skal: 1, vil: 1, må: 1, noe: 1, sånn: 1 };
+    var finn = {}; TEMA.forEach(function (t) { finn[t.id] = t; });
+
+    function vask(t) { return t.toLowerCase().replace(/[^a-zæøåäö0-9\s]/g, ' ').replace(/ä/g, 'æ').replace(/ö/g, 'ø').replace(/\s+/g, ' ').trim(); }
+    function avstand(a, b) {
+      if (Math.abs(a.length - b.length) > 2) return 9;
+      var forrige = [], i, j;
+      for (j = 0; j <= b.length; j++) forrige[j] = j;
+      for (i = 1; i <= a.length; i++) {
+        var naa = [i];
+        for (j = 1; j <= b.length; j++) {
+          naa[j] = Math.min(forrige[j] + 1, naa[j - 1] + 1, forrige[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+          if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) naa[j] = Math.min(naa[j], forrige[j - 2] + 1);
+        }
+        forrige = naa;
+      }
+      return forrige[b.length];
+    }
+    function ordLikhet(q, k) {
+      if (q === k) return 1;
+      if (k.length >= 4 && q.indexOf(k) === 0) return 0.9;
+      if (q.length >= 4 && k.indexOf(q) === 0) return 0.8;
+      var maks = k.length <= 3 ? 0 : k.length <= 6 ? 1 : 2;
+      if (maks && avstand(q, k) <= maks) return 0.75;
+      return 0;
+    }
+    function poeng(ordliste, tema) {
+      var sum = 0;
+      tema.ord.forEach(function (frase) {
+        var deler = frase.split(' '), beste = 1;
+        for (var d = 0; d < deler.length; d++) {
+          var b = 0;
+          for (var w = 0; w < ordliste.length; w++) b = Math.max(b, ordLikhet(ordliste[w], deler[d]));
+          beste = Math.min(beste, b);
+          if (!beste) break;
+        }
+        if (beste) sum += beste * (frase.length >= 5 ? 2 : 1) * (deler.length > 1 ? 1.5 : 1);
+      });
+      return sum;
+    }
+    function rangering(tekst) {
+      var alle = vask(tekst).split(' ');
+      var ordliste = alle.filter(function (w) { return w && !STOPP[w]; });
+      if (!ordliste.length) ordliste = alle;
+      return TEMA.map(function (t) { return { t: t, p: poeng(ordliste, t) }; })
+        .filter(function (x) { return x.p > 0; })
+        .sort(function (a, b) { return b.p - a.p; });
+    }
 
     var chat = document.getElementById('chat');
     var knapp = document.getElementById('chat-knapp');
@@ -760,57 +965,72 @@
     var input = document.getElementById('chat-input');
     var startet = false, sistApnet = null;
 
-    function vask(t) { return t.toLowerCase().replace(/[^a-zæøå0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim(); }
-    function finnSvar(sporsmal) {
-      var t = ' ' + vask(sporsmal) + ' ';
-      var best = null, bestPoeng = 0;
-      SVAR.forEach(function (s) {
-        var poeng = 0;
-        s.ord.forEach(function (o) { if (t.indexOf(o) !== -1) poeng += o.length > 4 ? 2 : 1; });
-        if (poeng > bestPoeng) { bestPoeng = poeng; best = s; }
-      });
-      return best ? best.svar : VET_IKKE;
-    }
-    function leggTil(html, hvem) {
+    function leggTil(innhold, hvem) {
       var m = document.createElement('div');
       m.className = 'melding ' + hvem;
-      if (hvem === 'meg') m.textContent = html; else m.innerHTML = html;
+      if (hvem === 'meg') m.textContent = innhold; else m.innerHTML = innhold;
       logg.appendChild(m);
       logg.scrollTop = logg.scrollHeight;
-      return m;
     }
-    function visForslag() {
+    function knapper(ider, intro) {
+      ider = ider.filter(function (id) { return finn[id] && !finn[id].skjult; });
+      if (!ider.length) return;
+      if (intro) leggTil('<p>' + intro + '</p>', 'bot');
       var f = document.createElement('div');
       f.className = 'forslag';
-      FORSLAG.forEach(function (tekst) {
+      ider.forEach(function (id) {
         var b = document.createElement('button');
-        b.type = 'button'; b.textContent = tekst;
-        b.addEventListener('click', function () { spor(tekst); });
+        b.type = 'button'; b.textContent = finn[id].sp;
+        b.addEventListener('click', function () { leggTil(finn[id].sp, 'meg'); svarPaa(finn[id]); });
         f.appendChild(b);
       });
       logg.appendChild(f);
+      logg.scrollTop = logg.scrollHeight;
+    }
+    function svarPaa(tema) {
+      setTimeout(function () {
+        leggTil(tema.svar, 'bot');
+        knapper(tema.rel, tema.rel.length ? 'Andre lurer også på:' : '');
+      }, 300);
     }
     function spor(tekst) {
       leggTil(tekst, 'meg');
-      setTimeout(function () { leggTil(finnSvar(tekst), 'bot'); }, 350);
+      var r = rangering(tekst);
+      if (!r.length) {
+        setTimeout(function () {
+          leggTil('<p>Det fant jeg ikke svar på. Send oss en e-post på ' + ML + ', så svarer vi deg.</p>', 'bot');
+          knapper(START, 'Eller kanskje du lurer på ett av disse?');
+        }, 300);
+        return;
+      }
+      var topp = r[0], nummer2 = r[1];
+      var tydelig = topp.p >= 1.5 && (!nummer2 || nummer2.p < topp.p * 0.75);
+      if (tydelig) { svarPaa(topp.t); return; }
+      setTimeout(function () {
+        knapper(r.slice(0, 3).map(function (x) { return x.t.id; }), 'Jeg er ikke helt sikker på hva du mener. Mente du ett av disse?');
+      }, 300);
     }
     function apne(e) {
       sistApnet = e && e.currentTarget ? e.currentTarget : knapp;
       chat.hidden = false; knapp.hidden = true;
       if (!startet) {
         startet = true;
-        leggTil('<p>Hei! Jeg svarer på enkle spørsmål om Hverdagshelten. Velg et spørsmål, eller skriv ditt eget.</p>', 'bot');
-        visForslag();
+        leggTil('<p>Hei! Jeg svarer på enkle spørsmål om Hverdagshelten. Velg et spørsmål, eller skriv ditt eget. Skrivefeil går fint.</p>', 'bot');
+        knapper(START);
       }
       input.focus();
     }
     function lukk() {
       chat.hidden = true; knapp.hidden = false;
-      (sistApnet && document.body.contains(sistApnet) && !sistApnet.hidden ? sistApnet : knapp).focus();
+      (sistApnet && !sistApnet.hidden ? sistApnet : knapp).focus();
     }
     document.querySelectorAll('[data-apne-chat]').forEach(function (b) { b.addEventListener('click', apne); });
     document.getElementById('chat-lukk').addEventListener('click', lukk);
     chat.addEventListener('keydown', function (e) { if (e.key === 'Escape') lukk(); });
+    logg.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (a && window.innerWidth < 700) { chat.hidden = true; knapp.hidden = false; }
+    });
     skjema.addEventListener('submit', function (e) {
       e.preventDefault();
       var t = input.value.trim();
