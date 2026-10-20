@@ -199,16 +199,11 @@
   .team { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 1.2rem; }
   @media (min-width: 640px) { .team { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 980px) { .team { grid-template-columns: 1fr 1fr 1fr; } }
-  .person { background: var(--papir); border-radius: 16px; padding: 1.4rem; display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; align-items: start; }
-  .person h3 { overflow-wrap: break-word; hyphens: auto; }
-  @media (max-width: 360px) { .person { grid-template-columns: 3rem minmax(0, 1fr); padding: 1.1rem; } .initialer { width: 3rem; height: 3rem; font-size: 1rem; } }
-  .initialer { width: 4rem; height: 4rem; border-radius: 50%; background: var(--lavendel); color: var(--lilla-mork); display: grid; place-items: center; font-weight: 700; font-size: 1.2rem; }
-  .person:nth-child(even) .initialer { background: var(--krem); }
-  .person h3 { margin: 0 0 .1rem; }
-  .person .rolle { margin: 0 0 .4rem; color: var(--lilla); font-weight: 700; font-size: .95rem; }
-  .person .styrker { margin: 0; font-size: .9rem; color: var(--hint); }
-  .person.ledig { background: transparent; border: 2px dashed var(--strek); }
-  .person.ledig .initialer { background: transparent; border: 2px dashed var(--lavendel); color: var(--lavendel); }
+  .person { background: var(--papir); border-radius: 18px; padding: 1.8rem 1.4rem 1.6rem; text-align: center; }
+  .portrett { display: block; width: 8.5rem; height: 8.5rem; margin: 0 auto 1rem; border-radius: 50%; object-fit: cover; border: 3px solid var(--lavendel); background: var(--lavendel-lys); }
+  .person h3 { margin: 0 0 .15rem; overflow-wrap: break-word; hyphens: auto; }
+  .person .rolle { margin: 0 auto .5rem; color: var(--lilla); font-weight: 700; font-size: .95rem; }
+  .person .styrker { margin: 0 auto; font-size: .9rem; color: var(--hint); }
   .brev { background: var(--papir); max-width: 40rem; padding: 2rem; border-radius: 16px; margin-top: 2.5rem; }
   .brev p { font-size: 1.05rem; }
   .signatur { font-family: var(--hand); font-size: 1.5rem; color: var(--lilla); line-height: 1.2; margin: 0; }
@@ -280,7 +275,10 @@
   }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .fotnote { font-size: .85rem; color: var(--hint); }
-  .partner { margin-top: 2rem; background: var(--bakgrunn); border-radius: 16px; padding: 1.4rem 1.6rem; max-width: 46rem; border-left: 6px solid var(--lavendel); }
+  .partner { margin-top: 2rem; background: var(--bakgrunn); border-radius: 16px; padding: 1.4rem; display: grid; gap: 1.4rem; align-items: center; }
+  @media (min-width: 860px) { .partner { grid-template-columns: 1.1fr 1fr; padding: 1.6rem; } }
+  .partner > * { min-width: 0; }
+  .partner-foto { aspect-ratio: 1034 / 664; }
   .partner h3 { margin-bottom: .3rem; }
   .partner p { margin: 0; }
 
@@ -577,16 +575,18 @@
         <caption class="sr">Svar fra 16 personer på Simensbråten seniorsenter, i prosent</caption>
         <thead class="sr"><tr><th scope="col">Svar</th><th scope="col">Andel</th><th scope="col">Antall</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Ønsket mer informasjon</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:37.5%"></div></div><span class="prosent">38 %</span></div></td><td class="antall">6 av 16</td></tr>
-          <tr><th scope="row">Svarte, men ville være anonyme</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:31.25%"></div></div><span class="prosent">31 %</span></div></td><td class="antall">5 av 16</td></tr>
+          <tr><th scope="row">Var veldig for ideen</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:68.75%"></div></div><span class="prosent">69 %</span></div></td><td class="antall">11 av 16</td></tr>
           <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19 %</span></div></td><td class="antall">3 av 16</td></tr>
           <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12 %</span></div></td><td class="antall">2 av 16</td></tr>
         </tbody>
       </table>
       <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100 %.</p>
       <div class="partner">
-        <h3>Samarbeidspartner: Simensbråten seniorsenter</h3>
-        <p>Takk til Simensbråten seniorsenter, som tok imot oss og lot oss snakke med besøkende. Tilbakemeldingene har hjulpet oss å forme Hverdagshelten.</p>
+        <figure><img class="foto partner-foto" src="bilde-simensbraten.jpg" alt="Seniorer og ansatte samlet under et «Velkommen!»-banner på Simensbråten seniorsenter" width="1034" height="664" loading="lazy"><figcaption>Fra besøket vårt på Simensbråten seniorsenter</figcaption></figure>
+        <div>
+          <h3>Samarbeidspartner: Simensbråten seniorsenter</h3>
+          <p>Takk til Simensbråten seniorsenter, som tok imot oss og lot oss snakke med besøkende. Tilbakemeldingene har hjulpet oss å forme Hverdagshelten.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -599,28 +599,28 @@
 
       <ul class="team">
         <li class="person">
-          <span class="initialer" aria-hidden="true">JP</span>
-          <div><h3>Joakim Skree Robert Purnell</h3><p class="rolle">Daglig leder</p><p class="styrker">Inkluderende, oversiktlig, hyggelig og tospråklig</p></div>
+          <img class="portrett" src="team-joakim.jpg" alt="Portrett av Joakim Skree Robert Purnell" width="400" height="400" loading="lazy">
+          <h3>Joakim Skree Robert Purnell</h3><p class="rolle">Daglig leder</p><p class="styrker">Inkluderende, oversiktlig, hyggelig og tospråklig</p>
         </li>
         <li class="person">
-          <span class="initialer" aria-hidden="true">DP</span>
-          <div><h3>Didrik Thommesen Puskas</h3><p class="rolle">Økonomiansvarlig</p><p class="styrker">Oversiktlig og blid</p></div>
+          <img class="portrett" src="team-didrik.jpg" alt="Portrett av Didrik Thommesen Puskas" width="400" height="400" loading="lazy">
+          <h3>Didrik Thommesen Puskas</h3><p class="rolle">Økonomiansvarlig</p><p class="styrker">Oversiktlig og blid</p>
         </li>
         <li class="person">
-          <span class="initialer" aria-hidden="true">MM</span>
-          <div><h3>Miriam Mathiasen Mårnes</h3><p class="rolle">Personalansvarlig</p><p class="styrker">Inkluderende og positiv</p></div>
+          <img class="portrett" src="team-miriam.jpg" alt="Portrett av Miriam Mathiasen Mårnes" width="400" height="400" loading="lazy">
+          <h3>Miriam Mathiasen Mårnes</h3><p class="rolle">Personalansvarlig</p><p class="styrker">Inkluderende og positiv</p>
         </li>
         <li class="person">
-          <span class="initialer" aria-hidden="true">FJ</span>
-          <div><h3>Frida Tillnes Jansen</h3><p class="rolle">Markedsansvarlig</p></div>
+          <img class="portrett" src="team-isabel.jpg" alt="Portrett av Isabel Sansuan Gulbrandsen" width="400" height="400" loading="lazy">
+          <h3>Isabel Sansuan Gulbrandsen</h3><p class="rolle">Salgsansvarlig</p><p class="styrker">Kreativ, ansvarsfull og observant</p>
         </li>
         <li class="person">
-          <span class="initialer" aria-hidden="true">LH</span>
-          <div><h3>Lisa Tveit Hauge</h3><p class="rolle">Ansvarlig for sosiale medier og kommunikasjon</p></div>
+          <img class="portrett" src="team-frida.jpg" alt="Portrett av Frida Tillnes Jansen" width="400" height="400" loading="lazy">
+          <h3>Frida Tillnes Jansen</h3><p class="rolle">Markedsansvarlig</p><p class="styrker">Sosial og utadvendt</p>
         </li>
-        <li class="person ledig">
-          <span class="initialer" aria-hidden="true">?</span>
-          <div><h3>Kommer snart</h3><p class="styrker">Den sjette i teamet presenteres her snart.</p></div>
+        <li class="person">
+          <img class="portrett" src="team-lisa.jpg" alt="Portrett av Lisa Tveit Hauge" width="400" height="400" loading="lazy">
+          <h3>Lisa Tveit Hauge</h3><p class="rolle">Ansvarlig for sosiale medier og kommunikasjon</p><p class="styrker">Sosial, hyggelig og imøtekommende</p>
         </li>
       </ul>
 
@@ -721,6 +721,7 @@
         <li>E-post: <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a></li>
         <li>Instagram: <a href="https://www.instagram.com/hverdagshelten123/" rel="noopener">@hverdagshelten123</a></li>
         <li>TikTok: <a href="https://www.tiktok.com/@hverdagshelten5" rel="noopener">@hverdagshelten5</a></li>
+        <li>Facebook: <a href="https://www.facebook.com/groups/2030878040926684/" rel="noopener">Hverdagshelten-gruppen</a></li>
       </ul>
     </div>
     <div>
@@ -898,12 +899,12 @@
         svar: '<p>Vi starter i Oslo. Hjelperne er ungdommer som bor i nærheten av deg.</p>', rel: ['alder', 'bestill'] },
       { id: 'betaling', sp: 'Hvordan betaler jeg?', ord: ['betale', 'betaling', 'betaler', 'faktura', 'kontant', 'kontanter', 'bankkort'],
         svar: '<p>Du betaler i appen etter besøket. Bestiller du via skjemaet, finner vi en løsning som passer deg.</p>', rel: ['pris', 'trygg'] },
-      { id: 'kontakt', sp: 'Hvordan kontakter jeg dere?', ord: ['kontakt', 'kontakte', 'ringe', 'telefon', 'nummer', 'epost', 'mail', 'snakke', 'åpningstid', 'svare'],
-        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram og TikTok.</p>', rel: ['bestill', 'omoss'] },
+      { id: 'kontakt', sp: 'Hvordan kontakter jeg dere?', ord: ['kontakt', 'kontakte', 'ringe', 'telefon', 'nummer', 'epost', 'mail', 'snakke', 'åpningstid', 'svare', 'facebook', 'instagram', 'tiktok', 'sosiale medier'],
+        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram, TikTok og Facebook.</p>', rel: ['bestill', 'omoss'] },
       { id: 'omoss', sp: 'Hvem står bak Hverdagshelten?', ord: ['hvem er dere', 'om dere', 'gründer', 'gründere', 'team', 'teamet', 'startet', 'står bak'],
         svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo som brenner for å gjøre hverdagen enklere for eldre. Les mer under <a href="#om-oss">«Hvem er vi?»</a>.</p>', rel: ['undersokelse', 'kontakt'] },
       { id: 'undersokelse', sp: 'Hva sa seniorene i undersøkelsen?', ord: ['undersøkelse', 'undersøkelsen', 'seniorsenter', 'simensbråten', 'spurte', 'resultat'],
-        svar: '<p>Vi snakket med 16 personer på Simensbråten seniorsenter. 38 % ønsket mer informasjon. Se alle tallene under <a href="#undersokelse">«Vi spurte seniorene først»</a>.</p>', rel: ['omoss'] },
+        svar: '<p>Vi snakket med 16 personer på Simensbråten seniorsenter. 69 % var veldig for ideen. Se alle tallene under <a href="#undersokelse">«Vi spurte seniorene først»</a>.</p>', rel: ['omoss'] },
       { id: 'fast', sp: 'Kan jeg få den samme hjelperen?', ord: ['samme hjelper', 'fast hjelper', 'samme person', 'samme ungdom'],
         svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>', rel: ['trygg', 'bestill'] },
       { id: 'hei', sp: 'Hei', skjult: true, ord: ['hei', 'hallo', 'heisann', 'hey', 'god dag', 'god morgen', 'god kveld'],
