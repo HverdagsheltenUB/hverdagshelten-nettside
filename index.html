@@ -777,7 +777,6 @@
   // ---------- Sending av skjema ----------
   // Svarene sendes via FormSubmit til Hverdagsheltens Gmail. Ingen ting lagres på nettsiden.
   var EPOST = 'hverdagsheltenub@gmail.com';
-  var SKJEMA_URL = 'https://formsubmit.co/ajax/' + EPOST;
 
   function gyldigKontakt(t) {
     t = t.trim();
@@ -790,46 +789,50 @@
     boks.classList.toggle('feil', !!feil);
     if (html) boks.innerHTML = tekst; else boks.textContent = tekst;
   }
-  function sendTilOss(data, emne) {
+  // Sender som et vanlig skjema til FormSubmit. Etterpå sendes besøkeren tilbake hit med ?takk=…
+  function sendTilOss(data, emne, takkKode) {
+    var tilbake = location.origin + location.pathname + '?takk=' + takkKode + '#' + (takkKode === 'varsel' ? 'varsling' : 'bestill');
     data._subject = emne;
     data._template = 'table';
     data._captcha = 'false';
-    return fetch(SKJEMA_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(function (r) { return r.json(); }).then(function (svar) {
-      if (String(svar.success) !== 'true') throw new Error(svar.message || 'Feil');
-      return svar;
+    data._next = tilbake;
+    var f = document.createElement('form');
+    f.method = 'POST';
+    f.action = 'https://formsubmit.co/' + EPOST;
+    f.style.display = 'none';
+    Object.keys(data).forEach(function (k) {
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = k; i.value = data[k];
+      f.appendChild(i);
     });
+    document.body.appendChild(f);
+    f.submit();
   }
-  function feilTekst() {
-    return 'Vi fikk ikke sendt skjemaet akkurat nå. Prøv igjen om litt, eller send oss en e-post på <a href="mailto:' + EPOST + '">' + EPOST + '</a>.';
-  }
-  function koble(skjemaId, kvitteringId, lagData, sjekk, takk) {
+  function koble(skjemaId, kvitteringId, takkKode, lagData, sjekk, takk) {
     var skjema = document.getElementById(skjemaId);
     var boks = document.getElementById(kvitteringId);
     var knapp = skjema.querySelector('button[type=submit]');
-    var knappTekst = knapp.textContent;
+    // Kom vi nettopp tilbake etter innsending? Vis takk.
+    var param = new URLSearchParams(location.search).get('takk');
+    if (param === takkKode) {
+      visKvittering(boks, takk(), false);
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
     skjema.addEventListener('submit', function (e) {
       e.preventDefault();
       var problem = sjekk(skjema);
       if (problem) { visKvittering(boks, problem.tekst, true); problem.felt.focus(); return; }
       var honning = skjema.querySelector('[name=_honey]');
+      if (honning && honning.value) { visKvittering(boks, takk(), false); skjema.reset(); return; }
       var data = lagData(skjema);
-      if (honning && honning.value) { visKvittering(boks, takk(data), false); skjema.reset(); return; }
       knapp.disabled = true; knapp.textContent = 'Sender …';
-      sendTilOss(data.felter, data.emne).then(function () {
-        visKvittering(boks, takk(data), false);
-        skjema.reset();
-      }).catch(function () {
-        visKvittering(boks, feilTekst(), true, true);
-      }).then(function () { knapp.disabled = false; knapp.textContent = knappTekst; });
+      visKvittering(boks, 'Sender …', false);
+      sendTilOss(data.felter, data.emne, takkKode);
     });
   }
 
   // Påmelding til appen
-  koble('varsel-skjema', 'varsel-kvittering',
+  koble('varsel-skjema', 'varsel-kvittering', 'varsel',
     function (f) {
       return { emne: 'Ny påmelding: vil ha beskjed når appen lanseres',
                felter: { 'Fornavn': f['v-navn'].value.trim(), 'E-post eller mobil': f['v-kontakt'].value.trim(), 'Skjema': 'Påmelding til appen' } };
@@ -839,10 +842,10 @@
       if (!gyldigKontakt(f['v-kontakt'].value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer.', felt: f['v-kontakt'] };
       return null;
     },
-    function (d) { return 'Takk, ' + d.felter['Fornavn'] + '! Vi gir deg beskjed når appen er klar.'; });
+    function () { return 'Takk! Vi har fått påmeldingen din og gir deg beskjed når appen er klar.'; });
 
   // Bestill hjelp
-  koble('skjema', 'kvittering',
+  koble('skjema', 'kvittering', 'bestill',
     function (f) {
       var valgt = Array.prototype.map.call(f.querySelectorAll('input[name=hjelp]:checked'), function (c) { return c.parentNode.textContent.trim(); });
       return { emne: 'Ny forespørsel fra nettsiden: ' + (valgt.join(', ') || 'Bestill hjelp'),
@@ -854,7 +857,7 @@
       if (!gyldigKontakt(f.kontakt.value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer, så vi kan nå deg.', felt: f.kontakt };
       return null;
     },
-    function (d) { return 'Takk, ' + d.felter['Navn'] + '! Forespørselen er sendt. Vi tar kontakt med deg så snart vi kan.'; });
+    function () { return 'Takk! Forespørselen er sendt. Vi tar kontakt med deg så snart vi kan.'; });
 
   // ---------- Chat som svarer på enkle spørsmål ----------
   // Alt skjer i nettleseren. Den tåler skrivefeil og foreslår lignende spørsmål.
