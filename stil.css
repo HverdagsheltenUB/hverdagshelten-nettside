@@ -565,3 +565,5 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
 .menyknapp .ikon-lukk { display: none; }
 .menyknapp[aria-expanded="true"] .ikon-meny { display: none; }
 .menyknapp[aria-expanded="true"] .ikon-lukk { display: block; }
+.bestill-trygt { margin: 0 0 1.2rem; }
+.valg input[type=radio] { width: 1.2rem; height: 1.2rem; }

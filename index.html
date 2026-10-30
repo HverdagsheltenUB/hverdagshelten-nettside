@@ -404,6 +404,11 @@
       <div>
         <h2>Bestill hjelp</h2>
         <p>Fyll ut skjemaet, så tar vi kontakt med deg for å avtale resten. Liker du ikke apper, hjelper vi deg også med å komme i gang.</p>
+        <ul class="sjekkliste bestill-trygt">
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Uforpliktende. Du bestemmer ingenting før vi har snakket sammen.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>150&nbsp;kr per time + 29&nbsp;kr per bestilling. Gratis å avbestille dagen før.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pårørende kan gjerne bestille for noen de er glad i.</span></li>
+        </ul>
         <p>Du kan også sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
       </div>
 
@@ -428,8 +433,17 @@
               <label><input type="checkbox" name="hjelp" value="hjelper" id="velg-hjelper"> Jeg vil bli hjelper</label>
             </div>
           </fieldset>
+          <fieldset>
+            <legend>Når på dagen passer det best? <span class="valgfritt">(valgfritt)</span></legend>
+            <div class="valg">
+              <label><input type="radio" name="tid" value="Formiddag (8–12)"> Formiddag <span class="valgfritt">8–12</span></label>
+              <label><input type="radio" name="tid" value="Ettermiddag (12–17)"> Ettermiddag <span class="valgfritt">12–17</span></label>
+              <label><input type="radio" name="tid" value="Kveld (17–20)"> Kveld <span class="valgfritt">17–20</span></label>
+              <label><input type="radio" name="tid" value="Når som helst"> Når som helst</label>
+            </div>
+          </fieldset>
           <div class="felt">
-            <label for="melding">Fortell gjerne litt mer <span class="hint" id="melding-hint">For eksempel hvilken dag som passer best.</span></label>
+            <label for="melding">Fortell gjerne litt mer <span class="hint" id="melding-hint">For eksempel hvilken dag som passer. Ikke skriv helseopplysninger eller personnummer.</span></label>
             <textarea id="melding" name="melding" rows="4" aria-describedby="melding-hint"></textarea>
           </div>
           <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
@@ -723,7 +737,7 @@
       return { emne: 'Ny forespørsel fra nettsiden: ' + (valgt.join(', ') || 'Bestill hjelp'),
                svarTil: gyldigEpost(kontakt) ? kontakt : '',
                felter: { 'Navn': f.navn.value.trim(), 'E-post eller mobil': kontakt,
-                         'Hjelp med': valgt.join(', ') || 'Ikke valgt', 'Melding': f.melding.value.trim() || '–', 'Skjema': 'Bestill hjelp' } };
+                         'Hjelp med': valgt.join(', ') || 'Ikke valgt', 'Tid på dagen': (f.querySelector('input[name=tid]:checked') || {}).value || 'Ikke valgt', 'Melding': f.melding.value.trim() || '–', 'Skjema': 'Bestill hjelp' } };
     },
     sjekk: function (f) {
       var p = [];
