@@ -5,60 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personvern – Hverdagshelten</title>
 <meta name="description" content="Slik behandler Hverdagshelten personopplysningene dine.">
-<meta name="theme-color" content="#52395E">
+<link rel="canonical" href="https://hverdagsheltenub.github.io/hverdagshelten-nettside/personvern.html">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root { --lilla: #52395E; --lilla-mork: #3E2A48; --lavendel: #BCA3D8; --lavendel-lys: #EEE6F6; --krem: #FFE7CE; --blekk: #2A1F30; --papir: #FFFFFF; --bakgrunn: #F7F3FA; --strek: #DCD1E6; --hint: #5E5266; }
-  html { font-size: 125%; }
-  html.stor-tekst { font-size: 150%; }
-  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  *, *::before, *::after { box-sizing: border-box; }
-  body { margin: 0; background: var(--bakgrunn); color: var(--blekk); font-family: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif; line-height: 1.6; }
-  a { color: var(--lilla); text-underline-offset: .15em; overflow-wrap: anywhere; }
-  :focus-visible { outline: 4px solid var(--blekk); outline-offset: 3px; border-radius: 6px; }
-  .topp { background: var(--papir); border-bottom: 1px solid var(--strek); }
-  .ramme { width: 100%; max-width: 46rem; margin: 0 auto; padding: 0 1rem; }
-  .topp .ramme { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.2rem; flex-wrap: wrap; }
-  .merke { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--lilla); font-weight: 700; font-size: 1.15rem; }
-  .merke img { width: 2.6rem; height: 2.6rem; border-radius: 22%; }
-  .tilbake { font-weight: 700; }
-  main { padding: 3rem 0 4rem; }
-  h1 { color: var(--lilla); font-size: clamp(1.7rem, 7vw, 2.8rem); overflow-wrap: break-word; line-height: 1.15; margin: 0 0 .4rem; }
-  h2 { font-size: 1.3rem; margin: 2.2rem 0 .5rem; line-height: 1.25; }
-  p, li { max-width: 36em; }
-  p { margin: 0 0 1em; }
-  ul { padding-left: 1.2em; margin: 0 0 1em; }
-  li { margin-bottom: .4rem; }
-  .dato { color: var(--hint); font-size: .9rem; }
-  .kort { background: var(--krem); border-radius: 16px; padding: 1.2rem 1.4rem; margin: 1.6rem 0; }
-  .kort p:last-child, .kort ul:last-child { margin-bottom: 0; }
-  .kort h2 { margin-top: 0; }
-  .bunn { background: var(--lilla-mork); color: #E9E1F0; padding: 2rem 0; font-size: .9rem; }
-  .bunn a { color: #fff; }
-</style>
+<link rel="stylesheet" href="stil.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<a class="hopp" href="#innhold">Hopp til innholdet</a>
+
 <header class="topp">
   <div class="ramme">
-    <a class="merke" href="index.html"><img src="logo.png" alt="" width="52" height="52">Hverdagshelten</a>
-    <a class="tilbake" href="index.html">Tilbake til forsiden</a>
+    <a class="merke" href="./"><img src="logo.png" alt="" width="52" height="52"><span translate="no">Hverdagshelten</span></a>
+    <button class="tekstknapp" id="tekststorrelse" type="button" aria-pressed="false" aria-label="Større tekst">
+      <span aria-hidden="true">A+</span><span class="lang">Større tekst</span>
+    </button>
+    <a class="knapp knapp-sekundar topp-tilbake" href="./">Til forsiden</a>
   </div>
 </header>
 
-<main>
+<main id="innhold" class="tekstside">
   <div class="ramme">
     <h1>Personvern&shy;erklæring</h1>
-    <p class="dato">Sist oppdatert 20. oktober 2026</p>
+    <p class="dato">Sist oppdatert 30. oktober 2026</p>
 
-    <div class="kort">
+    <div class="kort-fortalt">
       <h2>Kort fortalt</h2>
       <ul>
         <li>Vi samler bare inn det du selv skriver i skjemaene våre.</li>
         <li>Melder du deg på for å få beskjed om appen, bruker vi opplysningene bare til det. Vi sletter dem når vi har gitt deg beskjed.</li>
+        <li>I innspillsskjemaet er navn, e-post og telefon valgfritt. Du kan sende innspill helt uten å si hvem du er.</li>
         <li>Vi selger aldri opplysningene dine, og vi deler dem ikke med andre for reklame.</li>
         <li>Du kan når som helst be oss slette opplysningene dine.</li>
       </ul>
@@ -71,6 +51,7 @@
     <h2>Hvilke opplysninger samler vi inn, og hvorfor?</h2>
     <p><strong>Påmelding til appen.</strong> Vi ber om fornavnet ditt og e-postadressen eller mobilnummeret ditt. Vi bruker dette bare til å gi deg beskjed når appen lanseres. Grunnlaget er samtykket ditt, som du gir når du sender skjemaet. Du kan trekke samtykket tilbake når som helst.</p>
     <p><strong>«Bestill hjelp».</strong> Vi ber om navnet ditt, e-postadressen eller mobilnummeret ditt, hva du trenger hjelp med og det du eventuelt skriver i meldingsfeltet. Vi bruker dette bare til å svare deg og avtale hjelpen du har bedt om. Grunnlaget er at du selv har bedt oss om å ta kontakt.</p>
+    <p><strong>Innspillsskjemaet «Har du innspill?».</strong> Her er navn, e-postadresse og telefonnummer valgfritt. Vi ber bare om selve innspillet. Vi bruker det du skriver til å forbedre Hverdagshelten, og kontaktinformasjonen bare til å svare deg hvis du har lagt den igjen. Grunnlaget er at du selv har valgt å sende oss innspillet.</p>
     <p><strong>Chatten «Spør Hverdagshelten».</strong> Chatten svarer direkte i nettleseren din. Det du skriver i den, blir verken sendt til oss eller lagret.</p>
     <p><strong>«Større tekst».</strong> Hvis du slår på større tekst, husker nettleseren din valget. Dette lagres bare på din egen enhet.</p>
     <p>Vi bruker ikke informasjonskapsler (cookies) til sporing eller reklame, og vi bruker ingen analyseverktøy.</p>
@@ -84,6 +65,7 @@
     <ul>
       <li><strong>Påmelding til appen:</strong> Opplysningene slettes når vi har sendt deg påminnelsen om at appen er lansert. Blir appen ikke lansert, sletter vi dem senest 12 måneder etter at du meldte deg på.</li>
       <li><strong>«Bestill hjelp»:</strong> Opplysningene slettes når forespørselen er ferdig behandlet, og senest 3 måneder etter at du sendte den.</li>
+      <li><strong>«Har du innspill?»:</strong> Innspillet slettes når vi har lest og eventuelt svart på det, og senest 12 måneder etter at du sendte det.</li>
     </ul>
 
     <h2>Deler vi opplysningene med andre?</h2>
@@ -103,18 +85,15 @@
     <h2>Endringer</h2>
     <p>Hvis vi endrer måten vi behandler opplysninger på, oppdaterer vi denne siden og datoen øverst.</p>
 
-    <p><a class="tilbake" href="index.html">Tilbake til forsiden</a></p>
+    <p><a class="tilbake" href="./">Tilbake til forsiden</a></p>
   </div>
 </main>
 
-<footer class="bunn">
+<footer class="bunn bunn-enkel">
   <div class="ramme">
-    <p>Hverdagshelten – en hjelpende hånd · <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a></p>
+    <p>Hverdagshelten – en hjelpende hånd. E-post: <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a></p>
   </div>
 </footer>
-<script>
-  // Bruker samme «Større tekst»-valg som forsiden.
-  try { if (localStorage.getItem('hh-stor-tekst') === '1') document.documentElement.classList.add('stor-tekst'); } catch (e) {}
-</script>
+<script src="felles.js"></script>
 </body>
 </html>

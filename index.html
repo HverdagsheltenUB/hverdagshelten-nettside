@@ -3,465 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hverdagshelten – en hjelpende hånd</title>
-<meta name="description" content="Hverdagshelten setter eldre i kontakt med ungdommer i nabolaget som kan hjelpe med handling, hagearbeid, hundelufting, mobilhjelp og en kopp kaffe. En hjelpende hånd.">
-<meta name="theme-color" content="#52395E">
+<title>Hverdagshelten – hjelp til eldre fra ungdom i Oslo</title>
+<meta name="description" content="Hverdagshelten setter eldre i Oslo i kontakt med ungdommer i nabolaget som kan hjelpe med handling, hagearbeid, hundelufting, mobilhjelp og en kopp kaffe. En hjelpende hånd.">
+<link rel="canonical" href="https://hverdagsheltenub.github.io/hverdagshelten-nettside/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hverdagshelten">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:title" content="Hverdagshelten – en hjelpende hånd">
+<meta property="og:description" content="Ungdommer i nabolaget hjelper eldre i Oslo med handling, hagearbeid, hundelufting og en kopp kaffe.">
+<meta property="og:url" content="https://hverdagsheltenub.github.io/hverdagshelten-nettside/">
+<meta property="og:image" content="https://hverdagsheltenub.github.io/hverdagshelten-nettside/bilde-simensbraten.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hverdagsheltenub.github.io/hverdagshelten-nettside/#nettsted",
+      "name": "Hverdagshelten",
+      "alternateName": "Hverdagshelten UB",
+      "url": "https://hverdagsheltenub.github.io/hverdagshelten-nettside/",
+      "inLanguage": "nb-NO"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://hverdagsheltenub.github.io/hverdagshelten-nettside/#organisasjon",
+      "name": "Hverdagshelten",
+      "alternateName": "Hverdagshelten UB",
+      "slogan": "En hjelpende hånd.",
+      "description": "Hverdagshelten setter eldre i Oslo i kontakt med ungdommer i nabolaget som kan hjelpe med handling, hagearbeid, hundelufting, mobilhjelp og selskap.",
+      "url": "https://hverdagsheltenub.github.io/hverdagshelten-nettside/",
+      "logo": "https://hverdagsheltenub.github.io/hverdagshelten-nettside/logo.png",
+      "email": "hverdagsheltenub@gmail.com",
+      "areaServed": { "@type": "City", "name": "Oslo" },
+      "sameAs": [
+        "https://www.instagram.com/hverdagshelten123/",
+        "https://www.tiktok.com/@hverdagshelten5",
+        "https://www.facebook.com/groups/2030878040926684/"
+      ]
+    }
+  ]
+}
+</script>
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Fargene er hentet fra app-ikonet */
-    --lilla: #52395E;        /* hovedfarge: knapper, overskrifter i mørke felt */
-    --lilla-mork: #3E2A48;
-    --lavendel: #BCA3D8;     /* den ene hånden */
-    --lavendel-lys: #EEE6F6;
-    --krem: #FFE7CE;         /* den andre hånden og hjertet */
-    --blekk: #2A1F30;        /* brødtekst */
-    --papir: #FFFFFF;
-    --bakgrunn: #F7F3FA;
-    --strek: #DCD1E6;
-    --hint: #5E5266;
-    --hand: "Kalam", "Comic Sans MS", cursive;
-    --tekst: "Atkinson Hyperlegible", "Verdana", system-ui, sans-serif;
-  }
-  html { font-size: 125%; }               /* 20px grunnstørrelse */
-  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  [id] { scroll-margin-top: 1rem; }
-  html.stor-tekst { font-size: 150%; }    /* 24px når «Større tekst» er på */
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bakgrunn);
-    color: var(--blekk);
-    font-family: var(--tekst);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  img, svg { max-width: 100%; display: block; }
-  a { color: var(--lilla); text-underline-offset: .15em; }
-  a:hover { color: var(--lilla-mork); }
-  :focus-visible { outline: 4px solid var(--blekk); outline-offset: 3px; border-radius: 6px; }
-  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; letter-spacing: -0.01em; }
-  h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); color: var(--lilla); }
-  h2 { font-size: clamp(1.6rem, 3.6vw, 2.1rem); }
-  h3 { font-size: 1.15rem; }
-  p { margin: 0 0 1em; max-width: 36em; }
-
-  .hopp { position: absolute; left: -999px; top: 0; background: var(--blekk); color: #fff; padding: .6em 1em; z-index: 10; }
-  .hopp:focus { left: 1rem; top: 1rem; }
-
-  .ramme { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1rem; }
-  @media (min-width: 700px) { .ramme { padding: 0 2rem; } }
-
-  /* ---------- Topp ---------- */
-  .topp { background: var(--papir); border-bottom: 1px solid var(--strek); }
-  .topp .ramme { display: flex; align-items: center; gap: 1rem; min-height: 4.2rem; flex-wrap: wrap; padding-top: .5rem; padding-bottom: .5rem; }
-  .merke { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--lilla); font-weight: 700; font-size: 1.15rem; margin-right: auto; flex-shrink: 0; }
-  .merke img { width: 2.6rem; height: 2.6rem; border-radius: 22%; }
-  .topp nav { order: 2; }
-  .topp nav ul { list-style: none; display: none; flex-wrap: wrap; gap: .4rem 1.1rem; margin: 0; padding: 0; }
-  .topp nav a { color: var(--blekk); text-decoration: none; font-size: .85rem; white-space: nowrap; }
-  .topp nav a:hover { text-decoration: underline; }
-  @media (min-width: 1200px) { .topp nav ul { display: flex; } }
-  /* Med større tekst får menyen sin egen linje under logoen, så ingenting går i hverandre */
-  html.stor-tekst .topp nav { order: 4; flex-basis: 100%; padding-bottom: .3rem; }
-  html.stor-tekst .topp nav ul { justify-content: flex-start; }
-  .tekstknapp {
-    order: 3; flex-shrink: 0; white-space: nowrap;
-    font: inherit; font-size: .85rem; font-weight: 700; color: var(--blekk);
-    background: var(--bakgrunn); border: 2px solid var(--strek); border-radius: 999px;
-    padding: .35em .9em; cursor: pointer; min-height: 2.6rem;
-  }
-  .tekstknapp[aria-pressed="true"] { background: var(--krem); border-color: var(--lilla); }
-
-  /* ---------- Knapper ---------- */
-  .knapp {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
-    min-height: 3.2rem; padding: .6em 1.4em; border-radius: 12px;
-    font: inherit; font-weight: 700; font-size: 1.05rem; text-decoration: none; cursor: pointer;
-    border: 3px solid var(--lilla);
-  }
-  .knapp-hoved { background: var(--lilla); color: #fff; }
-  .knapp-hoved:hover { background: var(--lilla-mork); border-color: var(--lilla-mork); color: #fff; }
-  .knapp-sekundar { background: var(--papir); color: var(--lilla); }
-  .knapp-sekundar:hover { background: var(--lavendel-lys); }
-  .knapper { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.4rem; }
-
-  /* ---------- Hero ---------- */
-  .hero { padding: 3rem 0 3.5rem; }
-  .hero .ramme { display: grid; gap: 3rem; align-items: center; }
-  @media (min-width: 900px) { .hero .ramme { grid-template-columns: 1.15fr .85fr; } }
-  .hero .undertittel { font-size: 1.45rem; font-weight: 700; margin: -.2rem 0 1rem; }
-  .hero .ingress { font-size: 1.15rem; }
-  .ring-linje { margin-top: 1.4rem; font-size: 1rem; }
-  .ring-linje a { font-weight: 700; font-size: 1.25rem; white-space: nowrap; }
-
-  /* Lappen */
-  .lapp-holder { display: flex; justify-content: center; padding: 1rem 0; }
-  .lapp {
-    position: relative; width: min(100%, 22rem);
-    background: var(--krem); color: var(--blekk);
-    padding: 2.2rem 1.6rem 0; transform: rotate(-2deg);
-    box-shadow: 0 1px 0 rgba(42,31,48,.15), 6px 10px 0 rgba(82,57,94,.12);
-    font-family: var(--hand);
-  }
-  .lapp::before { /* tegnestift */
-    content: ""; position: absolute; top: .7rem; left: 50%; width: 1.1rem; height: 1.1rem; margin-left: -.55rem;
-    border-radius: 50%; background: var(--lilla); box-shadow: inset -3px -3px 0 rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.2);
-  }
-  .lapp .overskrift { font-size: 1.75rem; font-weight: 700; line-height: 1.15; margin: 0 0 .5rem; color: var(--lilla); }
-  .lapp ul { margin: 0 0 1rem; padding-left: 1.1em; font-size: 1.2rem; line-height: 1.45; }
-  .lapp .hilsen { font-size: 1.15rem; margin: 0 0 1.1rem; }
-  .lapper { display: flex; margin: 0 -1.6rem; border-top: 2px dashed rgba(82,57,94,.4); }
-  .lapper span {
-    flex: 1 1 0; writing-mode: vertical-rl; transform: rotate(180deg);
-    font-size: .8rem; font-weight: 700; padding: .7rem 0; text-align: center;
-    border-left: 2px dashed rgba(82,57,94,.4); white-space: nowrap;
-  }
-  .lapper span:last-child { border-left: 0; }
-  .lapper span.revet { color: transparent; background: var(--bakgrunn); margin-bottom: -2px; }
-  @media (prefers-reduced-motion: no-preference) {
-    .lapp { animation: heng .9s cubic-bezier(.2,.8,.3,1.2) both .2s; }
-    @keyframes heng { from { transform: rotate(-9deg) translateY(-14px); opacity: 0; } to { transform: rotate(-2deg); opacity: 1; } }
-  }
-
-  /* ---------- Trygghetsstripe ---------- */
-  .stripe { background: var(--papir); border-top: 1px solid var(--strek); border-bottom: 1px solid var(--strek); }
-  .stripe ul { list-style: none; margin: 0; padding: 1.4rem 0; display: grid; gap: 1rem 2rem; }
-  @media (min-width: 800px) { .stripe ul { grid-template-columns: repeat(3, 1fr); } }
-  .stripe li { display: flex; gap: .7rem; align-items: flex-start; font-weight: 700; }
-  .hake { flex: none; width: 1.6rem; height: 1.6rem; margin-top: .1rem; }
-
-  /* ---------- Seksjoner ---------- */
-  .seksjon { padding: 4.5rem 0; }
-  .seksjon-hvit { background: var(--papir); }
-  .seksjon > .ramme > p:first-of-type { font-size: 1.1rem; }
-
-  /* Tjenester: rolig liste */
-  .tjenester { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 0 3rem; }
-  @media (min-width: 760px) { .tjenester { grid-template-columns: 1fr 1fr; } }
-  .tjenester li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.3rem 0; border-top: 2px solid var(--strek); }
-  .tjenester h3 { margin: 0 0 .2rem; }
-  .tjenester p { margin: 0; }
-  .ikon { width: 3.2rem; height: 3.2rem; border-radius: 50%; background: var(--lavendel-lys); display: grid; place-items: center; }
-  .ikon svg { width: 1.8rem; height: 1.8rem; stroke: var(--lilla); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* Appen: to spalter, én for hver brukergruppe */
-  .app-spalter { display: grid; gap: 2rem; margin-top: 2.2rem; }
-  @media (min-width: 860px) { .app-spalter { grid-template-columns: 1fr 1fr; } }
-  .app-boks { background: var(--bakgrunn); border-radius: 16px; padding: 1.6rem 1.6rem .6rem; }
-  .app-boks h3 { font-size: 1.3rem; color: var(--lilla); }
-  .steg { list-style: none; padding: 0; margin: 1rem 0 0; counter-reset: steg; }
-  .steg li { counter-increment: steg; display: grid; grid-template-columns: 2.6rem 1fr; gap: .9rem; margin-bottom: 1.2rem; }
-  .steg li::before {
-    content: counter(steg); display: grid; place-items: center;
-    width: 2.6rem; height: 2.6rem; border-radius: 50%;
-    background: var(--lilla); color: #fff; font-weight: 700; font-size: 1.1rem;
-  }
-  .steg strong { display: block; }
-  .vipps-linje { margin-top: 2rem; display: flex; gap: .8rem; align-items: flex-start; background: var(--krem); border-radius: 12px; padding: 1rem 1.2rem; max-width: 46rem; }
-  .vipps-linje p { margin: 0; }
-
-  /* Trygghet */
-  .to-spalter { display: grid; gap: 2.5rem; }
-  @media (min-width: 900px) { .to-spalter { grid-template-columns: 1fr 1fr; align-items: start; } }
-  .sjekkliste { list-style: none; padding: 0; margin: 0; }
-  .sjekkliste li { display: flex; gap: .8rem; padding: .8rem 0; border-bottom: 1px solid var(--strek); }
-  .sjekkliste li:last-child { border-bottom: 0; }
-  .advarsel {
-    background: var(--papir); border-left: 6px solid #B3261E; padding: 1.2rem 1.4rem; border-radius: 0 12px 12px 0;
-  }
-  .advarsel h3 { margin-bottom: .4rem; }
-  .advarsel p { margin: 0; }
-
-  /* Priser */
-  .pris { background: var(--papir); border: 2px solid var(--strek); border-radius: 16px; padding: 1.6rem; max-width: 34rem; }
-  .pris dl { margin: 0; }
-  .pris .rad { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--strek); }
-  .pris .rad:last-of-type { border-bottom: 0; }
-  .pris dt { margin: 0; }
-  .pris dd { margin: 0; font-weight: 700; white-space: nowrap; }
-  .pris .eksempel { margin: 1rem 0 0; padding-top: 1rem; border-top: 2px solid var(--lilla); font-size: .95rem; }
-
-  /* Ungdom */
-  .ungdom { background: var(--lilla); color: #fff; }
-  .ungdom h2 { color: var(--krem); }
-  .ungdom a:not(.knapp) { color: #fff; }
-  .ungdom .knapp-hoved { background: var(--krem); border-color: var(--krem); color: var(--lilla); }
-  .ungdom .knapp-hoved:hover { background: #fff; border-color: #fff; color: var(--lilla); }
-  .ungdom ul { padding-left: 1.2em; margin: 0; }
-  .ungdom li { margin-bottom: .5rem; }
-
-  /* Teamet */
-  .team { list-style: none; padding: 0; margin: 2.2rem 0 0; display: grid; gap: 1.2rem; }
-  @media (min-width: 640px) { .team { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 980px) { .team { grid-template-columns: 1fr 1fr 1fr; } }
-  .person { background: var(--papir); border-radius: 18px; padding: 1.8rem 1.4rem 1.6rem; text-align: center; }
-  .initialer { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; margin: 0 auto 1rem; border-radius: 50%; background: var(--lavendel); color: var(--lilla-mork); font-weight: 700; font-size: 1.3rem; }
-  .person:nth-child(even) .initialer { background: var(--krem); }
-  .person h3 { margin: 0 0 .15rem; overflow-wrap: break-word; hyphens: auto; }
-  .person .rolle { margin: 0 auto .5rem; color: var(--lilla); font-weight: 700; font-size: .95rem; }
-  .person .styrker { margin: 0 auto; font-size: .9rem; color: var(--hint); }
-  .brev { background: var(--papir); max-width: 40rem; padding: 2rem; border-radius: 16px; margin-top: 2.5rem; }
-  .brev p { font-size: 1.05rem; }
-  .signatur { font-family: var(--hand); font-size: 1.5rem; color: var(--lilla); line-height: 1.2; margin: 0; }
-  .signatur small { display: block; font-family: var(--tekst); font-size: .9rem; color: var(--hint); }
-
-  /* Spørsmål */
-  .sporsmal { max-width: 46rem; margin-top: 2rem; }
-  details { background: var(--papir); border: 2px solid var(--strek); border-radius: 12px; margin-bottom: .8rem; }
-  details[open] { border-color: var(--lilla); }
-  summary { cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; min-height: 3.2rem; align-items: center; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; font-size: 1.6rem; line-height: 1; color: var(--lilla); }
-  details[open] summary::after { content: "–"; }
-  details p { padding: 0 1.2rem 1rem; margin: 0; }
-
-  /* Bestill */
-  .bestill .ramme { display: grid; gap: 3rem; }
-  @media (min-width: 900px) { .bestill .ramme { grid-template-columns: .9fr 1.1fr; } }
-  .telefon-stor { display: inline-block; font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 700; text-decoration: none; color: var(--lilla); margin: .2rem 0 .4rem; }
-  form { background: var(--papir); border: 2px solid var(--strek); border-radius: 16px; padding: 1.6rem; }
-  .felt { margin-bottom: 1.2rem; }
-  label, legend { display: block; font-weight: 700; margin-bottom: .35rem; }
-  .hint { display: block; font-weight: 400; font-size: .9rem; color: var(--hint); }
-  input[type=text], input[type=tel], textarea {
-    width: 100%; font: inherit; color: var(--blekk); background: #fff;
-    border: 2px solid #8A7D93; border-radius: 10px; padding: .65rem .8rem; min-height: 3.2rem;
-  }
-  textarea { min-height: 6rem; resize: vertical; }
-  input:focus, textarea:focus { border-color: var(--lilla); outline: 3px solid var(--lilla); outline-offset: 1px; }
-  fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
-  .valg { display: flex; flex-wrap: wrap; gap: .6rem; }
-  .valg label { font-weight: 400; display: flex; align-items: center; gap: .5rem; border: 2px solid var(--strek); border-radius: 999px; padding: .4rem 1rem; min-height: 3rem; cursor: pointer; margin: 0; }
-  .valg input { width: 1.2rem; height: 1.2rem; accent-color: var(--lilla); }
-  .valg label:has(input:checked) { border-color: var(--lilla); background: var(--lavendel-lys); font-weight: 700; }
-  .kvittering { display: none; background: var(--lavendel-lys); border: 2px solid var(--lilla); border-radius: 12px; padding: 1.2rem; margin-top: 1rem; }
-  .kvittering.vis { display: block; }
-  .kvittering.feil { background: #FCE8E6; border-color: #B3261E; }
-
-  /* Påmelding til appen */
-  .varsling { padding: 3rem 0 0; }
-  .varsling-boks { display: grid; gap: 1.4rem; background: var(--krem); border-radius: 20px; padding: 1.8rem; }
-  @media (min-width: 900px) { .varsling-boks { grid-template-columns: 1fr 1.1fr; align-items: center; padding: 2.2rem 2.4rem; } }
-  .varsling-boks h2 { color: var(--lilla); margin-bottom: .4rem; }
-  .varsling-boks p { margin: 0; }
-  .varsel-skjema { display: grid; gap: .8rem; }
-  .varsel-skjema .knapp { white-space: nowrap; }
-  @media (max-width: 599px) { .varsling-boks { padding: 1.3rem 1rem; } .varsel-skjema { padding: 1.1rem; } }
-  @media (min-width: 600px) { .varsel-skjema .rad { display: grid; grid-template-columns: 1fr 1.4fr; gap: .8rem; } }
-  .varsel-skjema .rad > div + div { margin-top: .8rem; }
-  @media (min-width: 600px) { .varsel-skjema .rad > div + div { margin-top: 0; } }
-  .varsel-skjema label { font-size: .9rem; margin-bottom: .25rem; }
-  .varsel-skjema .liten { font-size: .8rem; color: var(--hint); }
-  .liten-tekst { font-size: .8rem; color: var(--hint); margin: .8rem 0 0; }
-  .honning { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-  /* Undersøkelsen */
-  .resultat { width: 100%; max-width: 46rem; border-collapse: separate; border-spacing: 0 .9rem; margin-top: 1.6rem; }
-  .resultat th { text-align: left; font-weight: 400; padding-right: 1rem; width: 40%; vertical-align: middle; }
-  .resultat td { vertical-align: middle; }
-  .resultat .stolpe { display: flex; align-items: center; gap: .7rem; }
-  .resultat .spor { flex: 1; height: 1.4rem; background: var(--lavendel-lys); border-radius: 4px; overflow: hidden; }
-  .resultat .fyll { height: 100%; width: var(--p); background: var(--lilla); border-radius: 0 4px 4px 0; }
-  .resultat .prosent { font-weight: 700; min-width: 3.4rem; text-align: right; }
-  .resultat .antall { color: var(--hint); font-size: .85rem; white-space: nowrap; padding-left: .8rem; }
-  @media (max-width: 640px) {
-    .resultat, .resultat tbody, .resultat tr, .resultat th, .resultat td { display: block; width: 100%; }
-    .resultat tr { margin-bottom: 1rem; }
-    .resultat th { padding: 0 0 .3rem; font-weight: 700; }
-    .resultat .antall { padding: .2rem 0 0; }
-  }
-  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .fotnote { font-size: .85rem; color: var(--hint); }
-  .partner { margin-top: 2rem; background: var(--bakgrunn); border-radius: 16px; padding: 1.4rem; display: grid; gap: 1.4rem; align-items: center; }
-  @media (min-width: 860px) { .partner { grid-template-columns: 1.1fr 1fr; padding: 1.6rem; } }
-  .partner > * { min-width: 0; }
-  .partner-foto { aspect-ratio: 4 / 3; }
-  .partner h3 { margin-bottom: .3rem; }
-  .partner p { margin: 0; }
-
-  /* Bilder */
-  .foto { width: 100%; height: auto; aspect-ratio: 701 / 382; object-fit: cover; border-radius: 16px; background: var(--lavendel-lys); }
-  figure { margin: 0; }
-  figcaption { font-size: .85rem; color: var(--hint); margin-top: .5rem; }
-  .bilder-to { display: grid; gap: 1.2rem; margin-top: 2rem; }
-  @media (min-width: 760px) { .bilder-to { grid-template-columns: 1fr 1fr; } }
-  .ungdom figcaption { color: #E9E1F0; }
-  .ungdom .foto { margin-bottom: 1.4rem; }
-  .brev-rad { display: grid; gap: 2rem; margin-top: 2.5rem; align-items: center; }
-  @media (min-width: 900px) { .brev-rad { grid-template-columns: 1fr 1fr; } }
-  .brev-rad .brev { margin-top: 0; }
-  .brev-rad > * { min-width: 0; }
-  a[href^="mailto"] { overflow-wrap: anywhere; }
-
-  /* Chat */
-  .lenkeknapp { font: inherit; font-weight: 700; color: var(--lilla); background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
-  .chat-knapp {
-    position: fixed; right: 1rem; bottom: 1rem; z-index: 20;
-    display: inline-flex; align-items: center; gap: .5rem;
-    font: inherit; font-weight: 700; font-size: 1rem; color: #fff; background: var(--lilla);
-    border: 3px solid #fff; border-radius: 999px; padding: .7rem 1.2rem; min-height: 3.2rem; cursor: pointer;
-    box-shadow: 0 6px 20px rgba(42,31,48,.25);
-  }
-  .chat-knapp:hover { background: var(--lilla-mork); }
-  .chat-knapp svg { width: 1.4rem; height: 1.4rem; }
-  .chat-knapp[hidden] { display: none; }
-  .chat {
-    position: fixed; right: 1rem; bottom: 1rem; z-index: 30;
-    width: min(26rem, calc(100vw - 2rem)); height: min(36rem, calc(100vh - 2rem));
-    background: var(--papir); border-radius: 18px; box-shadow: 0 12px 40px rgba(42,31,48,.3);
-    display: flex; flex-direction: column; overflow: hidden;
-  }
-  .chat[hidden] { display: none; }
-  .chat-topp { background: var(--lilla); color: #fff; padding: .8rem 1rem; display: flex; align-items: center; gap: .7rem; }
-  .chat-topp img { width: 2.2rem; height: 2.2rem; border-radius: 22%; }
-  .chat-topp h2 { font-size: 1rem; margin: 0; color: #fff; }
-  .chat-topp p { font-size: .75rem; margin: 0; color: #E9E1F0; }
-  .chat-lukk { margin-left: auto; font: inherit; font-size: 1.6rem; line-height: 1; color: #fff; background: none; border: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; cursor: pointer; }
-  .chat-lukk:hover { background: rgba(255,255,255,.15); }
-  .chat-logg { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .7rem; background: var(--bakgrunn); }
-  .melding { max-width: 88%; padding: .6rem .9rem; border-radius: 16px; font-size: .95rem; line-height: 1.45; }
-  .melding p { margin: 0 0 .4em; } .melding p:last-child { margin: 0; }
-  .melding.bot { background: var(--papir); border: 1px solid var(--strek); align-self: flex-start; border-bottom-left-radius: 4px; }
-  .melding.meg { background: var(--lilla); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-  .forslag { display: flex; flex-wrap: wrap; gap: .4rem; }
-  .forslag button { font: inherit; font-size: .85rem; color: var(--lilla); background: var(--papir); border: 2px solid var(--lavendel); border-radius: 999px; padding: .35rem .8rem; min-height: 2.4rem; cursor: pointer; }
-  .forslag button:hover { background: var(--lavendel-lys); }
-  .chat-skjema { display: flex; gap: .5rem; padding: .7rem; border-top: 1px solid var(--strek); background: var(--papir); }
-  .chat-skjema input { flex: 1; font: inherit; font-size: 1rem; border: 2px solid #8A7D93; border-radius: 10px; padding: .5rem .7rem; min-height: 3rem; min-width: 0; }
-  .chat-skjema input:focus { border-color: var(--lilla); outline: 3px solid var(--lilla); outline-offset: 1px; }
-  .chat-skjema button { font: inherit; font-weight: 700; color: #fff; background: var(--lilla); border: 0; border-radius: 10px; padding: 0 1rem; min-height: 3rem; cursor: pointer; }
-  .chat-merknad { font-size: .72rem; color: var(--hint); text-align: center; padding: 0 .7rem .6rem; background: var(--papir); margin: 0; max-width: none; }
-  @media (prefers-reduced-motion: no-preference) {
-    .chat:not([hidden]) { animation: chatInn .22s ease-out; }
-    @keyframes chatInn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-  }
-
-  /* Bunn */
-  .bunn { background: var(--lilla-mork); color: #E9E1F0; padding: 3rem 0 2rem; font-size: .95rem; }
-  .bunn a { color: #fff; }
-  .bunn .ramme { display: grid; gap: 2rem; }
-  @media (min-width: 800px) { .bunn .ramme { grid-template-columns: 1.4fr 1fr 1fr; } }
-  .bunn .merke { color: var(--krem); }
-  .bunn ul { list-style: none; padding: 0; margin: 0; }
-  .bunn li { margin-bottom: .4rem; }
-  .bunn h2 { font-size: 1rem; color: #fff; }
-  .app-merke { display: inline-block; background: var(--krem); color: var(--lilla); font-weight: 700; padding: .2em .7em; border-radius: 999px; font-size: .85rem; }
-
-  /* ================= Mobil (under 700 px) – PC-visningen påvirkes ikke ================= */
-  @media (max-width: 699px) {
-    html { font-size: 100%; }                 /* 16 px i stedet for 20 px */
-    html.stor-tekst { font-size: 118.75%; }   /* 19 px med «Større tekst» */
-    h1 { font-size: 2.3rem; }
-    h2 { font-size: 1.55rem; }
-    h3 { font-size: 1.08rem; }
-
-    .topp .ramme { flex-wrap: nowrap; min-height: 3.6rem; gap: .6rem; }
-    html.stor-tekst .topp .ramme { flex-wrap: wrap; }
-    .merke { font-size: 1.05rem; gap: .5rem; }
-    .merke img { width: 2.2rem; height: 2.2rem; }
-    .tekstknapp { font-size: .8rem; min-height: 2.4rem; padding: .3em .8em; }
-
-    .hero { padding: 1.8rem 0 2.2rem; }
-    .hero .ramme { gap: 1.6rem; }
-    .hero .undertittel { font-size: 1.15rem; margin-bottom: .7rem; }
-    .hero .ingress { font-size: 1rem; }
-    .knapper { margin-top: 1.1rem; gap: .6rem; }
-    .knapp { min-height: 3rem; font-size: 1rem; padding: .55em 1.1em; border-width: 2px; }
-    .ring-linje { margin-top: 1rem; font-size: .95rem; }
-
-    .lapp-holder { padding: 0; }
-    .lapp { width: min(100%, 17.5rem); padding: 1.7rem 1.2rem 0; }
-    .lapp .overskrift { font-size: 1.45rem; }
-    .lapp ul { font-size: 1.05rem; margin-bottom: .7rem; }
-    .lapp .hilsen { font-size: 1rem; margin-bottom: .8rem; }
-    .lapper { margin: 0 -1.2rem; }
-    .lapper span { font-size: .7rem; padding: .5rem 0; }
-
-    .stripe ul { padding: 1.1rem 0; gap: .7rem; }
-    .stripe li { font-size: .95rem; }
-    .hake { width: 1.4rem; height: 1.4rem; }
-
-    .seksjon { padding: 2.8rem 0; }
-    .seksjon > .ramme > p:first-of-type { font-size: 1rem; }
-    .varsling { padding-top: 2rem; }
-    .varsling-boks { gap: 1rem; }
-
-    .bilder-to { margin-top: 1.4rem; gap: 1rem; }
-    .tjenester { margin-top: 1.4rem; }
-    .tjenester li { grid-template-columns: 2.6rem 1fr; gap: .8rem; padding: 1rem 0; }
-    .ikon { width: 2.6rem; height: 2.6rem; }
-    .ikon svg { width: 1.4rem; height: 1.4rem; }
-
-    .app-spalter { margin-top: 1.4rem; gap: 1rem; }
-    .app-boks { padding: 1.2rem 1.1rem .3rem; }
-    .app-boks h3 { font-size: 1.15rem; }
-    .steg li { grid-template-columns: 2.2rem 1fr; gap: .7rem; margin-bottom: .9rem; }
-    .steg li::before { width: 2.2rem; height: 2.2rem; font-size: .95rem; }
-    .vipps-linje { margin-top: 1.4rem; padding: .9rem 1rem; }
-
-    .to-spalter { gap: 1.6rem; }
-    .sjekkliste li { padding: .6rem 0; }
-    .advarsel { padding: 1rem 1.1rem; }
-
-    .pris { padding: 1.2rem; }
-    .resultat { margin-top: 1rem; }
-    .partner { margin-top: 1.4rem; padding: 1rem; gap: 1rem; }
-
-    /* Teamet: kompakte kort med initialer til venstre */
-    .team { margin-top: 1.4rem; gap: .7rem; }
-    .person { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); column-gap: .9rem; text-align: left; padding: 1rem 1.1rem; align-items: center; }
-    .person .initialer { grid-row: span 3; width: 3.2rem; height: 3.2rem; margin: 0; font-size: 1rem; align-self: start; }
-    .person h3 { font-size: 1rem; }
-    .person .rolle, .person .styrker { margin: 0; }
-    .person .rolle { font-size: .88rem; }
-    .person .styrker { font-size: .85rem; }
-
-    .brev-rad { margin-top: 1.6rem; gap: 1rem; }
-    .brev { padding: 1.3rem; }
-    .brev p { font-size: 1rem; }
-
-    details summary { padding: .8rem 1rem; min-height: 3rem; font-size: .98rem; }
-    details p { padding: 0 1rem .9rem; }
-
-    form { padding: 1.2rem; }
-    .felt { margin-bottom: 1rem; }
-    input[type=text], input[type=tel], textarea { min-height: 2.9rem; padding: .55rem .7rem; }
-    .valg label { min-height: 2.6rem; padding: .3rem .8rem; }
-
-    .bunn { padding: 2.2rem 0 5rem; }
-    .bunn .ramme { gap: 1.4rem; }
-
-    /* Chatknappen: mindre, så den ikke dekker innholdet */
-    .chat-knapp { right: .75rem; bottom: .75rem; font-size: .88rem; min-height: 2.8rem; padding: .5rem .95rem; border-width: 2px; }
-    .chat-knapp svg { width: 1.15rem; height: 1.15rem; }
-    .chat { right: .5rem; bottom: .5rem; width: calc(100vw - 1rem); height: min(34rem, calc(100vh - 1rem)); }
-  }
-</style>
+<link rel="stylesheet" href="stil.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 <a class="hopp" href="#innhold">Hopp til innholdet</a>
 
 <header class="topp">
   <div class="ramme">
-    <a class="merke" href="#">
+    <a class="merke" href="./">
       <img src="logo.png" alt="" width="52" height="52">
-      Hverdagshelten
+      <span translate="no">Hverdagshelten</span>
     </a>
-    <nav aria-label="Hovedmeny">
+    <nav class="hovedmeny" id="hovedmeny" aria-label="Hovedmeny">
       <ul>
-        <li><a href="#tjenester">Hva vi hjelper med</a></li>
-        <li><a href="#appen">Slik fungerer appen</a></li>
+        <li><a href="#tjenester">Tjenester</a></li>
+        <li><a href="#appen">Slik fungerer det</a></li>
         <li><a href="#trygghet">Trygghet</a></li>
         <li><a href="#priser">Priser</a></li>
         <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#innspill">Gi innspill</a></li>
+        <li class="bare-mobil"><a href="#ungdom">Bli hjelper</a></li>
+        <li class="bare-mobil"><a href="#sporsmal">Spørsmål og svar</a></li>
+        <li class="bare-mobil"><a class="knapp knapp-hoved" href="#bestill">Bestill hjelp</a></li>
       </ul>
     </nav>
-    <button class="tekstknapp" id="tekststorrelse" type="button" aria-pressed="false">Større tekst</button>
+    <button class="tekstknapp" id="tekststorrelse" type="button" aria-pressed="false" aria-label="Større tekst">
+      <span aria-hidden="true">A+</span><span class="lang">Større tekst</span>
+    </button>
+    <a class="knapp knapp-hoved topp-bestill" href="#bestill">Bestill hjelp</a>
+    <button class="menyknapp" id="menyknapp" type="button" aria-expanded="false" aria-controls="hovedmeny">
+      <svg class="ikon-meny" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ikon-lukk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      <span class="lang">Meny</span>
+    </button>
   </div>
 </header>
 
@@ -474,8 +99,11 @@
         <p class="undertittel">Fra ungdommen i nabolaget, når du trenger det.</p>
         <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller bare en kopp kaffe og en prat. I Hverdagshelten-appen finner du en ungdom fra nabolaget ditt i Oslo som kan komme innom.</p>
         <div class="knapper">
-          <a class="knapp knapp-hoved" href="#bestill">Bestill hjelp</a>
-          <a class="knapp knapp-sekundar" href="#appen">Se hvordan appen fungerer</a>
+          <a class="knapp knapp-hoved" href="#bestill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Bestill hjelp
+          </a>
+          <a class="knapp knapp-sekundar" href="#appen">Se hvordan det fungerer</a>
         </div>
         <p class="ring-linje">Lurer du på noe? <button type="button" class="lenkeknapp" data-apne-chat>Still et spørsmål</button> til chatten vår, som svarer på enkle spørsmål.</p>
       </div>
@@ -516,21 +144,29 @@
           <h2 id="varsling-tittel">Er du interessert i appen vår?</h2>
           <p>Legg igjen kontaktinformasjonen din, så sender vi deg en påminnelse når appen lanseres. Lurer du på noe, er du også velkommen til å ta kontakt.</p>
         </div>
-        <form class="varsel-skjema" id="varsel-skjema" novalidate>
-          <div class="rad">
-            <div>
-              <label for="v-navn">Fornavn</label>
-              <input id="v-navn" name="v-navn" type="text" autocomplete="given-name" required>
+        <form class="skjema varsel-skjema" id="varsel-skjema" novalidate>
+          <div class="skjema-innhold">
+            <div class="rad">
+              <div class="felt">
+                <label for="v-navn">Fornavn</label>
+                <input id="v-navn" name="v-navn" type="text" autocomplete="given-name" required>
+              </div>
+              <div class="felt">
+                <label for="v-kontakt">E-post eller mobilnummer</label>
+                <input id="v-kontakt" name="v-kontakt" type="text" autocomplete="email" inputmode="email" spellcheck="false" required>
+              </div>
             </div>
-            <div>
-              <label for="v-kontakt">E-post eller mobilnummer</label>
-              <input id="v-kontakt" name="v-kontakt" type="text" autocomplete="email" inputmode="email" required>
-            </div>
+            <div class="honning" aria-hidden="true"><label for="v-honning">Ikke fyll ut</label><input id="v-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+            <div class="varsel-send"><button class="knapp knapp-hoved" type="submit">Gi meg beskjed</button></div>
+            <p class="liten-tekst varsel-send">Vi bruker kontaktinformasjonen bare til å gi deg beskjed om appen, og sletter den etterpå. <a href="personvern.html">Les personvernerklæringen</a>.</p>
+            <div class="kvittering" role="status" aria-live="polite"></div>
           </div>
-          <div class="honning" aria-hidden="true"><label for="v-honning">Ikke fyll ut</label><input id="v-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-          <div><button class="knapp knapp-hoved" type="submit">Gi meg beskjed</button></div>
-          <p class="liten">Vi bruker kontaktinformasjonen bare til å gi deg beskjed om appen, og sletter den etterpå. <a href="personvern.html">Les personvernerklæringen</a>.</p>
-          <div class="kvittering" id="varsel-kvittering" role="status" aria-live="polite"></div>
+          <div class="takk-boks" hidden>
+            <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3 tabindex="-1">Takk! Du står på listen.</h3>
+            <p>Vi gir deg beskjed når appen er klar.</p>
+            <button class="knapp knapp-sekundar" type="button" data-ny>Meld på en til</button>
+          </div>
         </form>
       </div>
     </div>
@@ -539,7 +175,7 @@
   <section class="seksjon" id="tjenester">
     <div class="ramme">
       <h2>Dette kan vi hjelpe med</h2>
-      <p>Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
+      <p class="ingress-tekst">Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
       <div class="bilder-to">
         <figure><img class="foto" src="bilde-handling.jpg" alt="En ungdom triller handlevognen for en eldre dame utenfor butikken" width="701" height="382" loading="lazy"><figcaption>Handling og bæring</figcaption></figure>
         <figure><img class="foto" src="bilde-hage.jpg" alt="En jente klipper plenen mens en eldre mann raker i hagen" width="701" height="382" loading="lazy"><figcaption>Plenklipping og hagearbeid</figcaption></figure>
@@ -576,10 +212,10 @@
   <section class="seksjon seksjon-hvit" id="appen">
     <div class="ramme">
       <h2>Slik fungerer appen</h2>
-      <p>Hverdagshelten er en app som kobler sammen eldre som trenger litt hjelp, og ungdommer i nabolaget som vil tjene litt penger. Vi står for den digitale delen, slik at det blir enkelt og trygt for begge.</p>
+      <p class="ingress-tekst">Hverdagshelten er en app som kobler sammen eldre som trenger litt hjelp, og ungdommer i nabolaget som vil tjene litt penger. Vi står for den digitale delen, slik at det blir enkelt og trygt for begge.</p>
 
       <div class="app-spalter">
-        <div class="app-boks">
+        <div class="kort app-boks">
           <h3>For deg som trenger hjelp</h3>
           <ol class="steg">
             <li><div><strong>Logg inn med Vipps</strong>Du trenger ikke lage passord. Vipps bekrefter hvem du er.</div></li>
@@ -588,7 +224,7 @@
             <li><div><strong>Hjelpen kommer, du betaler etterpå</strong>Når jobben er gjort, betaler du enkelt i appen.</div></li>
           </ol>
         </div>
-        <div class="app-boks">
+        <div class="kort app-boks">
           <h3>For deg som vil hjelpe</h3>
           <ol class="steg">
             <li><div><strong>Logg inn med Vipps</strong>Slik vet både vi og kundene hvem du er.</div></li>
@@ -628,14 +264,14 @@
   <section class="seksjon seksjon-hvit" id="priser">
     <div class="ramme">
       <h2>Hva koster det?</h2>
-      <p>Én enkel pris. Timeprisen går til ungdommen som hjelper deg, og et lite gebyr per bestilling går til å drive Hverdagshelten.</p>
-      <div class="pris">
+      <p class="ingress-tekst">Én enkel pris. Timeprisen går til ungdommen som hjelper deg, og et lite gebyr per bestilling går til å drive Hverdagshelten.</p>
+      <div class="kort pris">
         <dl>
-          <div class="rad"><dt>Hjelp per time</dt><dd>150 kr</dd></div>
-          <div class="rad"><dt>Gebyr per bestilling</dt><dd>29 kr</dd></div>
+          <div class="rad"><dt>Hjelp per time</dt><dd>150&nbsp;kr</dd></div>
+          <div class="rad"><dt>Gebyr per bestilling</dt><dd>29&nbsp;kr</dd></div>
           <div class="rad"><dt>Avbestilling dagen før</dt><dd>Gratis</dd></div>
         </dl>
-        <p class="eksempel">Eksempel: En time med handling koster 150 kr + 29 kr = 179 kr. Varene betaler du som vanlig.</p>
+        <p class="eksempel">Eksempel: En time med handling koster 150&nbsp;kr + 29&nbsp;kr = 179&nbsp;kr. Varene betaler du som vanlig.</p>
       </div>
     </div>
   </section>
@@ -645,16 +281,16 @@
       <div>
         <h2>Er du mellom 15 og 19? Bli en hverdagshelt.</h2>
         <p>Tjen penger når det passer deg, i ditt eget nabolag. Du bestemmer selv hvor mye du vil jobbe, og du får en god referanse til CV-en.</p>
-        <a class="knapp knapp-hoved" href="#bestill">Meld deg som hjelper</a>
+        <a class="knapp knapp-hoved" href="#bestill" data-velg-hjelper>Meld deg som hjelper</a>
       </div>
       <div>
-      <figure><img class="foto" src="bilde-kjokkenhage.jpg" alt="To ungdommer og en eldre dame planter grønnsaker sammen i en kjøkkenhage" width="701" height="380" loading="lazy"></figure>
-      <ul>
-        <li>Du får 150 kr per time, rett til deg.</li>
-        <li>Du velger selv hvilke oppdrag du tar.</li>
-        <li>Du logger inn trygt med Vipps.</li>
-        <li>Du kan alltid kontakte oss hvis du lurer på noe.</li>
-      </ul>
+        <figure><img class="foto" src="bilde-kjokkenhage.jpg" alt="To ungdommer og en eldre dame planter grønnsaker sammen i en kjøkkenhage" width="701" height="380" loading="lazy"></figure>
+        <ul>
+          <li>Du får 150&nbsp;kr per time, rett til deg.</li>
+          <li>Du velger selv hvilke oppdrag du tar.</li>
+          <li>Du logger inn trygt med Vipps.</li>
+          <li>Du kan alltid kontakte oss hvis du lurer på noe.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -662,17 +298,17 @@
   <section class="seksjon seksjon-hvit" id="undersokelse">
     <div class="ramme">
       <h2>Vi spurte seniorene først</h2>
-      <p>Før vi startet, besøkte vi Simensbråten seniorsenter i Oslo og snakket med 16 personer om Hverdagshelten. Dette svarte de:</p>
+      <p class="ingress-tekst">Før vi startet, besøkte vi Simensbråten seniorsenter i Oslo og snakket med 16 personer om Hverdagshelten. Dette svarte de:</p>
       <table class="resultat">
         <caption class="sr">Svar fra 16 personer på Simensbråten seniorsenter, i prosent</caption>
         <thead class="sr"><tr><th scope="col">Svar</th><th scope="col">Andel</th><th scope="col">Antall</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Var veldig for ideen</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:68.75%"></div></div><span class="prosent">69 %</span></div></td><td class="antall">11 av 16</td></tr>
-          <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19 %</span></div></td><td class="antall">3 av 16</td></tr>
-          <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12 %</span></div></td><td class="antall">2 av 16</td></tr>
+          <tr><th scope="row">Var veldig for ideen</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:68.75%"></div></div><span class="prosent">69&nbsp;%</span></div></td><td class="antall">11 av 16</td></tr>
+          <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19&nbsp;%</span></div></td><td class="antall">3 av 16</td></tr>
+          <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12&nbsp;%</span></div></td><td class="antall">2 av 16</td></tr>
         </tbody>
       </table>
-      <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100 %.</p>
+      <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100&nbsp;%.</p>
       <div class="partner">
         <figure><img class="foto partner-foto" src="bilde-simensbraten.jpg" alt="Fem fra Hverdagshelten-teamet sammen med to seniorer rundt et bord på Simensbråten seniorsenter" width="1400" height="1050" loading="lazy"><figcaption>Fra besøket vårt på Simensbråten seniorsenter</figcaption></figure>
         <div>
@@ -686,7 +322,7 @@
   <section class="seksjon" id="om-oss">
     <div class="ramme">
       <h2>Hvem er vi?</h2>
-      <p>Vi er seks unge gründere som brenner for å gjøre hverdagen enklere for eldre. Engasjementet vårt bygger på personlige erfaringer og et ønske om å skape mer trygghet, selvstendighet og mestring i hverdagen.</p>
+      <p class="ingress-tekst">Vi er seks unge gründere som brenner for å gjøre hverdagen enklere for eldre. Engasjementet vårt bygger på personlige erfaringer og et ønske om å skape mer trygghet, selvstendighet og mestring i hverdagen.</p>
       <p>Vi så at mange eldre trenger litt hjelp innimellom, men ikke liker å spørre, og at mange ungdommer gjerne vil tjene litt penger, men ikke finner jobb. Med Hverdagshelten kan vi hjelpe hverandre.</p>
 
       <ul class="team">
@@ -717,12 +353,12 @@
       </ul>
 
       <div class="brev-rad">
-      <figure><img class="foto" src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></figure>
-      <div class="brev">
-        <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
-        <p>Har du spørsmål, kan du alltid sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
-        <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
-      </div>
+        <figure><img class="foto" src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></figure>
+        <div class="brev">
+          <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
+          <p>Har du spørsmål, kan du alltid sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
+          <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
+        </div>
       </div>
     </div>
   </section>
@@ -749,11 +385,15 @@
         </details>
         <details>
           <summary>Hvordan betaler jeg?</summary>
-          <p>Du betaler i appen etter besøket. Bestiller du på telefon, finner vi en løsning som passer deg.</p>
+          <p>Du betaler i appen etter besøket. Bestiller du via skjemaet her på siden, finner vi en løsning som passer deg.</p>
         </details>
         <details>
           <summary>Hva om jeg må avbestille?</summary>
           <p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller send oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
+        </details>
+        <details>
+          <summary>Hvordan kan jeg gi dere tilbakemelding?</summary>
+          <p>Vi blir glade for alle innspill, store og små. <a href="#innspill">Skriv til oss i innspillsskjemaet</a>. Du trenger ikke å oppgi navn.</p>
         </details>
       </div>
     </div>
@@ -767,34 +407,91 @@
         <p>Du kan også sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
       </div>
 
-      <form id="skjema" novalidate>
-        <div class="felt">
-          <label for="navn">Navnet ditt</label>
-          <input id="navn" name="navn" type="text" autocomplete="name" required>
-        </div>
-        <div class="felt">
-          <label for="kontakt">E-post eller mobilnummer <span class="hint">Slik kan vi nå deg.</span></label>
-          <input id="kontakt" name="kontakt" type="text" autocomplete="email" inputmode="email" required>
-        </div>
-        <fieldset>
-          <legend>Hva trenger du hjelp med?</legend>
-          <div class="valg">
-            <label><input type="checkbox" name="hjelp" value="handling"> Handling</label>
-            <label><input type="checkbox" name="hjelp" value="hage"> Hage</label>
-            <label><input type="checkbox" name="hjelp" value="hund"> Hund</label>
-            <label><input type="checkbox" name="hjelp" value="selskap"> Selskap</label>
-            <label><input type="checkbox" name="hjelp" value="mobil"> Mobil</label>
-            <label><input type="checkbox" name="hjelp" value="hjelper"> Jeg vil bli hjelper</label>
+      <form class="skjema" id="skjema" novalidate>
+        <div class="skjema-innhold">
+          <div class="felt">
+            <label for="navn">Navnet ditt</label>
+            <input id="navn" name="navn" type="text" autocomplete="name" required>
           </div>
-        </fieldset>
-        <div class="felt">
-          <label for="melding">Fortell gjerne litt mer <span class="hint">For eksempel hvilken dag som passer best.</span></label>
-          <textarea id="melding" name="melding"></textarea>
+          <div class="felt">
+            <label for="kontakt">E-post eller mobilnummer <span class="hint" id="kontakt-hint">Slik kan vi nå deg.</span></label>
+            <input id="kontakt" name="kontakt" type="text" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="kontakt-hint">
+          </div>
+          <fieldset>
+            <legend>Hva trenger du hjelp med?</legend>
+            <div class="valg">
+              <label><input type="checkbox" name="hjelp" value="handling"> Handling</label>
+              <label><input type="checkbox" name="hjelp" value="hage"> Hage</label>
+              <label><input type="checkbox" name="hjelp" value="hund"> Hund</label>
+              <label><input type="checkbox" name="hjelp" value="selskap"> Selskap</label>
+              <label><input type="checkbox" name="hjelp" value="mobil"> Mobil</label>
+              <label><input type="checkbox" name="hjelp" value="hjelper" id="velg-hjelper"> Jeg vil bli hjelper</label>
+            </div>
+          </fieldset>
+          <div class="felt">
+            <label for="melding">Fortell gjerne litt mer <span class="hint" id="melding-hint">For eksempel hvilken dag som passer best.</span></label>
+            <textarea id="melding" name="melding" rows="4" aria-describedby="melding-hint"></textarea>
+          </div>
+          <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
+          <p class="liten-tekst">Vi bruker opplysningene bare til å svare på forespørselen din. <a href="personvern.html">Les personvernerklæringen</a>.</p>
+          <div class="kvittering" role="status" aria-live="polite"></div>
         </div>
-        <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-        <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
-        <p class="liten-tekst">Vi bruker opplysningene bare til å svare på forespørselen din. <a href="personvern.html">Les personvernerklæringen</a>.</p>
-        <div class="kvittering" id="kvittering" role="status" aria-live="polite"></div>
+        <div class="takk-boks" hidden>
+          <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 tabindex="-1">Takk! Forespørselen er sendt.</h3>
+          <p>Vi tar kontakt med deg så snart vi kan, vanligvis innen et par dager.</p>
+          <button class="knapp knapp-sekundar" type="button" data-ny>Send en ny forespørsel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="seksjon innspill" id="innspill" aria-labelledby="innspill-tittel">
+    <div class="ramme">
+      <div>
+        <span class="innspill-tegn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M12 15.5s-3.2-1.9-3.2-4a1.7 1.7 0 0 1 3.2-.9 1.7 1.7 0 0 1 3.2.9c0 2.1-3.2 4-3.2 4z"/></svg></span>
+        <h2 id="innspill-tittel">Har du innspill? Vi vil gjerne høre fra deg!</h2>
+        <p class="ingress-tekst">Ros, ris, et forslag eller noe du savner. Alt er velkomment, og alt blir lest av oss i teamet.</p>
+        <p>Du bestemmer selv om du vil skrive navnet ditt. Vil du ha svar, legger du igjen e-post eller telefonnummer.</p>
+        <p class="signatur">Takk for at du hjelper oss å bli bedre!<small>Hverdagshelten-teamet</small></p>
+      </div>
+
+      <form class="skjema" id="innspill-skjema" novalidate>
+        <div class="skjema-innhold">
+          <div class="felt">
+            <label for="i-navn">Navn <span class="valgfritt">(valgfritt)</span></label>
+            <input id="i-navn" name="navn" type="text" autocomplete="name">
+          </div>
+          <div class="felt-rad">
+            <div class="felt">
+              <label for="i-epost">E-post <span class="valgfritt">(valgfritt)</span></label>
+              <input id="i-epost" name="epost" type="email" autocomplete="email" inputmode="email" spellcheck="false">
+            </div>
+            <div class="felt">
+              <label for="i-telefon">Telefonnummer <span class="valgfritt">(valgfritt)</span></label>
+              <input id="i-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel">
+            </div>
+          </div>
+          <div class="felt">
+            <label for="i-melding">Innspillet ditt <span class="hint" id="i-melding-hint">Skriv med dine egne ord. Det finnes ingen gale svar.</span></label>
+            <textarea id="i-melding" name="melding" rows="6" maxlength="3000" required aria-describedby="i-melding-hint i-teller"></textarea>
+            <p class="tegnteller" id="i-teller">0 av 3000 tegn</p>
+          </div>
+          <div class="honning" aria-hidden="true"><label for="i-honning">Ikke fyll ut</label><input id="i-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="knapp knapp-hoved" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+            Send innspill
+          </button>
+          <p class="liten-tekst">Innspillet sendes til e-posten vår. Vi bruker opplysningene bare til å lese og eventuelt svare på innspillet. <a href="personvern.html">Les personvernerklæringen</a>.</p>
+          <div class="kvittering" role="status" aria-live="polite"></div>
+        </div>
+        <div class="takk-boks" hidden>
+          <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 tabindex="-1">Takk for innspillet ditt!</h3>
+          <p>Vi har fått meldingen og leser den så snart vi kan. Har du lagt igjen e-post eller telefonnummer, svarer vi deg.</p>
+          <button class="knapp knapp-sekundar" type="button" data-ny>Skriv et nytt innspill</button>
+        </div>
       </form>
     </div>
   </section>
@@ -804,7 +501,7 @@
 <footer class="bunn">
   <div class="ramme">
     <div>
-      <a class="merke" href="#"><img src="logo.png" alt="" width="52" height="52">Hverdagshelten</a>
+      <a class="merke" href="./"><img src="logo.png" alt="" width="52" height="52"><span translate="no">Hverdagshelten</span></a>
       <p>En hjelpende hånd. Vi setter eldre og unge i Oslo i kontakt med hverandre.</p>
       <a class="app-merke" href="#varsling">Appen kommer snart – få beskjed</a>
     </div>
@@ -825,6 +522,7 @@
         <li><a href="#ungdom">Bli hjelper</a></li>
         <li><a href="#undersokelse">Undersøkelsen</a></li>
         <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#innspill">Gi oss innspill</a></li>
         <li><a href="personvern.html">Personvern</a></li>
       </ul>
     </div>
@@ -844,56 +542,58 @@
   </div>
   <div class="chat-logg" id="chat-logg" role="log" aria-live="polite"></div>
   <form class="chat-skjema" id="chat-skjema" autocomplete="off">
-    <label for="chat-input" class="hopp">Skriv spørsmålet ditt</label>
-    <input id="chat-input" type="text" placeholder="Skriv spørsmålet ditt her" enterkeyhint="send">
+    <label for="chat-input" class="sr">Skriv spørsmålet ditt</label>
+    <input id="chat-input" type="text" placeholder="Skriv spørsmålet ditt her …" enterkeyhint="send">
     <button type="submit">Send</button>
   </form>
   <p class="chat-merknad">Automatiske svar. For alt annet: hverdagsheltenub@gmail.com</p>
 </section>
 
-
+<script src="felles.js"></script>
 <script>
-  // «Større tekst»-knappen. Valget huskes i nettleseren hvis det er mulig.
-  (function () {
-    var knapp = document.getElementById('tekststorrelse');
-    function sett(pa) {
-      document.documentElement.classList.toggle('stor-tekst', pa);
-      knapp.setAttribute('aria-pressed', pa ? 'true' : 'false');
-      knapp.textContent = pa ? 'Vanlig tekst' : 'Større tekst';
-    }
-    try { if (localStorage.getItem('hh-stor-tekst') === '1') sett(true); } catch (e) {}
-    knapp.addEventListener('click', function () {
-      var pa = !document.documentElement.classList.contains('stor-tekst');
-      sett(pa);
-      try { localStorage.setItem('hh-stor-tekst', pa ? '1' : '0'); } catch (e) {}
-    });
-  })();
-
-  // ---------- Sending av skjema ----------
-  // Svarene sendes via FormSubmit til Hverdagsheltens Gmail. Ingen ting lagres på nettsiden.
+  // ---------- Skjemaene ----------
+  // Alle skjemaene sendes via FormSubmit til Hverdagsheltens Gmail. Det finnes ingen passord eller
+  // API-nøkler i koden: FormSubmit kjenner bare e-postadressen, som allerede er offentlig på siden.
   var EPOST = 'hverdagsheltenub@gmail.com';
+  var FORMSUBMIT = 'https://formsubmit.co/';
 
-  function gyldigKontakt(t) {
-    t = t.trim();
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t)) return true;
-    var tall = t.replace(/[\s+()-]/g, '');
-    return /^\d{8,12}$/.test(tall);
+  function gyldigEpost(t) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t.trim()); }
+  function gyldigTelefon(t) { return /^\+?\d{8,12}$/.test(t.trim().replace(/[\s()-]/g, '')); }
+  function gyldigKontakt(t) { return gyldigEpost(t) || gyldigTelefon(t); }
+
+  // Viser en feilmelding rett under feltet, og kobler den til feltet for skjermlesere
+  function visFeltFeil(felt, tekst) {
+    var id = felt.id + '-feil';
+    var p = document.getElementById(id);
+    if (!p) {
+      p = document.createElement('p');
+      p.className = 'feilmelding'; p.id = id;
+      felt.insertAdjacentElement('afterend', p);
+      felt.setAttribute('aria-describedby', ((felt.getAttribute('aria-describedby') || '') + ' ' + id).trim());
+    }
+    p.textContent = tekst;
+    felt.setAttribute('aria-invalid', 'true');
   }
-  function visKvittering(boks, tekst, feil, html) {
-    boks.classList.add('vis');
-    boks.classList.toggle('feil', !!feil);
-    if (html) boks.innerHTML = tekst; else boks.textContent = tekst;
+  function fjernFeltFeil(felt) {
+    var p = document.getElementById(felt.id + '-feil');
+    if (p) {
+      p.remove();
+      var rest = (felt.getAttribute('aria-describedby') || '').split(' ').filter(function (x) { return x && x !== p.id; }).join(' ');
+      if (rest) felt.setAttribute('aria-describedby', rest); else felt.removeAttribute('aria-describedby');
+    }
+    felt.removeAttribute('aria-invalid');
   }
-  // Sender som et vanlig skjema til FormSubmit. Etterpå sendes besøkeren tilbake hit med ?takk=…
-  function sendTilOss(data, emne, takkKode) {
-    var tilbake = location.origin + location.pathname + '?takk=' + takkKode + '#' + (takkKode === 'varsel' ? 'varsling' : 'bestill');
-    data._subject = emne;
-    data._template = 'table';
-    data._captcha = 'false';
-    data._next = tilbake;
+  function visKvittering(boks, tekst, type) {
+    boks.className = 'kvittering vis' + (type ? ' ' + type : '');
+    boks.innerHTML = tekst;
+  }
+
+  // Reserveløsning: sender som et vanlig skjema. FormSubmit sender da besøkeren tilbake hit med ?takk=…
+  function sendKlassisk(data, takkKode, anker) {
+    data._next = location.origin + location.pathname + '?takk=' + takkKode + '#' + anker;
     var f = document.createElement('form');
     f.method = 'POST';
-    f.action = 'https://formsubmit.co/' + EPOST;
+    f.action = FORMSUBMIT + EPOST;
     f.style.display = 'none';
     Object.keys(data).forEach(function (k) {
       var i = document.createElement('input');
@@ -903,56 +603,166 @@
     document.body.appendChild(f);
     f.submit();
   }
-  function koble(skjemaId, kvitteringId, takkKode, lagData, sjekk, takk) {
-    var skjema = document.getElementById(skjemaId);
-    var boks = document.getElementById(kvitteringId);
+
+  // Sender i bakgrunnen, så besøkeren blir på siden og får bekreftelsen med en gang
+  function sendTilOss(data) {
+    var kontroll = 'AbortController' in window ? new AbortController() : null;
+    var tidsavbrudd = setTimeout(function () { if (kontroll) kontroll.abort(); }, 20000);
+    return fetch(FORMSUBMIT + 'ajax/' + EPOST, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data),
+      signal: kontroll ? kontroll.signal : undefined
+    }).then(function (svar) {
+      clearTimeout(tidsavbrudd);
+      if (!svar.ok) { var e = new Error('nett'); e.nett = true; throw e; }
+      return svar.json();
+    }, function () {
+      clearTimeout(tidsavbrudd);
+      var e = new Error('nett'); e.nett = true; throw e;
+    }).then(function (json) {
+      if (String(json.success) !== 'true') throw new Error(json.message || 'Ukjent feil');
+      return json;
+    });
+  }
+
+  function koble(o) {
+    var skjema = document.getElementById(o.id);
+    var innhold = skjema.querySelector('.skjema-innhold');
+    var takk = skjema.querySelector('.takk-boks');
+    var boks = skjema.querySelector('.kvittering');
     var knapp = skjema.querySelector('button[type=submit]');
-    // Kom vi nettopp tilbake etter innsending? Vis takk.
-    var param = new URLSearchParams(location.search).get('takk');
-    if (param === takkKode) {
-      visKvittering(boks, takk(), false);
+    var knappTekst = knapp.innerHTML;
+    var anker = skjema.closest('section').id;
+
+    function visTakk(flytt) {
+      innhold.hidden = true;
+      takk.hidden = false;
+      var h = takk.querySelector('h3');
+      if (flytt) h.focus();
+    }
+    takk.querySelector('[data-ny]').addEventListener('click', function () {
+      skjema.reset();
+      if (o.etterNullstill) o.etterNullstill(skjema);
+      boks.className = 'kvittering'; boks.textContent = '';
+      takk.hidden = true; innhold.hidden = false;
+      skjema.querySelector('input:not([type=hidden]):not([tabindex="-1"]), textarea').focus();
+    });
+
+    // Kom vi nettopp tilbake fra reserveløsningen? Vis takk.
+    if (new URLSearchParams(location.search).get('takk') === o.takkKode) {
+      visTakk(false);
       history.replaceState(null, '', location.pathname + location.hash);
     }
+
+    // Fjern feilmeldingen så snart feltet rettes
+    skjema.addEventListener('input', function (e) {
+      if (e.target.getAttribute('aria-invalid') === 'true') fjernFeltFeil(e.target);
+    });
+
     skjema.addEventListener('submit', function (e) {
       e.preventDefault();
-      var problem = sjekk(skjema);
-      if (problem) { visKvittering(boks, problem.tekst, true); problem.felt.focus(); return; }
+      Array.prototype.forEach.call(skjema.querySelectorAll('[aria-invalid="true"]'), fjernFeltFeil);
+      var problemer = o.sjekk(skjema);
+      if (problemer.length) {
+        problemer.forEach(function (p) { visFeltFeil(p.felt, p.tekst); });
+        visKvittering(boks, '<p>' + (problemer.length === 1 ? 'Ett felt må rettes' : problemer.length + ' felt må rettes') + ' før du kan sende. Se den røde teksten.</p>', 'feil');
+        problemer[0].felt.focus();
+        return;
+      }
       var honning = skjema.querySelector('[name=_honey]');
-      if (honning && honning.value) { visKvittering(boks, takk(), false); skjema.reset(); return; }
-      var data = lagData(skjema);
+      if (honning && honning.value) { skjema.reset(); visTakk(true); return; }
+
+      var innsending = o.data(skjema);
+      var data = innsending.felter;
+      data._subject = innsending.emne;
+      data._template = 'table';
+      data._captcha = 'false';
+      if (innsending.svarTil) data._replyto = innsending.svarTil;
+
       knapp.disabled = true; knapp.textContent = 'Sender …';
-      visKvittering(boks, 'Sender …', false);
-      sendTilOss(data.felter, data.emne, takkKode);
+      visKvittering(boks, '<p>Sender …</p>', 'venter');
+
+      sendTilOss(data).then(function () {
+        skjema.reset();
+        if (o.etterNullstill) o.etterNullstill(skjema);
+        boks.className = 'kvittering'; boks.textContent = '';
+        visTakk(true);
+      }, function (feil) {
+        if (feil.nett) { sendKlassisk(data, o.takkKode, anker); return; }
+        visKvittering(boks, '<p><strong>Det gikk ikke å sende akkurat nå.</strong> Prøv igjen om litt, eller send oss en e-post på <a href="mailto:' + EPOST + '">' + EPOST + '</a>. Det du har skrevet, er ikke slettet.</p>', 'feil');
+      }).then(function () {
+        knapp.disabled = false; knapp.innerHTML = knappTekst;
+      });
     });
   }
 
   // Påmelding til appen
-  koble('varsel-skjema', 'varsel-kvittering', 'varsel',
-    function (f) {
+  koble({
+    id: 'varsel-skjema', takkKode: 'varsel',
+    data: function (f) {
+      var kontakt = f['v-kontakt'].value.trim();
       return { emne: 'Ny påmelding: vil ha beskjed når appen lanseres',
-               felter: { 'Fornavn': f['v-navn'].value.trim(), 'E-post eller mobil': f['v-kontakt'].value.trim(), 'Skjema': 'Påmelding til appen' } };
+               svarTil: gyldigEpost(kontakt) ? kontakt : '',
+               felter: { 'Fornavn': f['v-navn'].value.trim(), 'E-post eller mobil': kontakt, 'Skjema': 'Påmelding til appen' } };
     },
-    function (f) {
-      if (!f['v-navn'].value.trim()) return { tekst: 'Skriv inn fornavnet ditt.', felt: f['v-navn'] };
-      if (!gyldigKontakt(f['v-kontakt'].value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer.', felt: f['v-kontakt'] };
-      return null;
-    },
-    function () { return 'Takk! Vi har fått påmeldingen din og gir deg beskjed når appen er klar.'; });
+    sjekk: function (f) {
+      var p = [];
+      if (!f['v-navn'].value.trim()) p.push({ felt: f['v-navn'], tekst: 'Skriv inn fornavnet ditt.' });
+      if (!gyldigKontakt(f['v-kontakt'].value)) p.push({ felt: f['v-kontakt'], tekst: 'Skriv inn en e-postadresse (for eksempel navn@gmail.com) eller et mobilnummer med 8 siffer.' });
+      return p;
+    }
+  });
 
   // Bestill hjelp
-  koble('skjema', 'kvittering', 'bestill',
-    function (f) {
+  koble({
+    id: 'skjema', takkKode: 'bestill',
+    data: function (f) {
       var valgt = Array.prototype.map.call(f.querySelectorAll('input[name=hjelp]:checked'), function (c) { return c.parentNode.textContent.trim(); });
+      var kontakt = f.kontakt.value.trim();
       return { emne: 'Ny forespørsel fra nettsiden: ' + (valgt.join(', ') || 'Bestill hjelp'),
-               felter: { 'Navn': f.navn.value.trim(), 'E-post eller mobil': f.kontakt.value.trim(),
+               svarTil: gyldigEpost(kontakt) ? kontakt : '',
+               felter: { 'Navn': f.navn.value.trim(), 'E-post eller mobil': kontakt,
                          'Hjelp med': valgt.join(', ') || 'Ikke valgt', 'Melding': f.melding.value.trim() || '–', 'Skjema': 'Bestill hjelp' } };
     },
-    function (f) {
-      if (!f.navn.value.trim()) return { tekst: 'Skriv inn navnet ditt.', felt: f.navn };
-      if (!gyldigKontakt(f.kontakt.value)) return { tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer, så vi kan nå deg.', felt: f.kontakt };
-      return null;
+    sjekk: function (f) {
+      var p = [];
+      if (!f.navn.value.trim()) p.push({ felt: f.navn, tekst: 'Skriv inn navnet ditt.' });
+      if (!gyldigKontakt(f.kontakt.value)) p.push({ felt: f.kontakt, tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer, så vi kan nå deg.' });
+      return p;
+    }
+  });
+
+  // Innspill og tilbakemeldinger: alt er valgfritt bortsett fra selve innspillet
+  var teller = document.getElementById('i-teller');
+  var innspillFelt = document.getElementById('i-melding');
+  function oppdaterTeller() { teller.textContent = innspillFelt.value.length + ' av 3000 tegn'; }
+  innspillFelt.addEventListener('input', oppdaterTeller);
+  koble({
+    id: 'innspill-skjema', takkKode: 'innspill',
+    etterNullstill: oppdaterTeller,
+    data: function (f) {
+      var epost = f.epost.value.trim();
+      return { emne: 'Nytt innspill fra nettsiden',
+               svarTil: epost,
+               felter: { 'Navn': f.navn.value.trim() || 'Ikke oppgitt', 'E-post': epost || 'Ikke oppgitt',
+                         'Telefon': f.telefon.value.trim() || 'Ikke oppgitt', 'Innspill': f.melding.value.trim(), 'Skjema': 'Innspill' } };
     },
-    function () { return 'Takk! Forespørselen er sendt. Vi tar kontakt med deg så snart vi kan.'; });
+    sjekk: function (f) {
+      var p = [];
+      var epost = f.epost.value.trim(), tlf = f.telefon.value.trim(), tekst = f.melding.value.trim();
+      if (epost && !gyldigEpost(epost)) p.push({ felt: f.epost, tekst: 'E-postadressen ser ikke riktig ut. Sjekk at den har med @ og et punktum, for eksempel navn@gmail.com. Du kan også la feltet stå tomt.' });
+      if (tlf && !gyldigTelefon(tlf)) p.push({ felt: f.telefon, tekst: 'Telefonnummeret må ha 8 siffer, for eksempel 912 34 567. Du kan også la feltet stå tomt.' });
+      if (!tekst) p.push({ felt: f.melding, tekst: 'Skriv innspillet ditt før du sender.' });
+      else if (tekst.length < 3) p.push({ felt: f.melding, tekst: 'Innspillet er litt kort. Skriv gjerne noen flere ord.' });
+      return p;
+    }
+  });
+
+  // «Meld deg som hjelper» krysser av for «Jeg vil bli hjelper» i bestillingsskjemaet
+  document.querySelectorAll('[data-velg-hjelper]').forEach(function (a) {
+    a.addEventListener('click', function () { document.getElementById('velg-hjelper').checked = true; });
+  });
 
   // ---------- Chat som svarer på enkle spørsmål ----------
   // Alt skjer i nettleseren. Den tåler skrivefeil og foreslår lignende spørsmål.
@@ -994,7 +804,7 @@
       { id: 'betaling', sp: 'Hvordan betaler jeg?', ord: ['betale', 'betaling', 'betaler', 'faktura', 'kontant', 'kontanter', 'bankkort'],
         svar: '<p>Du betaler i appen etter besøket. Bestiller du via skjemaet, finner vi en løsning som passer deg.</p>', rel: ['pris', 'trygg'] },
       { id: 'kontakt', sp: 'Hvordan kontakter jeg dere?', ord: ['kontakt', 'kontakte', 'ringe', 'telefon', 'nummer', 'epost', 'mail', 'snakke', 'åpningstid', 'svare', 'facebook', 'instagram', 'tiktok', 'sosiale medier'],
-        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram, TikTok og Facebook.</p>', rel: ['bestill', 'omoss'] },
+        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram, TikTok og Facebook.</p>', rel: ['bestill', 'innspill'] },
       { id: 'omoss', sp: 'Hvem står bak Hverdagshelten?', ord: ['hvem er dere', 'om dere', 'gründer', 'gründere', 'team', 'teamet', 'startet', 'står bak'],
         svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo som brenner for å gjøre hverdagen enklere for eldre. Les mer under <a href="#om-oss">«Hvem er vi?»</a>.</p>', rel: ['undersokelse', 'kontakt'] },
       { id: 'undersokelse', sp: 'Hva sa seniorene i undersøkelsen?', ord: ['undersøkelse', 'undersøkelsen', 'seniorsenter', 'simensbråten', 'spurte', 'resultat'],
@@ -1003,6 +813,8 @@
         svar: '<p>Vi bruker opplysningene bare til det du har bedt om: å gi deg beskjed når appen lanseres, eller å svare på forespørselen din. Påmeldinger slettes når vi har gitt beskjed om appen. Les mer i <a href="personvern.html">personvernerklæringen</a>.</p>', rel: ['kontakt', 'app'] },
       { id: 'fast', sp: 'Kan jeg få den samme hjelperen?', ord: ['samme hjelper', 'fast hjelper', 'samme person', 'samme ungdom'],
         svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>', rel: ['trygg', 'bestill'] },
+      { id: 'innspill', sp: 'Hvordan gir jeg dere tilbakemelding?', ord: ['innspill', 'tilbakemelding', 'forslag', 'klage', 'ros', 'ris', 'idé', 'ide', 'mening', 'synes'],
+        svar: '<p>Så hyggelig! <a href="#innspill">Skriv til oss i innspillsskjemaet</a>. Du trenger ikke å oppgi navn, men legg gjerne igjen e-post eller telefon hvis du vil ha svar.</p>', rel: ['kontakt', 'omoss'] },
       { id: 'hei', sp: 'Hei', skjult: true, ord: ['hei', 'hallo', 'heisann', 'hey', 'god dag', 'god morgen', 'god kveld'],
         svar: '<p>Hei! Hva lurer du på?</p>', rel: ['pris', 'bestill', 'trygg', 'app'] },
       { id: 'takk', sp: 'Takk', skjult: true, ord: ['takk', 'tusen takk', 'flott', 'supert'],
