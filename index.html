@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,19 +69,19 @@
       <ul>
         <li><a href="#tjenester">Tjenester</a></li>
         <li><a href="#appen">Slik fungerer det</a></li>
+        <li><a href="#prov-appen">Prøv appen</a></li>
         <li><a href="#trygghet">Trygghet</a></li>
         <li><a href="#priser">Priser</a></li>
         <li><a href="#om-oss">Om oss</a></li>
-        <li><a href="#innspill">Gi innspill</a></li>
         <li class="bare-mobil"><a href="#ungdom">Bli hjelper</a></li>
         <li class="bare-mobil"><a href="#sporsmal">Spørsmål og svar</a></li>
-        <li class="bare-mobil"><a class="knapp knapp-hoved" href="#bestill">Bestill hjelp</a></li>
+        <li class="bare-mobil"><a class="knapp knapp-hoved" href="#varsling">Få beskjed når appen kommer</a></li>
       </ul>
     </nav>
     <button class="tekstknapp" id="tekststorrelse" type="button" aria-pressed="false" aria-label="Større tekst">
       <span aria-hidden="true">A+</span><span class="lang">Større tekst</span>
     </button>
-    <a class="knapp knapp-hoved topp-bestill" href="#bestill">Bestill hjelp</a>
+    <a class="knapp knapp-hoved topp-cta" href="#prov-appen">Prøv appen</a>
     <button class="menyknapp" id="menyknapp" type="button" aria-expanded="false" aria-controls="hovedmeny">
       <svg class="ikon-meny" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="ikon-lukk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
@@ -94,21 +94,19 @@
 
   <section class="hero">
     <div class="ramme">
-      <div>
+      <div class="hero-tekst">
         <h1>En hjelpende hånd.</h1>
         <p class="undertittel">Fra ungdommen i nabolaget, når du trenger det.</p>
-        <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller bare en kopp kaffe og en prat. I Hverdagshelten-appen finner du en ungdom fra nabolaget ditt i Oslo som kan komme innom.</p>
-        <div class="knapper">
-          <a class="knapp knapp-hoved" href="#bestill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            Bestill hjelp
-          </a>
-          <a class="knapp knapp-sekundar" href="#appen">Se hvordan det fungerer</a>
-        </div>
+        <p class="ingress">Handling, plenklipping, hundelufting, hjelp med mobilen eller en kopp kaffe og en prat. I Hverdagshelten-appen finner du en ungdom fra nabolaget ditt i Oslo som kan komme innom.</p>
+        <p class="hero-handling">
+          <a class="knapp knapp-hoved" href="#prov-appen">Prøv appen</a>
+          <a class="hero-lenke" href="#tjenester">Se hva vi kan hjelpe med</a>
+        </p>
         <p class="ring-linje">Lurer du på noe? <button type="button" class="lenkeknapp" data-apne-chat>Still et spørsmål</button> til chatten vår, som svarer på enkle spørsmål.</p>
       </div>
 
-      <div class="lapp-holder" aria-hidden="true">
+      <!-- Et utsnitt fra appen ved siden av oppslagslappen vår. Bare pynt, derfor skjult for skjermlesere. -->
+      <div class="kollasj" aria-hidden="true">
         <div class="lapp">
           <p class="overskrift">Trenger du en hjelpende hånd?</p>
           <ul>
@@ -123,6 +121,26 @@
             <span>Skann QR-koden</span><span>Skann QR-koden</span><span class="revet">Skann QR-koden</span><span>Skann QR-koden</span><span class="revet">Skann QR-koden</span><span>Skann QR-koden</span>
           </div>
         </div>
+
+        <div class="app-kort">
+          <img src="bilde-benk.jpg" alt="" width="701" height="380" fetchpriority="high">
+          <div class="app-kort-innhold">
+            <p class="app-liten">Ditt neste besøk</p>
+            <p class="app-stor">Torsdag 29. oktober<br>Kl. 14.00–15.00</p>
+            <div class="app-rad">
+              <span class="app-avatar">E</span>
+              <div><p class="app-navn">Emil blir med deg på tur</p><p class="app-bekreftet">Avtalen er bekreftet</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flytekort">
+          <span class="app-avatar">E</span>
+          <div>
+            <p class="app-navn">Emil, 16 år</p>
+            <p class="vurdering"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>4,9 i vurdering</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -130,10 +148,158 @@
   <section class="stripe" aria-label="Kort fortalt">
     <div class="ramme">
       <ul>
-        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Alle brukere er verifisert med Vipps</li>
-        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Fast pris, du vet hva det koster på forhånd</li>
-        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Liker du ikke apper? Vi hjelper deg i gang</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Alle logger inn med Vipps</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Fast pris, du vet hva det koster på forhånd</li>
+        <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Du betaler først når besøket er gjennomført</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="seksjon" id="tjenester">
+    <div class="ramme">
+      <h2>Dette kan vi hjelpe med</h2>
+      <p class="ingress-tekst">Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
+      <ul class="tjenester">
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3h2.6l2.4 12h11l2-8.5H6"/></svg></div>
+          <h3>Handling</h3><p>Vi handler for deg, eller bærer posene hjem.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8"/><path d="M12 13c-4 0-6-2.5-6-6.5 3.5 0 6 2 6 6.5zM12 11c0-3.5 2.5-6 6.5-6 0 3.5-2.5 6-6.5 6z"/><path d="M6 21h12"/></svg><img src="bilde-hage.jpg" alt="En jente klipper plenen mens en eldre mann raker i hagen" width="701" height="382" loading="lazy"></div>
+          <h3>Hage og uteområde</h3><p>Plenklipping, raking, luking og snømåking.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5.2C10 3.9 8.8 3 7.5 3S5 3.9 5 5.2V9c0 3 2 5 2 5v5h4v-4h2v4h4v-5s2-2 2-5V5.2C19 3.9 17.8 3 16.5 3S14 3.9 14 5.2"/><path d="M11 12h2"/></svg></div>
+          <h3>Hundelufting</h3><p>En god tur for hunden, når det passer deg.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg><img src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></div>
+          <h3>Kaffe og selskap</h3><p>En prat, et spill kort eller en tur i nabolaget.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18h2"/></svg></div>
+          <h3>Mobil og nettbrett</h3><p>Videosamtaler, bilder og apper, i ditt tempo.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+        <li>
+          <div class="tjeneste-bilde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg></div>
+          <h3>Småjobber i huset</h3><p>Lyspærer, søppel og ting som skal opp fra kjelleren.</p><p class="tjeneste-pris">fra 150 kr/t</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-krem" id="appen">
+    <div class="ramme">
+      <h2>Slik fungerer appen</h2>
+      <p class="ingress-tekst">Appen kobler sammen eldre som trenger litt hjelp, og ungdom i nabolaget som vil tjene litt penger. Vi står for den digitale delen, så det blir enkelt og trygt for begge.</p>
+
+      <div class="app-spalter">
+        <div>
+          <h3>For deg som trenger hjelp</h3>
+          <ol class="steg">
+            <li><strong>Logg inn med Vipps</strong>Du trenger ikke lage passord. Vipps bekrefter hvem du er.</li>
+            <li><strong>Fortell hva du trenger</strong>Velg hva som skal gjøres og når det passer. Du ser prisen før du bestiller.</li>
+            <li><strong>En hjelper tar oppdraget</strong>En ungdom i nærheten sier ja, og du får vite hvem som kommer.</li>
+            <li><strong>Hjelpen kommer, du betaler etterpå</strong>Når jobben er gjort, betaler du enkelt i appen.</li>
+          </ol>
+        </div>
+        <div>
+          <h3>For deg som vil hjelpe</h3>
+          <ol class="steg">
+            <li><strong>Logg inn med Vipps</strong>Slik vet både vi og kundene hvem du er.</li>
+            <li><strong>Se oppdrag i nærheten</strong>Appen viser hvem i nabolaget som trenger hjelp, og hva det gjelder.</li>
+            <li><strong>Ta de oppdragene du vil</strong>Du bestemmer selv når og hvor mye du jobber.</li>
+            <li><strong>Få betalt</strong>Timeprisen går til deg. Hverdagshelten tar bare et lite gebyr per bestilling.</li>
+          </ol>
+        </div>
+      </div>
+
+      <p class="app-merknad">Pårørende kan også bestille i appen, på vegne av noen de er glad i. <a href="#prov-appen">Prøv appen selv her på siden.</a></p>
+    </div>
+  </section>
+
+  <section class="seksjon prov" id="prov-appen" aria-labelledby="prov-tittel">
+    <div class="ramme prov-rutenett">
+      <div class="prov-tekst">
+        <h2 id="prov-tittel">Prøv appen før den kommer</h2>
+        <p class="ingress-tekst">Trykk deg rundt som Anne, som bestiller hjelp, eller som Emil, som tar oppdrag. Alle navn og avtaler er eksempler.</p>
+        <p>Dette kan du prøve:</p>
+        <ul class="prov-liste">
+          <li>Be om hjelp til handling eller en tur, i tre steg</li>
+          <li>Se når besøket er, og hvem som kommer</li>
+          <li>Finne møtestedet på kartet</li>
+          <li>Bytte til Emil og ta et oppdrag i nabolaget</li>
+        </ul>
+      </div>
+
+      <div class="prov-modell">
+        <iframe src="prototype/?innebygd=1" title="Klikkbar modell av Hverdagshelten-appen" loading="lazy" width="430" height="880"></iframe>
+        <a class="knapp knapp-sekundar fullskjerm" href="prototype/">Åpne modellen i full skjerm</a>
+      </div>
+
+      <div class="innspill" id="innspill">
+        <form class="skjema innspill-skjema" id="innspill-skjema" novalidate aria-labelledby="innspill-tittel">
+          <h3 id="innspill-tittel">Hva synes du?</h3>
+          <div class="skjema-innhold">
+            <div class="felt">
+              <label for="i-melding">Innspillet ditt <span class="hint" id="i-melding-hint">Ros, ris eller et forslag. Det finnes ingen gale svar.</span></label>
+              <textarea id="i-melding" name="melding" rows="4" maxlength="3000" required aria-describedby="i-melding-hint i-teller"></textarea>
+              <p class="tegnteller" id="i-teller">0 av 3000 tegn</p>
+            </div>
+            <div class="felt">
+              <label for="i-kontakt">E-post eller telefon <span class="valgfritt">(valgfritt)</span> <span class="hint" id="i-kontakt-hint">Bare hvis du vil at vi skal svare deg.</span></label>
+              <input id="i-kontakt" name="kontakt" type="text" autocomplete="email" inputmode="email" spellcheck="false" aria-describedby="i-kontakt-hint">
+            </div>
+            <div class="honning" aria-hidden="true"><label for="i-honning">Ikke fyll ut</label><input id="i-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+            <button class="knapp knapp-hoved" type="submit">Send innspill</button>
+            <p class="liten-tekst">Innspillet sendes til e-posten vår. Vi bruker opplysningene bare til å lese og eventuelt svare på innspillet. <a href="personvern.html">Les personvernerklæringen</a>.</p>
+            <div class="kvittering" role="status" aria-live="polite"></div>
+          </div>
+          <div class="takk-boks" hidden>
+            <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3 tabindex="-1">Takk for innspillet ditt!</h3>
+            <p>Vi har fått meldingen og leser den så snart vi kan. Har du lagt igjen e-post eller telefonnummer, svarer vi deg.</p>
+            <button class="knapp knapp-sekundar" type="button" data-ny>Skriv et nytt innspill</button>
+          </div>
+        </form>
+        <p class="signatur">Takk for at du hjelper oss å bli bedre!<small>Hverdagshelten-teamet</small></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon seksjon-krem" id="trygghet">
+    <div class="ramme to-spalter">
+      <div>
+        <h2>Trygghet først</h2>
+        <p>Det skal føles trygt å åpne døren. Derfor er dette på plass:</p>
+        <ul class="sjekkliste">
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Alle som bruker appen, både de som får og de som gir hjelp, logger inn med Vipps. Da vet vi hvem de er.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Du får vite hvem som kommer, før de kommer.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Betalingen skjer i appen etter besøket. Ingen kontanter trenger å skifte hender.</span></li>
+          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span>Er det noe som ikke føles riktig, sier du fra til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>. Vi tar det på alvor.</span></li>
+        </ul>
+      </div>
+      <div class="advarsel">
+        <h3>Dette gjør en hjelper aldri</h3>
+        <p>En hjelper fra Hverdagshelten ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Hvis noen gjør det, si nei og gi beskjed til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="priser">
+    <div class="ramme pris-rutenett">
+      <div>
+        <h2>Hva koster det?</h2>
+        <p class="ingress-tekst">Én enkel pris. Timeprisen går til ungdommen som hjelper deg, og et lite gebyr per bestilling går til å drive Hverdagshelten.</p>
+      </div>
+      <div class="prislapp">
+        <dl>
+          <div class="rad"><dt>Hjelp per time</dt><dd>150&nbsp;kr</dd></div>
+          <div class="rad"><dt>Gebyr per bestilling</dt><dd>29&nbsp;kr</dd></div>
+          <div class="rad"><dt>Avbestilling dagen før</dt><dd>Gratis</dd></div>
+        </dl>
+        <p class="eksempel">En time med handling koster 150&nbsp;kr + 29&nbsp;kr = <strong>179&nbsp;kr</strong>. Varene betaler du som vanlig.</p>
+      </div>
     </div>
   </section>
 
@@ -172,146 +338,44 @@
     </div>
   </section>
 
-  <section class="seksjon" id="tjenester">
-    <div class="ramme">
-      <h2>Dette kan vi hjelpe med</h2>
-      <p class="ingress-tekst">Små og store ting i hverdagen. Finner du ikke det du trenger på listen, er det bare å spørre.</p>
-      <div class="bilder-to">
-        <figure><img class="foto" src="bilde-handling.jpg" alt="En ungdom triller handlevognen for en eldre dame utenfor butikken" width="701" height="382" loading="lazy"><figcaption>Handling og bæring</figcaption></figure>
-        <figure><img class="foto" src="bilde-hage.jpg" alt="En jente klipper plenen mens en eldre mann raker i hagen" width="701" height="382" loading="lazy"><figcaption>Plenklipping og hagearbeid</figcaption></figure>
-      </div>
-      <ul class="tjenester">
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.3 11.1a1 1 0 0 1-1 .9H7.3a1 1 0 0 1-1-.9z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
-          <div><h3>Handling</h3><p>Vi handler for deg, eller blir med og bærer posene hjem.</p></div>
-        </li>
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-7"/><path d="M12 14c-4 0-6-3-6-7 3 0 6 2 6 7z"/><path d="M12 14c4 0 6-3 6-7-3 0-6 2-6 7z"/><path d="M5 21h14"/></svg></span>
-          <div><h3>Hage og uteområde</h3><p>Plenklipping, raking, luking og snømåking om vinteren.</p></div>
-        </li>
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="6" r="1.8"/><circle cx="12" cy="4.5" r="1.8"/><circle cx="17" cy="6" r="1.8"/><path d="M12 10c-3 0-6 4-6 7 0 2 1.5 3 3 3 1.2 0 1.8-.6 3-.6s1.8.6 3 .6c1.5 0 3-1 3-3 0-3-3-7-6-7z"/></svg></span>
-          <div><h3>Hundelufting</h3><p>En god tur for hunden, når det passer deg.</p></div>
-        </li>
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg></span>
-          <div><h3>Kaffe og selskap</h3><p>En prat, et spill kort eller en tur rundt i nabolaget.</p></div>
-        </li>
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg></span>
-          <div><h3>Hjelp med mobil og nettbrett</h3><p>Videosamtale med barnebarna, bilder og apper, forklart i ditt tempo.</p></div>
-        </li>
-        <li>
-          <span class="ikon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg></span>
-          <div><h3>Småjobber i huset</h3><p>Bære ting opp fra kjelleren, skifte lyspærer eller ta ut søpla.</p></div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="seksjon seksjon-hvit" id="appen">
-    <div class="ramme">
-      <h2>Slik fungerer appen</h2>
-      <p class="ingress-tekst">Hverdagshelten er en app som kobler sammen eldre som trenger litt hjelp, og ungdommer i nabolaget som vil tjene litt penger. Vi står for den digitale delen, slik at det blir enkelt og trygt for begge.</p>
-
-      <div class="app-spalter">
-        <div class="kort app-boks">
-          <h3>For deg som trenger hjelp</h3>
-          <ol class="steg">
-            <li><div><strong>Logg inn med Vipps</strong>Du trenger ikke lage passord. Vipps bekrefter hvem du er.</div></li>
-            <li><div><strong>Fortell hva du trenger</strong>Velg hva som skal gjøres og når det passer. Du ser prisen før du bestiller.</div></li>
-            <li><div><strong>En hjelper tar oppdraget</strong>En ungdom i nærheten sier ja, og du får vite hvem som kommer.</div></li>
-            <li><div><strong>Hjelpen kommer, du betaler etterpå</strong>Når jobben er gjort, betaler du enkelt i appen.</div></li>
-          </ol>
-        </div>
-        <div class="kort app-boks">
-          <h3>For deg som vil hjelpe</h3>
-          <ol class="steg">
-            <li><div><strong>Logg inn med Vipps</strong>Slik vet både vi og kundene hvem du er.</div></li>
-            <li><div><strong>Se oppdrag i nærheten</strong>Appen viser hvem i nabolaget som trenger hjelp, og hva det gjelder.</div></li>
-            <li><div><strong>Ta de oppdragene du vil</strong>Du bestemmer selv når og hvor mye du jobber.</div></li>
-            <li><div><strong>Få betalt</strong>Timeprisen går til deg. Hverdagshelten tar bare et lite gebyr per bestilling.</div></li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="vipps-linje">
-        <svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <p><strong>Liker du ikke apper?</strong> Fyll ut <a href="#bestill">skjemaet nedenfor</a>, så hjelper vi deg med å komme i gang. Pårørende kan også bestille på vegne av noen de er glad i.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="seksjon" id="trygghet">
-    <div class="ramme to-spalter">
-      <div>
-        <h2>Trygghet først</h2>
-        <p>Det skal føles trygt å åpne døren. Derfor er dette på plass:</p>
-        <ul class="sjekkliste">
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alle som bruker appen, både de som får og de som gir hjelp, logger inn med Vipps. Da vet vi hvem de er.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Du får vite hvem som kommer, før de kommer.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Betalingen skjer i appen etter besøket. Ingen kontanter trenger å skifte hender.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Er det noe som ikke føles riktig, sier du fra til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>. Vi tar det på alvor.</span></li>
-        </ul>
-      </div>
-      <div class="advarsel">
-        <h3>Dette gjør en hjelper aldri</h3>
-        <p>En hjelper fra Hverdagshelten ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Hvis noen gjør det, si nei og gi beskjed til oss på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="seksjon seksjon-hvit" id="priser">
-    <div class="ramme">
-      <h2>Hva koster det?</h2>
-      <p class="ingress-tekst">Én enkel pris. Timeprisen går til ungdommen som hjelper deg, og et lite gebyr per bestilling går til å drive Hverdagshelten.</p>
-      <div class="kort pris">
-        <dl>
-          <div class="rad"><dt>Hjelp per time</dt><dd>150&nbsp;kr</dd></div>
-          <div class="rad"><dt>Gebyr per bestilling</dt><dd>29&nbsp;kr</dd></div>
-          <div class="rad"><dt>Avbestilling dagen før</dt><dd>Gratis</dd></div>
-        </dl>
-        <p class="eksempel">Eksempel: En time med handling koster 150&nbsp;kr + 29&nbsp;kr = 179&nbsp;kr. Varene betaler du som vanlig.</p>
-      </div>
-    </div>
-  </section>
-
   <section class="seksjon ungdom" id="ungdom">
     <div class="ramme to-spalter">
       <div>
         <h2>Er du mellom 15 og 19? Bli en hverdagshelt.</h2>
         <p>Tjen penger når det passer deg, i ditt eget nabolag. Du bestemmer selv hvor mye du vil jobbe, og du får en god referanse til CV-en.</p>
-        <a class="knapp knapp-hoved" href="#bestill" data-velg-hjelper>Meld deg som hjelper</a>
-      </div>
-      <div>
-        <figure><img class="foto" src="bilde-kjokkenhage.jpg" alt="To ungdommer og en eldre dame planter grønnsaker sammen i en kjøkkenhage" width="701" height="380" loading="lazy"></figure>
         <ul>
           <li>Du får 150&nbsp;kr per time, rett til deg.</li>
           <li>Du velger selv hvilke oppdrag du tar.</li>
           <li>Du logger inn trygt med Vipps.</li>
           <li>Du kan alltid kontakte oss hvis du lurer på noe.</li>
         </ul>
+        <a class="knapp knapp-hoved" href="#varsling">Meld deg som hjelper</a>
       </div>
+      <figure><img class="foto" src="bilde-kjokkenhage.jpg" alt="To ungdommer og en eldre dame planter grønnsaker sammen i en kjøkkenhage" width="701" height="380" loading="lazy"></figure>
     </div>
   </section>
 
-  <section class="seksjon seksjon-hvit" id="undersokelse">
+  <section class="seksjon" id="undersokelse">
     <div class="ramme">
       <h2>Vi spurte seniorene først</h2>
-      <p class="ingress-tekst">Før vi startet, besøkte vi Simensbråten seniorsenter i Oslo og snakket med 16 personer om Hverdagshelten. Dette svarte de:</p>
-      <table class="resultat">
-        <caption class="sr">Svar fra 16 personer på Simensbråten seniorsenter, i prosent</caption>
-        <thead class="sr"><tr><th scope="col">Svar</th><th scope="col">Andel</th><th scope="col">Antall</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Var veldig for ideen</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:68.75%"></div></div><span class="prosent">69&nbsp;%</span></div></td><td class="antall">11 av 16</td></tr>
-          <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19&nbsp;%</span></div></td><td class="antall">3 av 16</td></tr>
-          <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12&nbsp;%</span></div></td><td class="antall">2 av 16</td></tr>
-        </tbody>
-      </table>
-      <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100&nbsp;%.</p>
-      <div class="partner">
+      <div class="undersokelse-rutenett">
         <figure><img class="foto partner-foto" src="bilde-simensbraten.jpg" alt="Fem fra Hverdagshelten-teamet sammen med to seniorer rundt et bord på Simensbråten seniorsenter" width="1400" height="1050" loading="lazy"><figcaption>Fra besøket vårt på Simensbråten seniorsenter</figcaption></figure>
         <div>
+          <p>Før vi startet, besøkte vi Simensbråten seniorsenter i Oslo og snakket med 16 personer om Hverdagshelten.</p>
+          <div class="store-tall">
+            <p><span class="tall">16</span>seniorer delte meningene sine med oss</p>
+            <p><span class="tall">69&nbsp;%</span>var veldig for ideen</p>
+          </div>
+          <table class="resultat">
+            <caption>Alle svarene</caption>
+            <thead class="sr"><tr><th scope="col">Svar</th><th scope="col">Andel</th><th scope="col">Antall</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Var veldig for ideen</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:68.75%"></div></div><span class="prosent">69&nbsp;%</span></div></td><td class="antall">11 av 16</td></tr>
+              <tr><th scope="row">Hadde ikke behov for tilbudet</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:18.75%"></div></div><span class="prosent">19&nbsp;%</span></div></td><td class="antall">3 av 16</td></tr>
+              <tr><th scope="row">Takket nei</th><td><div class="stolpe"><div class="spor"><div class="fyll" style="--p:12.5%"></div></div><span class="prosent">12&nbsp;%</span></div></td><td class="antall">2 av 16</td></tr>
+            </tbody>
+          </table>
+          <p class="fotnote">Prosentene er avrundet slik at de til sammen blir 100&nbsp;%.</p>
           <h3>Samarbeidspartner: Simensbråten seniorsenter</h3>
           <p>Takk til Simensbråten seniorsenter, som tok imot oss og lot oss snakke med besøkende. Tilbakemeldingene har hjulpet oss å forme Hverdagshelten.</p>
         </div>
@@ -319,7 +383,7 @@
     </div>
   </section>
 
-  <section class="seksjon" id="om-oss">
+  <section class="seksjon seksjon-krem" id="om-oss">
     <div class="ramme">
       <h2>Hvem er vi?</h2>
       <p class="ingress-tekst">Vi er seks unge gründere som brenner for å gjøre hverdagen enklere for eldre. Engasjementet vårt bygger på personlige erfaringer og et ønske om å skape mer trygghet, selvstendighet og mestring i hverdagen.</p>
@@ -352,24 +416,25 @@
         </li>
       </ul>
 
-      <div class="brev-rad">
-        <figure><img class="foto" src="bilde-benk.jpg" alt="En eldre mann og en ungdom sitter på en benk i parken og ser i et fotoalbum" width="701" height="380" loading="lazy"></figure>
-        <div class="brev">
-          <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
-          <p>Har du spørsmål, kan du alltid sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
-          <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
-        </div>
+      <div class="brev">
+        <p>Når en sekstenåring bærer handleposene opp trappen og blir sittende igjen over en kopp kaffe, har begge fått noe ut av det. Det er det Hverdagshelten handler om: en hjelpende hånd, begge veier.</p>
+        <p>Har du spørsmål, kan du alltid sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
+        <p class="signatur">Joakim og resten av teamet<small>Hverdagshelten</small></p>
       </div>
     </div>
   </section>
 
-  <section class="seksjon seksjon-hvit" id="sporsmal">
+  <section class="seksjon" id="sporsmal">
     <div class="ramme">
       <h2>Spørsmål og svar</h2>
       <div class="sporsmal">
         <details>
           <summary>Jeg har ikke smarttelefon. Kan jeg bruke Hverdagshelten likevel?</summary>
-          <p>Ja. Fyll ut <a href="#bestill">skjemaet nederst på siden</a>, eller be en pårørende gjøre det for deg, så tar vi kontakt og hjelper deg i gang.</p>
+          <p>Ja. Send oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>, eller be en pårørende gjøre det, så finner vi en løsning sammen. Pårørende kan også bestille for deg i appen.</p>
+        </details>
+        <details>
+          <summary>Når kommer appen?</summary>
+          <p>Appen er ikke lansert ennå. <a href="#varsling">Legg igjen fornavn og e-post eller mobilnummer</a>, så gir vi deg beskjed når den er klar. Til da kan du <a href="#prov-appen">prøve en modell av appen</a> her på siden.</p>
         </details>
         <details>
           <summary>Hvem er hjelperne?</summary>
@@ -385,7 +450,7 @@
         </details>
         <details>
           <summary>Hvordan betaler jeg?</summary>
-          <p>Du betaler i appen etter besøket. Bestiller du via skjemaet her på siden, finner vi en løsning som passer deg.</p>
+          <p>Du betaler i appen etter besøket. Ingen kontanter trenger å skifte hender.</p>
         </details>
         <details>
           <summary>Hva om jeg må avbestille?</summary>
@@ -393,120 +458,9 @@
         </details>
         <details>
           <summary>Hvordan kan jeg gi dere tilbakemelding?</summary>
-          <p>Vi blir glade for alle innspill, store og små. <a href="#innspill">Skriv til oss i innspillsskjemaet</a>. Du trenger ikke å oppgi navn.</p>
+          <p>Vi blir glade for alle innspill, store og små. <a href="#innspill">Skriv til oss i skjemaet «Hva synes du?»</a>. Du trenger ikke å oppgi navn.</p>
         </details>
       </div>
-    </div>
-  </section>
-
-  <section class="seksjon bestill" id="bestill">
-    <div class="ramme">
-      <div>
-        <h2>Bestill hjelp</h2>
-        <p>Fyll ut skjemaet, så tar vi kontakt med deg for å avtale resten. Liker du ikke apper, hjelper vi deg også med å komme i gang.</p>
-        <ul class="sjekkliste bestill-trygt">
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Uforpliktende. Du bestemmer ingenting før vi har snakket sammen.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>150&nbsp;kr per time + 29&nbsp;kr per bestilling. Gratis å avbestille dagen før.</span></li>
-          <li><svg class="hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#52395E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pårørende kan gjerne bestille for noen de er glad i.</span></li>
-        </ul>
-        <p>Du kan også sende oss en e-post på <a href="mailto:hverdagsheltenub@gmail.com">hverdagsheltenub@gmail.com</a>.</p>
-      </div>
-
-      <form class="skjema" id="skjema" novalidate>
-        <div class="skjema-innhold">
-          <div class="felt">
-            <label for="navn">Navnet ditt</label>
-            <input id="navn" name="navn" type="text" autocomplete="name" required>
-          </div>
-          <div class="felt">
-            <label for="kontakt">E-post eller mobilnummer <span class="hint" id="kontakt-hint">Slik kan vi nå deg.</span></label>
-            <input id="kontakt" name="kontakt" type="text" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="kontakt-hint">
-          </div>
-          <fieldset>
-            <legend>Hva trenger du hjelp med?</legend>
-            <div class="valg">
-              <label><input type="checkbox" name="hjelp" value="handling"> Handling</label>
-              <label><input type="checkbox" name="hjelp" value="hage"> Hage</label>
-              <label><input type="checkbox" name="hjelp" value="hund"> Hund</label>
-              <label><input type="checkbox" name="hjelp" value="selskap"> Selskap</label>
-              <label><input type="checkbox" name="hjelp" value="mobil"> Mobil</label>
-              <label><input type="checkbox" name="hjelp" value="hjelper" id="velg-hjelper"> Jeg vil bli hjelper</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Når på dagen passer det best? <span class="valgfritt">(valgfritt)</span></legend>
-            <div class="valg">
-              <label><input type="radio" name="tid" value="Formiddag (8–12)"> Formiddag <span class="valgfritt">8–12</span></label>
-              <label><input type="radio" name="tid" value="Ettermiddag (12–17)"> Ettermiddag <span class="valgfritt">12–17</span></label>
-              <label><input type="radio" name="tid" value="Kveld (17–20)"> Kveld <span class="valgfritt">17–20</span></label>
-              <label><input type="radio" name="tid" value="Når som helst"> Når som helst</label>
-            </div>
-          </fieldset>
-          <div class="felt">
-            <label for="melding">Fortell gjerne litt mer <span class="hint" id="melding-hint">For eksempel hvilken dag som passer. Ikke skriv helseopplysninger eller personnummer.</span></label>
-            <textarea id="melding" name="melding" rows="4" aria-describedby="melding-hint"></textarea>
-          </div>
-          <div class="honning" aria-hidden="true"><label for="b-honning">Ikke fyll ut</label><input id="b-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-          <button class="knapp knapp-hoved" type="submit">Send forespørsel</button>
-          <p class="liten-tekst">Vi bruker opplysningene bare til å svare på forespørselen din. <a href="personvern.html">Les personvernerklæringen</a>.</p>
-          <div class="kvittering" role="status" aria-live="polite"></div>
-        </div>
-        <div class="takk-boks" hidden>
-          <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h3 tabindex="-1">Takk! Forespørselen er sendt.</h3>
-          <p>Vi tar kontakt med deg så snart vi kan, vanligvis innen et par dager.</p>
-          <button class="knapp knapp-sekundar" type="button" data-ny>Send en ny forespørsel</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <section class="seksjon innspill" id="innspill" aria-labelledby="innspill-tittel">
-    <div class="ramme">
-      <div>
-        <span class="innspill-tegn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M12 15.5s-3.2-1.9-3.2-4a1.7 1.7 0 0 1 3.2-.9 1.7 1.7 0 0 1 3.2.9c0 2.1-3.2 4-3.2 4z"/></svg></span>
-        <h2 id="innspill-tittel">Har du innspill? Vi vil gjerne høre fra deg!</h2>
-        <p class="ingress-tekst">Ros, ris, et forslag eller noe du savner. Alt er velkomment, og alt blir lest av oss i teamet.</p>
-        <p>Du bestemmer selv om du vil skrive navnet ditt. Vil du ha svar, legger du igjen e-post eller telefonnummer.</p>
-        <p class="signatur">Takk for at du hjelper oss å bli bedre!<small>Hverdagshelten-teamet</small></p>
-      </div>
-
-      <form class="skjema" id="innspill-skjema" novalidate>
-        <div class="skjema-innhold">
-          <div class="felt">
-            <label for="i-navn">Navn <span class="valgfritt">(valgfritt)</span></label>
-            <input id="i-navn" name="navn" type="text" autocomplete="name">
-          </div>
-          <div class="felt-rad">
-            <div class="felt">
-              <label for="i-epost">E-post <span class="valgfritt">(valgfritt)</span></label>
-              <input id="i-epost" name="epost" type="email" autocomplete="email" inputmode="email" spellcheck="false">
-            </div>
-            <div class="felt">
-              <label for="i-telefon">Telefonnummer <span class="valgfritt">(valgfritt)</span></label>
-              <input id="i-telefon" name="telefon" type="tel" autocomplete="tel" inputmode="tel">
-            </div>
-          </div>
-          <div class="felt">
-            <label for="i-melding">Innspillet ditt <span class="hint" id="i-melding-hint">Skriv med dine egne ord. Det finnes ingen gale svar.</span></label>
-            <textarea id="i-melding" name="melding" rows="6" maxlength="3000" required aria-describedby="i-melding-hint i-teller"></textarea>
-            <p class="tegnteller" id="i-teller">0 av 3000 tegn</p>
-          </div>
-          <div class="honning" aria-hidden="true"><label for="i-honning">Ikke fyll ut</label><input id="i-honning" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
-          <button class="knapp knapp-hoved" type="submit">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
-            Send innspill
-          </button>
-          <p class="liten-tekst">Innspillet sendes til e-posten vår. Vi bruker opplysningene bare til å lese og eventuelt svare på innspillet. <a href="personvern.html">Les personvernerklæringen</a>.</p>
-          <div class="kvittering" role="status" aria-live="polite"></div>
-        </div>
-        <div class="takk-boks" hidden>
-          <svg class="merke-hake" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2F7A55"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h3 tabindex="-1">Takk for innspillet ditt!</h3>
-          <p>Vi har fått meldingen og leser den så snart vi kan. Har du lagt igjen e-post eller telefonnummer, svarer vi deg.</p>
-          <button class="knapp knapp-sekundar" type="button" data-ny>Skriv et nytt innspill</button>
-        </div>
-      </form>
     </div>
   </section>
 
@@ -517,7 +471,7 @@
     <div>
       <a class="merke" href="./"><img src="logo.png" alt="" width="52" height="52"><span translate="no">Hverdagshelten</span></a>
       <p>En hjelpende hånd. Vi setter eldre og unge i Oslo i kontakt med hverandre.</p>
-      <a class="app-merke" href="#varsling">Appen kommer snart – få beskjed</a>
+      <a class="app-merke" href="#varsling">Appen kommer snart. Få beskjed</a>
     </div>
     <div>
       <h2>Kontakt</h2>
@@ -531,7 +485,7 @@
     <div>
       <h2>Snarveier</h2>
       <ul>
-        <li><a href="#bestill">Bestill hjelp</a></li>
+        <li><a href="#prov-appen">Prøv appen</a></li>
         <li><a href="#appen">Slik fungerer appen</a></li>
         <li><a href="#ungdom">Bli hjelper</a></li>
         <li><a href="#undersokelse">Undersøkelsen</a></li>
@@ -728,25 +682,6 @@
     }
   });
 
-  // Bestill hjelp
-  koble({
-    id: 'skjema', takkKode: 'bestill',
-    data: function (f) {
-      var valgt = Array.prototype.map.call(f.querySelectorAll('input[name=hjelp]:checked'), function (c) { return c.parentNode.textContent.trim(); });
-      var kontakt = f.kontakt.value.trim();
-      return { emne: 'Ny forespørsel fra nettsiden: ' + (valgt.join(', ') || 'Bestill hjelp'),
-               svarTil: gyldigEpost(kontakt) ? kontakt : '',
-               felter: { 'Navn': f.navn.value.trim(), 'E-post eller mobil': kontakt,
-                         'Hjelp med': valgt.join(', ') || 'Ikke valgt', 'Tid på dagen': (f.querySelector('input[name=tid]:checked') || {}).value || 'Ikke valgt', 'Melding': f.melding.value.trim() || '–', 'Skjema': 'Bestill hjelp' } };
-    },
-    sjekk: function (f) {
-      var p = [];
-      if (!f.navn.value.trim()) p.push({ felt: f.navn, tekst: 'Skriv inn navnet ditt.' });
-      if (!gyldigKontakt(f.kontakt.value)) p.push({ felt: f.kontakt, tekst: 'Skriv inn en e-postadresse eller et mobilnummer med 8 siffer, så vi kan nå deg.' });
-      return p;
-    }
-  });
-
   // Innspill og tilbakemeldinger: alt er valgfritt bortsett fra selve innspillet
   var teller = document.getElementById('i-teller');
   var innspillFelt = document.getElementById('i-melding');
@@ -756,26 +691,19 @@
     id: 'innspill-skjema', takkKode: 'innspill',
     etterNullstill: oppdaterTeller,
     data: function (f) {
-      var epost = f.epost.value.trim();
+      var kontakt = f.kontakt.value.trim();
       return { emne: 'Nytt innspill fra nettsiden',
-               svarTil: epost,
-               felter: { 'Navn': f.navn.value.trim() || 'Ikke oppgitt', 'E-post': epost || 'Ikke oppgitt',
-                         'Telefon': f.telefon.value.trim() || 'Ikke oppgitt', 'Innspill': f.melding.value.trim(), 'Skjema': 'Innspill' } };
+               svarTil: gyldigEpost(kontakt) ? kontakt : '',
+               felter: { 'E-post eller telefon': kontakt || 'Ikke oppgitt', 'Innspill': f.melding.value.trim(), 'Skjema': 'Innspill' } };
     },
     sjekk: function (f) {
       var p = [];
-      var epost = f.epost.value.trim(), tlf = f.telefon.value.trim(), tekst = f.melding.value.trim();
-      if (epost && !gyldigEpost(epost)) p.push({ felt: f.epost, tekst: 'E-postadressen ser ikke riktig ut. Sjekk at den har med @ og et punktum, for eksempel navn@gmail.com. Du kan også la feltet stå tomt.' });
-      if (tlf && !gyldigTelefon(tlf)) p.push({ felt: f.telefon, tekst: 'Telefonnummeret må ha 8 siffer, for eksempel 912 34 567. Du kan også la feltet stå tomt.' });
+      var kontakt = f.kontakt.value.trim(), tekst = f.melding.value.trim();
       if (!tekst) p.push({ felt: f.melding, tekst: 'Skriv innspillet ditt før du sender.' });
       else if (tekst.length < 3) p.push({ felt: f.melding, tekst: 'Innspillet er litt kort. Skriv gjerne noen flere ord.' });
+      if (kontakt && !gyldigKontakt(kontakt)) p.push({ felt: f.kontakt, tekst: 'Skriv en e-postadresse (for eksempel navn@gmail.com) eller et telefonnummer med 8 siffer. Du kan også la feltet stå tomt.' });
       return p;
     }
-  });
-
-  // «Meld deg som hjelper» krysser av for «Jeg vil bli hjelper» i bestillingsskjemaet
-  document.querySelectorAll('[data-velg-hjelper]').forEach(function (a) {
-    a.addEventListener('click', function () { document.getElementById('velg-hjelper').checked = true; });
   });
 
   // ---------- Chat som svarer på enkle spørsmål ----------
@@ -786,21 +714,23 @@
       { id: 'pris', sp: 'Hva koster det?', ord: ['pris', 'priser', 'koster', 'kostnad', 'koste', 'betale', 'dyrt', 'billig', 'kroner', 'kr', 'gebyr', 'timepris'],
         svar: '<p>Hjelp koster 150 kr per time. I tillegg kommer et gebyr på 29 kr per bestilling.</p><p>En time med handling koster altså 179 kr. Varene betaler du som vanlig.</p>', rel: ['betaling', 'avbestill', 'bestill'] },
       { id: 'bestill', sp: 'Hvordan bestiller jeg?', ord: ['bestille', 'bestilling', 'bestiller', 'booke', 'få hjelp', 'trenger hjelp', 'ordne'],
-        svar: '<p>Du kan bestille på to måter:</p><p>1. I appen: logg inn med Vipps, velg hva du trenger og når det passer.</p><p>2. Uten app: fyll ut <a href="#bestill">skjemaet nederst på siden</a>, så tar vi kontakt.</p>', rel: ['pris', 'utenapp', 'parorende'] },
+        svar: '<p>Du bestiller i appen: logg inn med Vipps, velg hva du trenger og når det passer. <a href="#prov-appen">Prøv en modell av appen her på siden</a>.</p><p>Appen er ikke lansert ennå. Trenger du hjelp før den kommer, send oss en e-post på ' + ML + ', eller be en pårørende gjøre det.</p>', rel: ['pris', 'utenapp', 'parorende'] },
       { id: 'trygg', sp: 'Er det trygt?', ord: ['trygg', 'trygt', 'sikker', 'sikkert', 'svindel', 'vipps', 'verifisert', 'stole', 'hvem kommer', 'identitet'],
         svar: '<p>Alle som bruker Hverdagshelten logger inn med Vipps, så vi vet hvem de er. Du får vite hvem som kommer før besøket.</p><p>En hjelper ber aldri om bankkort, PIN-kode, BankID-kode eller kontanter. Skjer det, si nei og gi beskjed til oss på ' + ML + '.</p>', rel: ['alder', 'fast', 'kontakt'] },
       { id: 'hjelper', sp: 'Hvordan blir jeg hjelper?', ord: ['jobb', 'jobbe', 'hjelper', 'tjene', 'søke', 'melde', 'bli med', 'ungdom', 'sommerjobb', 'deltid', 'ekstrajobb'],
-        svar: '<p>Er du mellom 15 og 19 år, kan du bli hverdagshelt! Du logger inn med Vipps, velger selv hvilke oppdrag du tar, og får 150 kr per time.</p><p>Fyll ut <a href="#bestill">skjemaet nederst på siden</a> og kryss av for «Jeg vil bli hjelper», så tar vi kontakt.</p>', rel: ['alder', 'trygg', 'app'] },
+        svar: '<p>Er du mellom 15 og 19 år, kan du bli hverdagshelt! Du logger inn med Vipps, velger selv hvilke oppdrag du tar, og får 150 kr per time.</p><p><a href="#varsling">Meld deg på her</a>, så gir vi deg beskjed når appen kommer.</p>', rel: ['alder', 'trygg', 'app'] },
       { id: 'app', sp: 'Når kommer appen?', ord: ['app', 'appen', 'lansering', 'lanseres', 'last ned', 'laste ned', 'når kommer', 'app store', 'google play', 'påminnelse'],
-        svar: '<p>Appen er ikke lansert ennå. <a href="#varsling">Legg igjen fornavn og e-post eller mobilnummer her</a>, så gir vi deg beskjed når den er klar.</p>', rel: ['utenapp', 'bestill'] },
-      { id: 'utenapp', sp: 'Jeg liker ikke apper', ord: ['liker ikke', 'uten app', 'ikke app', 'smarttelefon', 'gammel mobil', 'vanskelig'],
-        svar: '<p>Det går helt fint. Fyll ut <a href="#bestill">skjemaet nedenfor</a>, eller be en pårørende gjøre det, så hjelper vi deg med å komme i gang.</p>', rel: ['parorende', 'bestill'] },
+        svar: '<p>Appen er ikke lansert ennå. <a href="#varsling">Legg igjen fornavn og e-post eller mobilnummer her</a>, så gir vi deg beskjed når den er klar.</p><p>Til da kan du <a href="#prov-appen">prøve en modell av appen</a>.</p>', rel: ['prov', 'utenapp', 'bestill'] },
+      { id: 'prov', sp: 'Kan jeg prøve appen?', ord: ['prøve', 'prøv', 'teste', 'test', 'modell', 'demo', 'se appen', 'hvordan ser'],
+        svar: '<p>Ja! <a href="#prov-appen">Her på siden</a> kan du trykke deg rundt i en modell av appen, som Anne som bestiller hjelp, eller Emil som tar oppdrag. Fortell oss gjerne hva du synes etterpå.</p>', rel: ['app', 'innspill'] },
+      { id: 'utenapp', sp: 'Jeg har ikke smarttelefon', ord: ['liker ikke', 'uten app', 'ikke app', 'smarttelefon', 'gammel mobil', 'vanskelig'],
+        svar: '<p>Det går fint. Send oss en e-post på ' + ML + ', eller be en pårørende gjøre det, så finner vi en løsning sammen. Pårørende kan også bestille for deg i appen.</p>', rel: ['parorende', 'bestill'] },
       { id: 'avbestill', sp: 'Hvordan avbestiller jeg?', ord: ['avbestille', 'avbestilling', 'avlyse', 'kansellere', 'endre tid', 'flytte'],
         svar: '<p>Det er gratis å avbestille frem til dagen før. Gjør det i appen, eller send oss en e-post på ' + ML + '.</p>', rel: ['pris', 'kontakt'] },
       { id: 'alder', sp: 'Hvor gamle er hjelperne?', ord: ['alder', 'gamle', 'gammel', 'år', 'unge', 'tenåring'],
         svar: '<p>Hjelperne våre er ungdommer mellom 15 og 19 år som bor i nærheten av deg i Oslo.</p>', rel: ['trygg', 'fast'] },
       { id: 'parorende', sp: 'Kan jeg bestille for noen andre?', ord: ['pårørende', 'mamma', 'pappa', 'mor', 'far', 'bestemor', 'bestefar', 'besteforeldre', 'foreldre', 'vegne', 'nabo'],
-        svar: '<p>Ja, pårørende kan bestille hjelp på vegne av noen de er glad i, i appen eller via <a href="#bestill">skjemaet</a>.</p>', rel: ['bestill', 'pris'] },
+        svar: '<p>Ja, pårørende kan bestille hjelp i appen, på vegne av noen de er glad i.</p>', rel: ['bestill', 'pris'] },
       { id: 'tjenester', sp: 'Hva kan dere hjelpe med?', ord: ['tjenester', 'hjelpe med', 'hva gjør', 'hva kan', 'tilbud', 'tilbyr'],
         svar: '<p>Vi hjelper med handling, hagearbeid, hundelufting, kaffe og selskap, mobil og nettbrett, og småjobber i huset.</p>', rel: ['handling', 'selskap', 'mobil'] },
       { id: 'handling', sp: 'Kan dere handle for meg?', ord: ['handle', 'handling', 'butikk', 'butikken', 'innkjøp', 'varer', 'mat', 'dagligvarer', 'bære', 'poser'],
@@ -816,25 +746,25 @@
       { id: 'omrade', sp: 'Hvor holder dere til?', ord: ['område', 'oslo', 'bydel', 'sted', 'nærheten', 'hvor holder'],
         svar: '<p>Vi starter i Oslo. Hjelperne er ungdommer som bor i nærheten av deg.</p>', rel: ['alder', 'bestill'] },
       { id: 'betaling', sp: 'Hvordan betaler jeg?', ord: ['betale', 'betaling', 'betaler', 'faktura', 'kontant', 'kontanter', 'bankkort'],
-        svar: '<p>Du betaler i appen etter besøket. Bestiller du via skjemaet, finner vi en løsning som passer deg.</p>', rel: ['pris', 'trygg'] },
+        svar: '<p>Du betaler i appen etter besøket. Ingen kontanter trenger å skifte hender.</p>', rel: ['pris', 'trygg'] },
       { id: 'kontakt', sp: 'Hvordan kontakter jeg dere?', ord: ['kontakt', 'kontakte', 'ringe', 'telefon', 'nummer', 'epost', 'mail', 'snakke', 'åpningstid', 'svare', 'facebook', 'instagram', 'tiktok', 'sosiale medier'],
-        svar: '<p>Send oss en e-post på ' + ML + ', eller fyll ut <a href="#bestill">skjemaet nederst på siden</a>. Du finner oss også på Instagram, TikTok og Facebook.</p>', rel: ['bestill', 'innspill'] },
+        svar: '<p>Send oss en e-post på ' + ML + ', så svarer vi så fort vi kan. Du finner oss også på Instagram, TikTok og Facebook.</p>', rel: ['bestill', 'innspill'] },
       { id: 'omoss', sp: 'Hvem står bak Hverdagshelten?', ord: ['hvem er dere', 'om dere', 'gründer', 'gründere', 'team', 'teamet', 'startet', 'står bak'],
         svar: '<p>Hverdagshelten er startet av seks unge gründere i Oslo som brenner for å gjøre hverdagen enklere for eldre. Les mer under <a href="#om-oss">«Hvem er vi?»</a>.</p>', rel: ['undersokelse', 'kontakt'] },
       { id: 'undersokelse', sp: 'Hva sa seniorene i undersøkelsen?', ord: ['undersøkelse', 'undersøkelsen', 'seniorsenter', 'simensbråten', 'spurte', 'resultat'],
         svar: '<p>Vi snakket med 16 personer på Simensbråten seniorsenter. 69 % var veldig for ideen. Se alle tallene under <a href="#undersokelse">«Vi spurte seniorene først»</a>.</p>', rel: ['omoss'] },
       { id: 'personvern', sp: 'Hva gjør dere med opplysningene mine?', ord: ['personvern', 'personopplysninger', 'opplysninger', 'gdpr', 'slette', 'sletting', 'lagre', 'lagrer', 'data om meg'],
-        svar: '<p>Vi bruker opplysningene bare til det du har bedt om: å gi deg beskjed når appen lanseres, eller å svare på forespørselen din. Påmeldinger slettes når vi har gitt beskjed om appen. Les mer i <a href="personvern.html">personvernerklæringen</a>.</p>', rel: ['kontakt', 'app'] },
+        svar: '<p>Vi bruker opplysningene bare til det du har bedt om: å gi deg beskjed når appen lanseres, eller å svare på innspillet ditt. Påmeldinger slettes når vi har gitt beskjed om appen. Les mer i <a href="personvern.html">personvernerklæringen</a>.</p>', rel: ['kontakt', 'app'] },
       { id: 'fast', sp: 'Kan jeg få den samme hjelperen?', ord: ['samme hjelper', 'fast hjelper', 'samme person', 'samme ungdom'],
         svar: '<p>Ja, så langt det går. Mange liker å ha en fast hjelper, og det synes ungdommene også er fint.</p>', rel: ['trygg', 'bestill'] },
       { id: 'innspill', sp: 'Hvordan gir jeg dere tilbakemelding?', ord: ['innspill', 'tilbakemelding', 'forslag', 'klage', 'ros', 'ris', 'idé', 'ide', 'mening', 'synes'],
-        svar: '<p>Så hyggelig! <a href="#innspill">Skriv til oss i innspillsskjemaet</a>. Du trenger ikke å oppgi navn, men legg gjerne igjen e-post eller telefon hvis du vil ha svar.</p>', rel: ['kontakt', 'omoss'] },
+        svar: '<p>Så hyggelig! <a href="#innspill">Skriv til oss i skjemaet «Hva synes du?»</a>. Du trenger ikke å oppgi navn, men legg gjerne igjen e-post eller telefon hvis du vil ha svar.</p>', rel: ['prov', 'kontakt'] },
       { id: 'hei', sp: 'Hei', skjult: true, ord: ['hei', 'hallo', 'heisann', 'hey', 'god dag', 'god morgen', 'god kveld'],
         svar: '<p>Hei! Hva lurer du på?</p>', rel: ['pris', 'bestill', 'trygg', 'app'] },
       { id: 'takk', sp: 'Takk', skjult: true, ord: ['takk', 'tusen takk', 'flott', 'supert'],
         svar: '<p>Bare hyggelig! Ha en fin dag.</p>', rel: [] }
     ];
-    var START = ['pris', 'bestill', 'trygg', 'app', 'hjelper'];
+    var START = ['pris', 'bestill', 'trygg', 'prov', 'hjelper'];
     var STOPP = { hva: 1, er: 1, det: 1, jeg: 1, du: 1, dere: 1, kan: 1, en: 1, et: 1, ei: 1, å: 1, på: 1, i: 1, med: 1, for: 1, til: 1, og: 1, som: 1, meg: 1, min: 1, mitt: 1, mine: 1, hvordan: 1, hvor: 1, mye: 1, man: 1, vi: 1, har: 1, om: 1, de: 1, den: 1, skal: 1, vil: 1, må: 1, noe: 1, sånn: 1 };
     var finn = {}; TEMA.forEach(function (t) { finn[t.id] = t; });
 

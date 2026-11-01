@@ -11,12 +11,13 @@
 | `personvern.html` | Personvernerklæringen |
 | `stil.css` | Felles utseende for begge sidene (farger, skrift, knapper) |
 | `felles.js` | «Større tekst»-knappen og menyen på mobil/nettbrett |
+| `prototype/index.html` | Klikkbar modell av appen (Anne og Emil). Vises i «Prøv appen» med `?innebygd=1` |
 | `robots.txt`, `sitemap.xml` | Hjelper Google å finne sidene |
 | `*.jpg`, `*.png` | Bilder, logo og ikoner |
 
 ## Skjemaene og Gmail
 
-Alle tre skjemaene (påmelding til appen, «Bestill hjelp» og «Har du innspill?») sendes via
+Begge skjemaene (påmelding til appen og innspillsskjemaet «Hva synes du?») sendes via
 [FormSubmit](https://formsubmit.co) til **hverdagsheltenub@gmail.com**.
 
 - Det finnes ingen passord eller API-nøkler i koden. FormSubmit kjenner bare e-postadressen.

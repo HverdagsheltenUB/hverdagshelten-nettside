@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klikkbar modell av Hverdagshelten-appen</title>
+<meta name="description" content="Prøv Hverdagshelten-appen før den kommer. Trykk deg rundt som Anne, som bestiller hjelp, eller som Emil, som tar oppdrag. Alle navn og avtaler er eksempler.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://hverdagsheltenub.github.io/hverdagshelten-nettside/prototype/">
+<meta name="theme-color" content="#FFF6EC">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<script>
+  // Vist inne i nettsiden (prototype/?innebygd=1): gjennomsiktig bakgrunn og ingen ekstra lenker.
+  if (new URLSearchParams(location.search).has('innebygd')) document.documentElement.classList.add('innebygd');
+</script>
+<style>
+  /* Fargene fra appen */
+  :root {
+    --krem: #FDF8F2; --fersken: #F8E4CF; --fersken-lys: #FBEEDF;
+    --lilla: #4D3B5C; --lilla-mork: #3E2F4B; --lilla-lys: #E7E0EE;
+    --tekst: #2B2230; --dempet: #66596D; --linje: #E9DED3; --kort: #FFFDFA;
+    --gronn: #2F7A55; --gronn-lys: #E3F1E8; --stjerne: #B9821F;
+    --s: 1; /* tekstskala, 1.15 med «Større tekst» */
+    --easing: cubic-bezier(.22, .8, .3, 1);
+    font-family: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: #FFF6EC; color: var(--tekst); -webkit-font-smoothing: antialiased; }
+  html.innebygd body { background: transparent; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--tekst); outline-offset: 2px; border-radius: 8px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .side { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px 16px 32px; }
+  html.innebygd .side { padding: 4px 0 8px; }
+  .forklaring { text-align: center; max-width: 30rem; }
+  .forklaring h1 { font-size: 1.6rem; margin: 0 0 .3rem; color: #3E2A48; }
+  .forklaring p { margin: 0; font-size: 1.1rem; line-height: 1.5; }
+  .forklaring a { color: #52395E; font-weight: 700; }
+  /* Innebygd: nettsiden har allerede overskrift og lenker, så vi beholder bare overskriften for skjermlesere */
+  html.innebygd .forklaring p, html.innebygd .merknad { display: none; }
+  html.innebygd .forklaring h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .merknad { font-size: 1rem; color: #5B4F63; margin: 0; }
+
+  /* Bytt mellom Anne og Emil */
+  .rollevalg { display: flex; gap: 6px; padding: 5px; background: #fff; border: 2px solid var(--linje); border-radius: 999px; }
+  .rollevalg button {
+    min-height: 48px; padding: 0 18px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+    font-size: 17px; font-weight: 700; color: var(--lilla-mork); transition: background-color .25s, color .25s;
+  }
+  .rollevalg button span { font-weight: 400; }
+  .rollevalg button[aria-pressed="true"] { background: var(--lilla); color: #fff; }
+
+  /* Telefonen */
+  .telefon { width: 410px; padding: 10px; border-radius: 52px; background: #2B2230; }
+  .skjerm {
+    position: relative; height: 780px; border-radius: 42px; overflow: hidden; background: var(--krem);
+    display: flex; flex-direction: column;
+  }
+  .statuslinje { flex: none; display: flex; justify-content: space-between; padding: 14px 28px 4px; font-size: 14px; font-weight: 700; }
+  @media (max-width: 419px) {
+    .side { padding: 12px 0 24px; }
+    .telefon { width: 100%; padding: 0; border-radius: 0; background: none; }
+    .skjerm { border-radius: 24px; border: 2px solid var(--linje); height: 760px; }
+    .statuslinje { display: none; }
+    .rollevalg button { padding: 0 12px; font-size: 16px; }
+  }
+
+  .innhold { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 14px 20px 28px; scrollbar-width: thin; }
+  .liste { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Tekst */
+  .tittel { font-size: calc(28px * var(--s)); font-weight: 700; line-height: 1.2; margin: 0; letter-spacing: -.01em; }
+  .under { font-size: calc(15px * var(--s)); color: var(--dempet); margin: 2px 0 0; line-height: 1.35; }
+  .mellom { font-size: calc(19px * var(--s)); font-weight: 700; margin: 0; }
+  .stor { font-size: calc(22px * var(--s)); font-weight: 700; line-height: 1.2; margin: 0; }
+  .brod { font-size: calc(17px * var(--s)); margin: 0; line-height: 1.4; }
+  .listetittel { font-size: calc(18px * var(--s)); font-weight: 700; margin: 0; line-height: 1.3; }
+  .fet { font-weight: 700; }
+  .seksjon-tittel { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+
+  /* Kort og knapper */
+  .kort { background: var(--kort); border: 1.5px solid var(--linje); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .kort.myk { background: var(--fersken-lys); border-color: var(--fersken-lys); }
+  .rad { display: flex; flex-direction: row; align-items: center; gap: 14px; }
+  .rad > .vokse { flex: 1; min-width: 0; }
+  .topp-rad { display: flex; align-items: flex-start; gap: 12px; }
+  .topp-rad > .vokse { flex: 1; }
+  .linje { height: 1.5px; background: var(--linje); }
+  .ikonboks { flex: none; width: 48px; height: 48px; border-radius: 14px; background: var(--fersken); display: grid; place-items: center; color: var(--lilla-mork); font-size: 20px; font-weight: 700; }
+  .ikon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .avatar { flex: none; border-radius: 50%; background: var(--lilla); color: #fff; display: grid; place-items: center; font-weight: 700; width: 44px; height: 44px; font-size: 19px; }
+  .avatar.stor-avatar { width: 72px; height: 72px; font-size: 30px; }
+
+  .trykk { cursor: pointer; transition: transform .12s ease; text-align: left; -webkit-tap-highlight-color: transparent; }
+  .trykk:active { transform: scale(.97); }
+  button.kort { width: 100%; }
+
+  .knapp {
+    display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;
+    min-height: 60px; padding: 0 24px; border-radius: 999px; border: 0; cursor: pointer;
+    background: var(--lilla); color: #fff; font-size: calc(19px * var(--s)); font-weight: 700;
+    transition: transform .12s ease, background-color .25s;
+  }
+  .knapp:active { transform: scale(.97); }
+  @media (hover: hover) {
+    .knapp:hover { background: var(--lilla-mork); }
+    .knapp.sekundar:hover, .chip:not([aria-pressed="true"]):hover, button.kort:hover { border-color: var(--lilla); }
+    .knapp.gronn:hover { background: #256645; }
+    .lenkerad:hover, .tilbake:hover { text-decoration: underline; }
+  }
+  .knapp .ikon { width: 22px; height: 22px; }
+  .knapp.sekundar { background: var(--kort); color: var(--lilla-mork); border: 1.5px solid var(--linje); }
+  .knapp.gronn { background: var(--gronn); }
+  .knapp.liten { min-height: 46px; font-size: calc(16px * var(--s)); padding: 0 12px; gap: 8px; }
+  .knapp.liten .ikon { width: 18px; height: 18px; }
+  .knapper { display: flex; gap: 10px; }
+
+  .lenkerad { display: flex; justify-content: space-between; align-items: center; background: none; border: 0; padding: 4px 0; min-height: 44px; cursor: pointer; color: var(--lilla); font-weight: 700; font-size: calc(17px * var(--s)); }
+  .tilbake { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; background: none; border: 0; padding: 6px 0; min-height: 44px; cursor: pointer; color: var(--lilla); font-weight: 700; font-size: calc(16px * var(--s)); }
+  .tilbake .ikon { width: 20px; height: 20px; }
+  .steg { color: var(--lilla); font-weight: 700; font-size: calc(15px * var(--s)); margin: 0; }
+
+  .pille { align-self: flex-start; flex: none; border-radius: 999px; padding: 3px 10px; font-size: calc(12px * var(--s)); font-weight: 700; background: var(--fersken); color: var(--lilla-mork); white-space: nowrap; }
+  .pille.gronn { background: var(--gronn-lys); color: var(--gronn); }
+  .pille.lilla { background: var(--lilla-lys); color: var(--lilla); }
+
+  .stjerner { display: flex; gap: 2px; color: var(--stjerne); }
+  .stjerner .ikon { width: 18px; height: 18px; fill: currentColor; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    border-radius: 999px; border: 1.5px solid var(--linje); background: var(--kort); padding: 10px 16px; min-height: 44px;
+    font-size: calc(16px * var(--s)); font-weight: 700; cursor: pointer; transition: background-color .25s, color .25s, border-color .25s, transform .12s;
+  }
+  .chip:active { transform: scale(.97); }
+  .chip[aria-pressed="true"] { background: var(--lilla); border-color: var(--lilla); color: #fff; }
+
+  .bryter { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+  .bryter .listetittel { flex: 1; font-weight: 400; }
+  .spor { flex: none; width: 52px; height: 30px; border-radius: 999px; background: var(--linje); padding: 3px; transition: background-color .25s; }
+  .knott { display: block; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform .25s var(--easing); }
+  .bryter[aria-checked="true"] .spor { background: var(--lilla); }
+  .bryter[aria-checked="true"] .knott { transform: translateX(22px); }
+
+  .stat-rad { display: flex; gap: 12px; }
+  .stat { flex: 1; background: var(--fersken-lys); border-radius: 18px; padding: 16px; }
+  .stat .stor { display: flex; align-items: center; gap: 6px; }
+  .stat .stor .ikon { color: var(--stjerne); fill: currentColor; width: 22px; height: 22px; }
+
+  .pris-rad { display: flex; justify-content: space-between; gap: 8px; }
+  .profil-topp { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
+  .belop { font-size: calc(18px * var(--s)); font-weight: 700; white-space: nowrap; }
+  .midt { text-align: center; }
+
+  /* Kartet */
+  .kart { position: relative; height: 270px; border-radius: 18px; border: 1.5px solid var(--linje); overflow: hidden; background: #F3EADF; }
+  .kart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .kart .omrade { position: absolute; font-size: 12px; font-weight: 700; color: #786C7E; }
+  .nal { position: absolute; width: 34px; margin: -42px 0 0 -17px; display: flex; flex-direction: column; align-items: center; background: none; border: 0; padding: 0; }
+  button.nal { cursor: pointer; }
+  .nal-hode { width: 34px; height: 34px; border-radius: 50%; background: var(--lilla); border: 3px solid #fff; display: grid; place-items: center; font-size: 15px; font-weight: 700; color: var(--lilla-mork); }
+  .nal-hode::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; }
+  .nal.nummer .nal-hode { background: var(--fersken); border-color: var(--lilla); }
+  .nal.nummer .nal-hode::after { display: none; }
+  .nal-spiss { width: 12px; height: 12px; margin-top: -8px; background: var(--lilla); transform: rotate(45deg); position: relative; z-index: -1; }
+
+  /* Bunnmenyen */
+  .meny { flex: none; display: flex; gap: 6px; padding: 10px 10px 14px; background: var(--lilla); }
+  .meny[hidden] { display: none; }
+  .meny button {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 0; min-height: 56px;
+    border: 0; border-radius: 16px; background: transparent; color: #fff; cursor: pointer; font-size: 15px;
+    transition: background-color .25s, transform .12s;
+  }
+  .meny button:active { transform: scale(.97); }
+  .meny button[aria-current="page"] { background: var(--fersken); color: var(--lilla-mork); font-weight: 700; }
+  .meny :focus-visible { outline-color: #fff; }
+
+  /* Toast */
+  .toast {
+    position: absolute; left: 16px; right: 16px; bottom: 96px; z-index: 5;
+    background: var(--lilla-mork); color: #fff; border-radius: 16px; padding: 14px 18px; font-size: 16px; font-weight: 700; line-height: 1.4;
+    opacity: 0; transform: translateY(24px); pointer-events: none; transition: opacity .3s, transform .38s var(--easing);
+  }
+  .toast.vis { opacity: 1; transform: none; }
+  .meny[hidden] ~ .toast { bottom: 20px; }
+
+  /* Overganger. Uten «Reduser bevegelse» glir skjermene inn fra siden. */
+  @keyframes fremInn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+  @keyframes tilbakeInn { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+  @keyframes rolleInn { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: none; } }
+  @keyframes loft { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .innhold.frem { animation: fremInn .38s var(--easing) both; }
+    .innhold.tilbake { animation: tilbakeInn .38s var(--easing) both; }
+    .innhold.rolle { animation: rolleInn .45s var(--easing) both; }
+    .innhold .liste > * { animation: loft .38s var(--easing) both; animation-delay: calc(min(var(--i, 0), 4) * 30ms); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .toast { transform: none; transition: opacity .2s; }
+    .knott, .trykk, .knapp, .chip { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="side">
+  <div class="forklaring">
+    <h1>Prøv appen før den kommer</h1>
+    <p>Trykk deg rundt som Anne eller Emil. <a href="../#prov-appen">Tilbake til nettsiden</a></p>
+  </div>
+
+  <div class="rollevalg" role="group" aria-label="Hvem vil du være?">
+    <button type="button" data-rolle="anne" aria-pressed="true">Anne <span>bestiller hjelp</span></button>
+    <button type="button" data-rolle="emil" aria-pressed="false">Emil <span>tar oppdrag</span></button>
+  </div>
+
+  <div class="telefon">
+    <div class="skjerm" id="skjerm">
+      <div class="statuslinje" aria-hidden="true"><span>09:41</span><span>4G</span></div>
+      <div class="innhold" id="innhold"></div>
+      <nav class="meny" id="meny" aria-label="Appmeny"></nav>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <p class="merknad">Alle navn og avtaler er eksempler.</p>
+</main>
+
+<script>
+(function () {
+  // ---------- Ikoner (tynne streker, som i appen) ----------
+  var STIER = {
+    hus: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/>',
+    kalender: '<rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>',
+    liste: '<rect x="5" y="3.5" width="14" height="18" rx="2"/><path d="M9 3.5V2h6v1.5M9 10h6M9 14h6M9 18h3"/>',
+    kart: '<path d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/>',
+    bruker: '<circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/>',
+    pluss: '<path d="M12 5v14M5 12h14"/>',
+    pilH: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    pilV: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
+    chevron: '<path d="m9 6 6 6-6 6"/>',
+    nal: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    telefon: '<path d="M21 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.1 4.2 2 2 0 0 1 3.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+    handlevogn: '<circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3h2.6l2.4 12h11l2-8.5H6"/>',
+    kaffe: '<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/>',
+    fotspor: '<path d="M7 16v-2.4C7 11.5 6 10.5 6 8c0-2.7 1.5-5 3.5-5S12 5 12 7.5c0 2.5-1 3.5-1 6V16z"/><path d="M7 16h4v1.5a2 2 0 0 1-4 0z"/><path d="M17 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-5-3.5-5S12 9 12 11.5c0 2.5 1 3.5 1 6V20z"/>',
+    spire: '<path d="M12 21v-8"/><path d="M12 13c-4 0-6-2.5-6-6.5 3.5 0 6 2 6 6.5zM12 11c0-3.5 2.5-6 6.5-6 0 3.5-2.5 6-6.5 6z"/><path d="M6 21h12"/>',
+    hund: '<path d="M10 5.2C10 3.9 8.8 3 7.5 3S5 3.9 5 5.2V9c0 3 2 5 2 5v5h4v-4h2v4h4v-5s2-2 2-5V5.2C19 3.9 17.8 3 16.5 3S14 3.9 14 5.2"/><path d="M10 9h.01M14 9h.01M11 12h2"/>',
+    mobil: '<rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18h2"/>',
+    sjekk: '<path d="M5 12.5 10 17.5 19.5 7"/>',
+    stjerne: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+    kort: '<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6.5 15h3"/>',
+    skjold: '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.5 7.5 10 4.3-1.5 7.5-5.4 7.5-10v-6z"/><path d="m9 12 2 2 4-4"/>',
+    lommebok: '<path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4H5a2 2 0 0 0 0 4h14a1.5 1.5 0 0 1 1.5 1.5V12M20.5 16v2.5A1.5 1.5 0 0 1 19 20H5a2 2 0 0 1-2-2V6"/><path d="M21.5 12v4h-4a2 2 0 0 1 0-4z"/>',
+    klokke: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    bok: '<path d="M2.5 4.5H8a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2.5zM21.5 4.5H16a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h6.5z"/>',
+    vei: '<path d="m3 11 18-8-8 18-2-8z"/>',
+    sedler: '<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+    post: '<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/>',
+    hjerte: '<path d="M20.4 5.6a5 5 0 0 0-7.1 0L12 6.9l-1.3-1.3a5 5 0 0 0-7.1 7.1L12 21l8.4-8.3a5 5 0 0 0 0-7.1z"/>'
+  };
+  function ikon(navn) { return '<svg class="ikon" viewBox="0 0 24 24" aria-hidden="true">' + STIER[navn] + '</svg>'; }
+
+  // ---------- Eksempeldata (samme som i appen) ----------
+  var KATEGORIER = [
+    ['Hjelp hjemme', 'Enkle oppgaver i hjemmet', 'hus'],
+    ['Handling', 'Hjelp med dagligvarer', 'handlevogn'],
+    ['Hyggelig besøk', 'En prat og litt selskap', 'kaffe'],
+    ['Tur sammen', 'En tur i nærområdet', 'fotspor'],
+    ['Hagearbeid', 'Plenklipping og luking', 'spire'],
+    ['Lufte hunden', 'En runde med firbeinte', 'hund'],
+    ['Mobilhjelp', 'Hjelp med mobil og nettbrett', 'mobil']
+  ];
+  var DAGER = ['I morgen', 'Lørdag 31. okt', 'Mandag 2. nov', 'Torsdag 5. nov'];
+  var TIDER = ['10.00–11.00', '12.00–13.00', '14.00–15.00', '17.00–18.00'];
+  var PRIS = { time: 150, gebyr: 29 };
+  var OPPDRAG = [
+    { id: 'kiwi', tittel: 'Handling på Kiwi', navn: 'Kari', alder: 81, sted: 'Sagene', avstand: '600 m', nar: 'I morgen kl. 11.00', belop: 150, varighet: '1 time', ikon: 'handlevogn', x: 52, y: 15,
+      beskjed: 'Hei! Jeg trenger melk, brød og litt frukt. Handlelisten ligger klar.' },
+    { id: 'plen', tittel: 'Klippe plenen', navn: 'Arne', alder: 77, sted: 'Frogner', avstand: '1,2 km', nar: 'Lørdag kl. 10.00', belop: 300, varighet: '2 timer', ikon: 'spire', x: 18, y: 45,
+      beskjed: 'Gressklipperen står i boden. Kaffe og vafler etterpå!' },
+    { id: 'bella', tittel: 'Lufte Bella (labrador)', navn: 'Solveig', alder: 84, sted: 'St. Hanshaugen', avstand: '900 m', nar: 'Søndag kl. 13.00', belop: 100, varighet: '45 min', ikon: 'hund', x: 50, y: 35,
+      beskjed: 'Bella er snill og glad i folk, men drar litt i båndet.' },
+    { id: 'facetime', tittel: 'Sette opp FaceTime', navn: 'Per', alder: 79, sted: 'Grünerløkka', avstand: '1,5 km', nar: 'Mandag kl. 17.00', belop: 150, varighet: '1 time', ikon: 'mobil', x: 78, y: 27,
+      beskjed: 'Jeg vil gjerne snakke med barnebarna mine på video.' }
+  ];
+  var HJELPEOMRADER = ['Tur sammen', 'Mobilhjelp', 'Lufte hunden', 'Hagearbeid'];
+
+  // ---------- Tilstand ----------
+  var t = {
+    rolle: 'anne', skjerm: 'hjem', steg: 1, kategori: '', dag: DAGER[0], tid: TIDER[0], oppdrag: null,
+    bestillinger: [], tatt: [], storre: false, paminnelse: true, varsel: true, liker: ['Tur sammen', 'Mobilhjelp', 'Lufte hunden']
+  };
+  var FANER = ['hjem', 'avtaler', 'kart', 'profil'];
+
+  var innhold = document.getElementById('innhold');
+  var meny = document.getElementById('meny');
+  var skjerm = document.getElementById('skjerm');
+  var toastEl = document.getElementById('toast');
+  var toastTimer;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function finnKategori(navn) { for (var i = 0; i < KATEGORIER.length; i++) if (KATEGORIER[i][0] === navn) return KATEGORIER[i]; return KATEGORIER[0]; }
+  function finnOppdrag(id) { for (var i = 0; i < OPPDRAG.length; i++) if (OPPDRAG[i].id === id) return OPPDRAG[i]; }
+  function ledige() { return OPPDRAG.filter(function (o) { return t.tatt.indexOf(o.id) < 0; }); }
+  function tjent() { return 1250 + t.tatt.reduce(function (s, id) { return s + finnOppdrag(id).belop; }, 0); }
+
+  // ---------- Små byggeklosser ----------
+  function overskrift(tittel, under) {
+    return '<div><h2 class="tittel" tabindex="-1">' + tittel + '</h2>' + (under ? '<p class="under">' + under + '</p>' : '') + '</div>';
+  }
+  function pille(tekst, type) { return '<span class="pille ' + (type || '') + '">' + tekst + '</span>'; }
+  function stjerner() { var s = ''; for (var i = 0; i < 5; i++) s += ikon('stjerne'); return '<span class="stjerner" role="img" aria-label="5 av 5 stjerner">' + s + '</span>'; }
+  function listevalg(o) {
+    var venstre = o.tall ? '<span class="ikonboks">' + o.tall + '</span>' : '<span class="ikonboks">' + ikon(o.ikon) + '</span>';
+    var hoyre = o.hoyre ? '<span class="belop">' + o.hoyre + '</span>' : '<span style="color:var(--dempet)">' + ikon('chevron') + '</span>';
+    return '<button type="button" class="kort rad trykk" data-gjor="' + o.gjor + '"' + (o.verdi ? ' data-verdi="' + esc(o.verdi) + '"' : '') + '>' + venstre +
+      '<span class="vokse"><span class="listetittel" style="display:block">' + o.tittel + '</span>' + (o.under ? '<span class="under" style="display:block">' + o.under + '</span>' : '') + '</span>' + hoyre + '</button>';
+  }
+  function bryter(etikett, pa, gjor) {
+    return '<button type="button" class="bryter" role="switch" aria-checked="' + pa + '" data-gjor="' + gjor + '"><span class="listetittel">' + etikett + '</span><span class="spor"><span class="knott"></span></span></button>';
+  }
+  function knapp(tekst, gjor, o) {
+    o = o || {};
+    var ik = o.ikon ? ikon(o.ikon) : '';
+    return '<button type="button" class="knapp ' + (o.klasse || '') + '" data-gjor="' + gjor + '">' + (o.etter ? '' : ik) + tekst + (o.etter ? ik : '') + '</button>';
+  }
+  function chip(tekst, valgt, gjor) { return '<button type="button" class="chip" aria-pressed="' + valgt + '" data-gjor="' + gjor + '" data-verdi="' + esc(tekst) + '">' + tekst + '</button>'; }
+  function kart(naler) {
+    var omrader = [['Sagene', 60, 5], ['Frogner', 6, 55], ['St. Hanshaugen', 28, 9], ['Grünerløkka', 72, 41], ['Sentrum', 62, 71], ['Oslofjorden', 8, 89]];
+    var s = '<div class="kart"><svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Eksempelkart over Oslo sentrum">' +
+      '<path d="M0,76 C14,70 26,80 38,86 C50,92 62,86 74,94 L80,100 L0,100 Z" fill="#CFE2E8"/>' +
+      '<path d="M62,0 C58,14 66,24 63,36 C60,48 68,58 66,72 C65,80 70,88 74,94" stroke="#CFE2E8" stroke-width="5" fill="none" vector-effect="non-scaling-stroke"/>' +
+      '<ellipse cx="34" cy="58" rx="8" ry="6" fill="#DCEAD6"/><ellipse cx="46" cy="30" rx="6" ry="5" fill="#DCEAD6"/><ellipse cx="10" cy="36" rx="9" ry="8" fill="#DCEAD6"/>';
+    ['M0,52 L100,46', 'M0,22 L100,30', 'M24,0 L36,100', 'M48,0 L50,100', 'M84,0 L88,100', 'M44,62 L80,66', 'M8,96 L96,6'].forEach(function (d) {
+      s += '<path d="' + d + '" stroke="#fff" stroke-width="6" vector-effect="non-scaling-stroke"/>';
+    });
+    s += '</svg>';
+    omrader.forEach(function (o) { s += '<span class="omrade" aria-hidden="true" style="left:' + o[1] + '%;top:' + o[2] + '%">' + o[0] + '</span>'; });
+    naler.forEach(function (n) {
+      var stil = ' style="left:' + n.x + '%;top:' + n.y + '%"';
+      var hode = '<span class="nal-hode">' + (n.nummer || '') + '</span><span class="nal-spiss"></span>';
+      if (n.gjor) s += '<button type="button" class="nal nummer trykk"' + stil + ' data-gjor="' + n.gjor + '" data-verdi="' + n.verdi + '" aria-label="' + esc(n.etikett) + '">' + hode + '</button>';
+      else s += '<span class="nal"' + stil + '>' + hode + '</span>';
+    });
+    return s + '</div>';
+  }
+
+  // ---------- Skjermene for Anne ----------
+  var ANNE = {
+    hjem: function () {
+      var venter = '';
+      if (t.bestillinger.length) {
+        venter = '<div class="kort"><h3 class="mellom">Venter på svar</h3>' + t.bestillinger.map(function (b) {
+          return '<div class="rad"><div class="vokse"><p class="brod fet">' + b.kategori + '</p><p class="under">' + b.dag + ' · ' + b.tid + '</p></div>' + pille('Sendt') + '</div>';
+        }).join('') + '</div>';
+      }
+      return overskrift('Hei, Anne.', 'Her finner du hjelp i hverdagen.') +
+        '<div class="kort"><p class="under fet" style="margin:0">Ditt neste besøk</p>' +
+        '<div class="rad"><span class="ikonboks">' + ikon('kalender') + '</span><div class="vokse"><p class="stor">Torsdag 29. oktober</p><p class="stor">Kl. 14.00–15.00</p></div></div>' +
+        '<div class="rad"><span class="avatar">E</span><div class="vokse"><p class="brod fet">Emil blir med deg på tur</p><p class="under">Avtalen er bekreftet</p></div></div>' +
+        '<div class="linje"></div><button type="button" class="lenkerad" data-gjor="fane" data-verdi="avtaler">Se avtalen' + ikon('pilH') + '</button></div>' +
+        venter + knapp('Bestill hjelp', 'bestill', { ikon: 'pluss' }) +
+        '<button type="button" class="kort myk rad trykk" data-gjor="fane" data-verdi="kart"><span class="ikonboks">' + ikon('nal') + '</span>' +
+        '<span class="vokse"><span class="listetittel" style="display:block">Se møtestedet på kart</span><span class="under" style="display:block">Nationaltheatret · eksempel</span></span>' +
+        '<span style="color:var(--dempet)">' + ikon('chevron') + '</span></button>';
+    },
+    bestill: function () {
+      if (t.steg === 1) {
+        return '<button type="button" class="tilbake" data-gjor="hjem">' + ikon('pilV') + 'Til forsiden</button><p class="steg">Steg 1 av 3</p>' +
+          overskrift('Hva trenger du hjelp med?') +
+          KATEGORIER.map(function (k) { return listevalg({ ikon: k[2], tittel: k[0], under: k[1], gjor: 'velgKategori', verdi: k[0] }); }).join('');
+      }
+      if (t.steg === 2) {
+        return '<button type="button" class="tilbake" data-gjor="steg" data-verdi="1">' + ikon('pilV') + 'Tilbake</button><p class="steg">Steg 2 av 3</p>' +
+          overskrift('Når passer det?', t.kategori) +
+          '<div class="liste" style="gap:10px"><h3 class="mellom">Dag</h3><div class="chips" role="group" aria-label="Dag">' + DAGER.map(function (d) { return chip(d, t.dag === d, 'dag'); }).join('') + '</div></div>' +
+          '<div class="liste" style="gap:10px"><h3 class="mellom">Tid</h3><div class="chips" role="group" aria-label="Tid">' + TIDER.map(function (x) { return chip(x, t.tid === x, 'tid'); }).join('') + '</div></div>' +
+          knapp('Neste', 'steg', { ikon: 'pilH', etter: true }).replace('data-gjor="steg"', 'data-gjor="steg" data-verdi="3"');
+      }
+      var k = finnKategori(t.kategori);
+      return '<button type="button" class="tilbake" data-gjor="steg" data-verdi="2">' + ikon('pilV') + 'Tilbake</button><p class="steg">Steg 3 av 3</p>' +
+        overskrift('Ser dette riktig ut?') +
+        '<div class="kort"><div class="rad"><span class="ikonboks">' + ikon('kalender') + '</span><p class="brod fet vokse">' + t.dag + ', kl. ' + t.tid + '</p></div>' +
+        '<div class="rad"><span class="ikonboks">' + ikon(k[2]) + '</span><p class="brod fet vokse">' + k[0] + '</p></div>' +
+        '<div class="rad"><span class="ikonboks">' + ikon('hus') + '</span><p class="brod fet vokse">Hjemme hos deg, Thereses gate 12</p></div></div>' +
+        '<div class="kort"><div class="pris-rad brod"><span>Hjelp, 1 time</span><span class="fet">' + PRIS.time + ' kr</span></div>' +
+        '<div class="pris-rad brod"><span>Hverdagshelten-gebyr</span><span class="fet">' + PRIS.gebyr + ' kr</span></div><div class="linje"></div>' +
+        '<div class="pris-rad brod fet"><span>Å betale</span><span>' + (PRIS.time + PRIS.gebyr) + ' kr</span></div></div>' +
+        '<p class="under">Du betaler først når besøket er gjennomført.</p>' + knapp('Send bestilling', 'send', { ikon: 'sjekk' });
+    },
+    avtaler: function () {
+      return overskrift('Dine avtaler', 'Kommende og tidligere besøk.') + '<h3 class="mellom seksjon-tittel">Kommende</h3>' +
+        '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">Tur sammen med Emil</p><p class="under">Torsdag 29. okt · 14.00–15.00</p></div>' + pille('Bekreftet', 'gronn') + '</div>' +
+        '<div class="knapper">' + knapp('Ring Emil', 'toast', { ikon: 'telefon', klasse: 'sekundar liten' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="Ringer Emil …"') +
+        knapp('Møtested', 'fane', { ikon: 'nal', klasse: 'sekundar liten' }).replace('data-gjor="fane"', 'data-gjor="fane" data-verdi="kart"') + '</div></div>' +
+        t.bestillinger.map(function (b) {
+          return '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">' + b.kategori + '</p><p class="under">' + b.dag + ' · ' + b.tid + '</p></div>' + pille('Venter') + '</div></div>';
+        }).join('') +
+        '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">Handling med Sara</p><p class="under">Mandag 2. nov · 11.00–12.00</p></div>' + pille('Bekreftet', 'gronn') + '</div></div>' +
+        '<h3 class="mellom seksjon-tittel">Tidligere</h3>' +
+        '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">Hyggelig besøk med Emil</p><p class="under">22. okt</p></div>' + stjerner() + '</div></div>';
+    },
+    kart: function () {
+      return overskrift('Her møtes dere', 'Eksempelkart · Oslo') + kart([{ x: 44, y: 60 }]) +
+        '<div class="kort"><div><p class="listetittel">Nationaltheatret</p><p class="under">Ved teaterbygningen i Oslo</p></div><div class="linje"></div>' +
+        '<div><p class="listetittel">Torsdag kl. 14.00</p><p class="under">Tur sammen med Emil</p></div></div>' +
+        knapp('Vis veien dit', 'toast', { ikon: 'vei', klasse: 'sekundar' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="I appen åpner dette veibeskrivelsen."') +
+        '<p class="under midt">Møtested og avtale er eksempeldata.</p>';
+    },
+    profil: function () {
+      return '<div class="profil-topp"><span class="avatar stor-avatar">A</span><h2 class="tittel" tabindex="-1">Anne Hansen</h2><p class="under">Thereses gate 12, Oslo</p></div>' +
+        '<div class="kort">' + bryter('Større tekst', t.storre, 'storre') + '<div class="linje"></div>' + bryter('Påminnelse dagen før', t.paminnelse, 'paminnelse') + '</div>' +
+        '<div class="kort"><p class="under fet" style="margin:0">Pårørende som får beskjed</p><div><p class="listetittel">Lise (datter)</p><p class="under">922 45 678</p></div></div>' +
+        listevalg({ ikon: 'kort', tittel: 'Betaling', under: 'Vipps · betaler etter besøket', gjor: 'snart' }) +
+        listevalg({ ikon: 'skjold', tittel: 'Trygghet', under: 'Slik sjekker vi hjelperne', gjor: 'snart' }) +
+        knapp('Kontakt oss', 'toast', { ikon: 'telefon' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="I appen ringer dette til Hverdagshelten."') +
+        '<p class="under midt">Ring oss hverdager 09–16. Vi hjelper gjerne.</p>' +
+        '<div class="kort">' + bryter('Bytt til ungdomsversjon', false, 'byttRolle') + '</div>';
+    }
+  };
+
+  // ---------- Skjermene for Emil ----------
+  var EMIL = {
+    hjem: function () {
+      var l = ledige();
+      return overskrift('Hei, Emil.', 'Klar for å gjøre noen glade i dag?') +
+        '<div class="kort"><p class="under fet" style="margin:0">Ditt neste oppdrag</p>' +
+        '<div class="rad"><span class="ikonboks">' + ikon('fotspor') + '</span><div class="vokse"><p class="stor">Tur med Anne</p><p class="under">I dag kl. 14.00–15.00</p></div></div>' +
+        '<div class="linje"></div><button type="button" class="lenkerad" data-gjor="fane" data-verdi="kart">Se møtestedet' + ikon('pilH') + '</button></div>' +
+        '<div class="stat-rad"><div class="stat"><p class="under fet" style="margin:0">Tjent i oktober</p><p class="stor">' + tjent() + ' kr</p></div>' +
+        '<div class="stat"><p class="under fet" style="margin:0">Vurdering</p><p class="stor">4,9' + ikon('stjerne') + '</p></div></div>' +
+        '<div class="seksjon-tittel"><h3 class="mellom">Ledige oppdrag nær deg</h3>' + (l.length ? pille(l.length + ' nye', 'lilla') : '') + '</div>' +
+        (l.length ? '' : '<p class="under">Ingen ledige oppdrag akkurat nå.</p>') +
+        l.map(function (o) { return listevalg({ ikon: o.ikon, tittel: o.tittel, under: o.nar + ' · ' + o.sted, hoyre: o.belop + ' kr', gjor: 'oppdrag', verdi: o.id }); }).join('');
+    },
+    oppdrag: function () {
+      var o = finnOppdrag(t.oppdrag), tatt = t.tatt.indexOf(o.id) >= 0;
+      function detalj(ik, tekst, under) {
+        return '<div class="rad"><span class="ikonboks">' + ikon(ik) + '</span><div class="vokse"><p class="listetittel">' + tekst + '</p>' + (under ? '<p class="under">' + under + '</p>' : '') + '</div></div>';
+      }
+      return '<button type="button" class="tilbake" data-gjor="tilbakeFane">' + ikon('pilV') + 'Tilbake</button>' +
+        '<div class="liste" style="gap:10px">' + pille(o.varighet) + overskrift(o.tittel, o.navn + ', ' + o.alder + ' år') + '</div>' +
+        '<div class="kort">' + detalj('klokke', o.nar) + detalj('nal', o.sted, o.avstand + ' unna deg') + detalj('sedler', 'Du får ' + o.belop + ' kr', 'Utbetales til kontoen din etter oppdraget') + '</div>' +
+        '<div class="kort"><p class="under fet" style="margin:0">Beskjed fra ' + o.navn + '</p><p class="brod">«' + o.beskjed + '»</p></div>' +
+        (tatt ? knapp('Oppdraget er ditt', 'ingenting', { ikon: 'sjekk', klasse: 'gronn' }) : knapp('Ta oppdraget', 'taOppdrag'));
+    },
+    avtaler: function () {
+      return overskrift('Mine oppdrag', 'Det du har sagt ja til.') +
+        '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">Tur med Anne</p><p class="under">I dag · 14.00–15.00 · 150 kr</p></div>' + pille('Bekreftet', 'gronn') + '</div>' +
+        '<div class="knapper">' + knapp('Ring Anne', 'toast', { ikon: 'telefon', klasse: 'sekundar liten' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="Ringer Anne …"') +
+        knapp('Ferdig', 'toast', { ikon: 'sjekk', klasse: 'gronn liten' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="Flott jobbet! Anne får beskjed om at turen er ferdig."') + '</div></div>' +
+        t.tatt.map(function (id) {
+          var o = finnOppdrag(id);
+          return '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">' + o.tittel + '</p><p class="under">' + o.nar + ' · ' + o.belop + ' kr</p></div>' + pille('Bekreftet', 'gronn') + '</div></div>';
+        }).join('') +
+        '<h3 class="mellom seksjon-tittel">Fullført</h3>' +
+        '<div class="kort"><div class="topp-rad"><div class="vokse"><p class="listetittel">Hyggelig besøk hos Anne</p><p class="under">22. okt · 150 kr</p></div>' + stjerner() + '</div></div>';
+    },
+    kart: function () {
+      var l = ledige();
+      var naler = [{ x: 44, y: 60 }].concat(l.map(function (o, i) {
+        return { x: o.x, y: o.y, nummer: i + 1, gjor: 'oppdrag', verdi: o.id, etikett: (i + 1) + '. ' + o.tittel };
+      }));
+      return overskrift('Oppdrag nær deg', 'Eksempelkart · Oslo') + kart(naler) +
+        l.map(function (o, i) { return listevalg({ tall: i + 1, tittel: o.tittel, under: o.sted + ' · ' + o.avstand, hoyre: o.belop + ' kr', gjor: 'oppdrag', verdi: o.id }); }).join('');
+    },
+    profil: function () {
+      return '<div class="profil-topp"><span class="avatar stor-avatar">E</span><h2 class="tittel" tabindex="-1">Emil Berg</h2><p class="under">16 år · Sagene</p>' +
+        '<div class="chips" style="justify-content:center;gap:8px;margin-top:8px">' + pille('✓ Bekreftet med BankID', 'gronn') + pille('✓ Foresatt har godkjent', 'gronn') + '</div></div>' +
+        '<div class="stat-rad"><div class="stat"><p class="under fet" style="margin:0">Oppdrag utført</p><p class="stor">12</p></div>' +
+        '<div class="stat"><p class="under fet" style="margin:0">Vurdering</p><p class="stor">4,9' + ikon('stjerne') + '</p></div></div>' +
+        '<div class="kort"><h3 class="mellom">Dette liker jeg å hjelpe med</h3><div class="chips">' +
+        HJELPEOMRADER.map(function (h) { return chip(h, t.liker.indexOf(h) >= 0, 'liker'); }).join('') + '</div></div>' +
+        '<div class="kort">' + bryter('Varsel om nye oppdrag', t.varsel, 'varsel') + '<div class="linje"></div>' + bryter('Større tekst', t.storre, 'storre') + '</div>' +
+        listevalg({ ikon: 'lommebok', tittel: 'Utbetaling', under: 'Kontonummer og historikk', gjor: 'snart' }) +
+        listevalg({ ikon: 'klokke', tittel: 'Når kan jeg hjelpe?', under: 'Ettermiddager og helg', gjor: 'snart' }) +
+        listevalg({ ikon: 'bok', tittel: 'Retningslinjer', under: 'Slik er du en god hverdagshelt', gjor: 'snart' }) +
+        knapp('Kontakt oss', 'toast', { ikon: 'post', klasse: 'sekundar' }).replace('data-gjor="toast"', 'data-gjor="toast" data-verdi="I appen sender dette en e-post til Hverdagshelten."') +
+        '<div class="kort">' + bryter('Bytt til eldreversjon', false, 'byttRolle') + '</div>';
+    }
+  };
+
+  // ---------- Tegning og navigasjon ----------
+  function tegnMeny() {
+    var erFane = FANER.indexOf(t.skjerm) >= 0;
+    meny.hidden = !erFane;
+    if (!erFane) return;
+    var faner = [['hjem', 'Hjem', 'hus'], ['avtaler', t.rolle === 'emil' ? 'Oppdrag' : 'Avtaler', t.rolle === 'emil' ? 'liste' : 'kalender'], ['kart', 'Kart', 'kart'], ['profil', 'Profil', 'bruker']];
+    meny.innerHTML = faner.map(function (f) {
+      return '<button type="button" data-gjor="fane" data-verdi="' + f[0] + '"' + (t.skjerm === f[0] ? ' aria-current="page"' : '') + '>' + ikon(f[2]) + f[1] + '</button>';
+    }).join('');
+  }
+
+  function tegn(retning, flyttFokus) {
+    var skjermer = t.rolle === 'emil' ? EMIL : ANNE;
+    innhold.innerHTML = '<div class="liste">' + skjermer[t.skjerm]() + '</div>';
+    Array.prototype.forEach.call(innhold.firstChild.children, function (el, i) { el.style.setProperty('--i', i); });
+    skjerm.style.setProperty('--s', t.storre ? 1.15 : 1);
+    tegnMeny();
+    if (retning) {
+      innhold.className = 'innhold';
+      void innhold.offsetWidth; // start animasjonen på nytt
+      innhold.className = 'innhold ' + retning;
+      innhold.scrollTop = 0;
+    }
+    if (flyttFokus) {
+      var h = innhold.querySelector('.tittel');
+      if (h) h.focus({ preventScroll: true });
+    }
+  }
+
+  function ga(skjermNavn, retning) { t.skjerm = skjermNavn; tegn(retning, true); }
+
+  function visToast(tekst) {
+    clearTimeout(toastTimer);
+    toastEl.textContent = tekst;
+    toastEl.classList.add('vis');
+    toastTimer = setTimeout(function () { toastEl.classList.remove('vis'); }, 2400);
+  }
+
+  function settRolle(rolle, beholdSkjerm) {
+    t.rolle = rolle;
+    if (!beholdSkjerm) t.skjerm = 'hjem';
+    document.querySelectorAll('[data-rolle]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-rolle') === rolle ? 'true' : 'false'); });
+    tegn('rolle', beholdSkjerm);
+  }
+
+  var HANDLINGER = {
+    fane: function (v) {
+      if (v === t.skjerm) return;
+      var fra = FANER.indexOf(t.skjerm), til = FANER.indexOf(v);
+      ga(v, fra < 0 || til > fra ? 'frem' : 'tilbake');
+    },
+    bestill: function () { t.steg = 1; ga('bestill', 'frem'); },
+    hjem: function () { ga('hjem', 'tilbake'); },
+    velgKategori: function (v) { t.kategori = v; t.steg = 2; tegn('frem', true); },
+    steg: function (v) { var ny = Number(v); var r = ny > t.steg ? 'frem' : 'tilbake'; t.steg = ny; tegn(r, true); },
+    dag: function (v) { t.dag = v; tegn(); },
+    tid: function (v) { t.tid = v; tegn(); },
+    send: function () {
+      t.bestillinger.push({ kategori: t.kategori, dag: t.dag, tid: t.tid });
+      ga('hjem', 'tilbake');
+      visToast('Bestillingen er sendt. Du får beskjed når en hjelper har sagt ja.');
+    },
+    oppdrag: function (v) { t.oppdrag = v; t.fraFane = t.skjerm; ga('oppdrag', 'frem'); },
+    tilbakeFane: function () { ga(t.fraFane || 'hjem', 'tilbake'); },
+    taOppdrag: function () {
+      if (t.tatt.indexOf(t.oppdrag) < 0) t.tatt.push(t.oppdrag);
+      tegn();
+      visToast('Oppdraget er ditt! Du finner det under Oppdrag.');
+      var k = innhold.querySelector('.knapp.gronn'); if (k) k.focus();
+    },
+    ingenting: function () {},
+    toast: function (v) { visToast(v); },
+    snart: function () { visToast('Kommer snart.'); },
+    storre: function () { t.storre = !t.storre; tegn(); },
+    paminnelse: function () { t.paminnelse = !t.paminnelse; tegn(); },
+    varsel: function () { t.varsel = !t.varsel; tegn(); },
+    liker: function (v) { var i = t.liker.indexOf(v); if (i >= 0) t.liker.splice(i, 1); else t.liker.push(v); tegn(); },
+    byttRolle: function () { settRolle(t.rolle === 'anne' ? 'emil' : 'anne', true); }
+  };
+
+  // Etter at en bryter eller chip er tegnet på nytt, legger vi fokus tilbake på samme knapp
+  skjerm.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-gjor]');
+    if (!el) return;
+    var gjor = el.getAttribute('data-gjor'), verdi = el.getAttribute('data-verdi');
+    var beholdFokus = ['storre', 'paminnelse', 'varsel', 'liker', 'dag', 'tid'].indexOf(gjor) >= 0;
+    HANDLINGER[gjor](verdi);
+    if (beholdFokus) {
+      var sel = '[data-gjor="' + gjor + '"]' + (verdi ? '[data-verdi="' + verdi.replace(/"/g, '\\"') + '"]' : '');
+      var ny = innhold.querySelector(sel); if (ny) ny.focus();
+    }
+  });
+  document.querySelectorAll('[data-rolle]').forEach(function (b) {
+    b.addEventListener('click', function () { if (b.getAttribute('data-rolle') !== t.rolle) settRolle(b.getAttribute('data-rolle'), false); });
+  });
+
+  tegn();
+})();
+</script>
+</body>
+</html>
