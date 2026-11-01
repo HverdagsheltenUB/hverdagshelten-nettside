@@ -223,8 +223,6 @@ html:not(.js) .hovedmeny ul { flex-wrap: wrap; }
   background: var(--lilla); color: #fff; font-weight: 700; font-size: 1.1rem;
 }
 .steg strong { display: block; }
-.vipps-linje { margin-top: 2rem; display: flex; gap: .8rem; align-items: flex-start; background: var(--krem); border-radius: var(--radius); padding: 1.1rem 1.3rem; max-width: 46rem; }
-.vipps-linje p { margin: 0; }
 
 /* Trygghet */
 .to-spalter { display: grid; gap: 2.5rem; }
@@ -318,6 +316,43 @@ figcaption { font-size: .85rem; color: var(--hint); margin-top: .5rem; }
 .bilder-to { display: grid; gap: 1.2rem; margin-top: 2rem; }
 @media (min-width: 760px) { .bilder-to { grid-template-columns: 1fr 1fr; } }
 
+/* ---------- Tall i toppen (rolig sosialt bevis) ---------- */
+.tall { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 2.4rem; margin: 2.2rem 0 0; }
+.tall div { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+.tall dd { margin: 0; font-size: 2.1rem; font-weight: 700; line-height: 1.1; color: var(--lilla); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.tall dt { font-size: .82rem; color: var(--hint); max-width: 9rem; line-height: 1.35; margin-top: .3rem; }
+
+/* Små kort som «henger» ved lappen, hentet fra appen */
+.flytekort {
+  position: absolute; z-index: 2; display: flex; align-items: center; gap: .7rem;
+  background: var(--papir); border: 1px solid var(--strek); border-radius: 999px;
+  padding: .55rem 1.1rem .55rem .55rem; font-size: .85rem; line-height: 1.3;
+  box-shadow: 0 10px 24px rgba(62, 42, 72, .12);
+}
+.flytekort strong { display: block; font-size: .95rem; color: var(--blekk); }
+.flytekort span { color: var(--hint); }
+.flytekort .avatar { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--lilla); color: #fff; font-weight: 700; flex: none; }
+.flytekort .merke-hake { width: 2.6rem; height: 2.6rem; flex: none; }
+.hero .lapp-holder { padding-top: 5.5rem; }
+.flytekort-topp { top: .5rem; right: 0; }
+.flytekort-bunn { bottom: .5rem; left: -1.5rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .flytekort { animation: flyt .7s cubic-bezier(.22,.8,.3,1) both; }
+  .flytekort-topp { animation-delay: .7s; }
+  .flytekort-bunn { animation-delay: .95s; }
+  @keyframes flyt { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+}
+
+/* Store bildekort med pris, som en annonse */
+.bildekort { position: relative; }
+.bildekort figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: .7rem; font-size: 1rem; color: var(--blekk); }
+.bildekort figcaption strong { font-size: 1.1rem; }
+.bildekort figcaption span { color: var(--hint); white-space: nowrap; font-size: .9rem; }
+
+/* Tjenestene som et rolig rutenett uten tunge bokser */
+.tjenester { gap: 0 2.4rem; border-top: 1px solid var(--strek); }
+.tjenester li { background: none; border: 0; border-bottom: 1px solid var(--strek); border-radius: 0; padding: 1.4rem 0; }
+
 /* ---------- Skjemaer ---------- */
 form.skjema { background: var(--papir); border: 2px solid var(--strek); border-radius: var(--radius); padding: 1.6rem; }
 .felt { margin-bottom: 1.2rem; }
@@ -347,10 +382,6 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
 .liten-tekst { font-size: .85rem; color: var(--hint); margin: .9rem 0 0; }
 .honning { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-/* Bestill */
-.bestill .ramme { display: grid; gap: 3rem; }
-@media (min-width: 900px) { .bestill .ramme { grid-template-columns: .9fr 1.1fr; } }
-
 /* Påmelding til appen */
 .varsling { padding: 3rem 0 0; }
 .varsling-boks { display: grid; gap: 1.4rem; background: var(--krem); border-radius: var(--radius); padding: 1.8rem; }
@@ -366,13 +397,26 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
 .varsel-skjema label { font-size: .9rem; margin-bottom: .25rem; }
 .varsel-skjema .liten-tekst { margin: 0; }
 
-/* Innspill (tilbakemeldinger) */
+/* Prøv appen + innspill */
 .innspill { background: var(--krem-lys); border-top: 1px solid var(--strek); }
 .innspill .ramme { display: grid; gap: 2.5rem; }
-@media (min-width: 900px) { .innspill .ramme { grid-template-columns: .85fr 1.15fr; align-items: start; } }
-.innspill-tegn { width: 4.2rem; height: 4.2rem; border-radius: 50%; background: var(--lilla); display: grid; place-items: center; margin-bottom: 1.2rem; }
-.innspill-tegn svg { width: 2.2rem; height: 2.2rem; stroke: var(--krem); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.innspill .signatur { margin-top: 1.4rem; }
+@media (min-width: 960px) { .innspill .ramme { grid-template-columns: 1fr 26rem; align-items: start; gap: 4rem; } }
+.innspill-tekst { min-width: 0; }
+.prov-liste { list-style: none; padding: 0; margin: 0 0 1.4rem; }
+.prov-liste li { position: relative; padding: .55rem 0 .55rem 2.2rem; border-bottom: 1px solid var(--strek); }
+.prov-liste li:last-child { border-bottom: 0; }
+.prov-liste li::before { content: ""; position: absolute; left: .35rem; top: 1.05rem; width: .8rem; height: .8rem; border-radius: 50%; background: var(--lavendel); box-shadow: 0 0 0 4px var(--lavendel-lys); }
+.fullskjerm { display: none; }
+.innspill-skjema { margin-top: 2.2rem; }
+.innspill-skjema h3 { font-size: 1.25rem; color: var(--lilla); margin-bottom: 1rem; }
+.innspill .signatur { margin-top: 1.6rem; }
+.modell { position: relative; }
+.modell iframe { display: block; width: 100%; max-width: 26rem; height: 880px; margin: 0 auto; border: 0; background: transparent; color-scheme: light; }
+@media (min-width: 960px) { .modell { position: sticky; top: 5.5rem; } }
+@media (max-width: 959px) {
+  .modell { order: -1; }
+  .fullskjerm { display: inline-flex; }
+}
 .felt-rad { display: grid; gap: 0 1rem; }
 @media (min-width: 640px) { .felt-rad { grid-template-columns: 1fr 1fr; } }
 .tegnteller { font-size: .8rem; color: var(--hint); text-align: right; margin: .25rem 0 0; font-variant-numeric: tabular-nums; }
@@ -454,6 +498,17 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
 
 /* ================= Mobil (under 700 px) – PC-visningen påvirkes ikke ================= */
 @media (max-width: 699px) {
+
+  .tall { grid-template-columns: repeat(3, 1fr); gap: 0 1rem; margin-top: 1.6rem; }
+  .tall dd { font-size: 1.6rem; }
+  .tall dt { font-size: .75rem; }
+  .flytekort { font-size: .78rem; padding: .4rem .9rem .4rem .4rem; }
+  .flytekort strong { font-size: .85rem; }
+  .flytekort .avatar, .flytekort .merke-hake { width: 2.2rem; height: 2.2rem; }
+  .hero .lapp-holder { padding-top: 4.5rem; }
+  .flytekort-topp { top: 0; right: -.25rem; }
+  .flytekort-bunn { bottom: -.5rem; left: -.25rem; }
+  .modell iframe { height: 820px; }
   html { font-size: 112.5%; }               /* 18 px – god lesestørrelse på mobil */
   html.stor-tekst { font-size: 131.25%; }   /* 21 px med «Større tekst» */
   h1 { font-size: 2.2rem; }
@@ -498,7 +553,7 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
 
   .bilder-to { margin-top: 1.4rem; gap: 1rem; }
   .tjenester { margin-top: 1.4rem; gap: .7rem; }
-  .tjenester li { grid-template-columns: 2.6rem 1fr; gap: .8rem; padding: 1rem; }
+  .tjenester li { grid-template-columns: 2.6rem 1fr; gap: .8rem; padding: 1rem 0; }
   .tjenester h3 { margin-top: .1rem; }
   .ikon { width: 2.6rem; height: 2.6rem; }
   .ikon svg { width: 1.4rem; height: 1.4rem; }
@@ -507,7 +562,6 @@ fieldset { border: 0; padding: 0; margin: 0 0 1.2rem; }
   .app-boks h3 { font-size: 1.15rem; }
   .steg li { grid-template-columns: 2.2rem 1fr; gap: .7rem; margin-bottom: .9rem; }
   .steg li::before { width: 2.2rem; height: 2.2rem; font-size: .95rem; }
-  .vipps-linje { margin-top: 1.4rem; padding: .9rem 1rem; }
 
   .to-spalter { gap: 1.6rem; }
   .sjekkliste li { padding: .6rem 0; }
