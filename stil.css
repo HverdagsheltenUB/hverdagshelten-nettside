@@ -309,6 +309,23 @@ details p { padding: 0 1.2rem 1rem; margin: 0; }
 .partner h3 { margin-bottom: .3rem; }
 .partner p { margin: 0; }
 
+/* Tallene bak ideen: kort med store tall og kilde */
+.behov { margin-top: 3.5rem; }
+.behov > h3 { font-size: clamp(1.35rem, 2.6vw, 1.6rem); color: var(--lilla-mork); }
+.behov-grupper { display: grid; gap: 2rem; margin-top: 1.8rem; }
+@media (min-width: 900px) { .behov-grupper { grid-template-columns: 1fr 1fr; gap: 2.4rem; } }
+.behov-gruppe h4 { margin: 0 0 .6rem; font-size: .95rem; color: var(--hint); font-weight: 700; }
+.fakta { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--lilla); }
+.fakta li { padding: 1.2rem 0; border-bottom: 1px solid var(--strek); }
+.fakta p { margin: 0; }
+.fakta-tall { font-size: 2.2rem; font-weight: 700; line-height: 1.1; color: var(--lilla); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; margin-bottom: .3rem !important; }
+.kilde { font-size: .82rem; color: var(--hint); margin-top: .5rem !important; }
+.behov-slutt { margin-top: 1.8rem; font-weight: 700; font-size: 1.05rem; }
+@media (max-width: 699px) {
+  .behov { margin-top: 2.4rem; }
+  .fakta-tall { font-size: 1.8rem; }
+}
+
 /* Bilder */
 .foto { width: 100%; height: auto; aspect-ratio: 701 / 382; object-fit: cover; border-radius: var(--radius); background: var(--lavendel-lys); }
 figure { margin: 0; }
