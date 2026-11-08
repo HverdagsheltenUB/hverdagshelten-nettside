@@ -11,7 +11,9 @@
 | `personvern.html` | Personvernerklæringen |
 | `stil.css` | Felles utseende for begge sidene (farger, skrift, knapper) |
 | `felles.js` | «Større tekst»-knappen og menyen på mobil/nettbrett |
-| `prototype/index.html` | Den klikkbare modellen av appen (Anne og Emil). Vises under «Prøv appen» på forsiden |
+| `prototype/index.html` | Rammen rundt modellen: rollebryter (Kari / Jonas) og telefon. Vises under «Prøv appen» på forsiden |
+| `prototype/app/` | Den ekte appen bygget for nettleseren (`npx expo export -p web`) med eksempeldata. Den bruker en falsk database i nettleseren og rører aldri den ekte |
+| `.nojekyll` | Gjør at GitHub Pages viser mappen `prototype/app/_expo` |
 | `robots.txt`, `sitemap.xml` | Hjelper Google å finne sidene |
 | `*.jpg`, `*.png` | Bilder, logo og ikoner |
 

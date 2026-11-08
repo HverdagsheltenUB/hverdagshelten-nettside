@@ -5,455 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <script>if (/[?&]innebygd=1/.test(location.search)) document.documentElement.classList.add('innebygd');</script>
-<title>Hverdagshelten – klikkbar modell av appen</title>
+<title>Hverdagshelten – prøv appen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-/* Layout: én telefonramme midt på siden, rollebryter over. Samme farger som skissene. */
-:root{
-  --page:#EFE9E3;
-  --cream:#FDF8F2;
-  --peach:#F8E4CF;
-  --peach-soft:#FBEEDF;
-  --plum:#4D3B5C;
-  --plum-deep:#3E2F4B;
-  --ink:#2B2230;
-  --muted:#6E6274;
-  --line:#E9DED3;
-  --card:#FFFDFA;
-  --green:#2F7A55;
-  --green-soft:#E3F1E8;
-  --font:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  color-scheme:light;
-}
+/* Modellen er den ekte appen, bygget for nettleseren med eksempeldata. Ingenting blir sendt. */
+:root{ --side:#EFE9E3; --lilla:#52395E; --lilla-mork:#3E2A48; --lavendel:#BCA3D8; --krem:#FFE7CE; --tekst:#2B2230; --dempet:#6E6274; color-scheme:light; }
 *{box-sizing:border-box}
-html,body{height:100%}
-body{background:var(--page);color:var(--ink);font-family:var(--font);font-size:16px;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 32px}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
-button:focus-visible{outline:3px solid #B48BD0;outline-offset:2px}
-.wrap{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:14px;align-items:stretch}
-
-/* Rollebryter */
-.switch{display:grid;grid-template-columns:1fr 1fr;background:#E2D8CF;border-radius:999px;padding:4px;gap:4px}
-.switch button{border-radius:999px;padding:10px 8px;font-weight:700;font-size:15px;color:var(--muted);line-height:1.2}
-.switch button small{display:block;font-weight:500;font-size:12px}
-.switch button[aria-pressed="true"]{background:var(--plum);color:#fff}
-.hint{font-size:13px;color:var(--muted);text-align:center;margin:0}
-
-/* Telefon */
-.phone{background:var(--cream);border:8px solid #1E1A21;border-radius:38px;overflow:hidden;
-  height:min(780px,calc(100dvh - 140px));min-height:560px;display:flex;flex-direction:column;box-shadow:0 18px 40px rgba(62,47,75,.18)}
-.status{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 6px;font-size:12px;font-weight:600;flex:none}
-.status .ic{display:flex;gap:5px}
-.screen{flex:1;overflow-y:auto;padding:18px 20px 28px;display:flex;flex-direction:column;gap:16px}
-.screen[hidden]{display:none!important}
-
-h1{font-size:28px;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:balance;line-height:1.15}
-h2{font-size:19px;font-weight:700;margin:0}
-.sub{color:var(--muted);margin:2px 0 0;font-size:17px}
-.back{display:flex;align-items:center;gap:6px;font-size:17px;color:var(--ink);align-self:flex-start}
-.step{color:var(--muted);font-size:15px;margin:0}
-
-.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:16px}
-.label{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:15px;font-weight:600}
-.row{display:flex;align-items:center;gap:12px}
-.row .grow{flex:1;min-width:0}
-.date-ic{width:48px;height:48px;border-radius:12px;background:var(--peach);display:grid;place-items:center;flex:none;color:var(--plum)}
-.big{font-size:21px;font-weight:700;line-height:1.25}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--plum);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
-.avatar.lg{width:72px;height:72px;font-size:28px}
-.small{font-size:14px;color:var(--muted)}
-.divider{height:1px;background:var(--line);margin:12px 0}
-.link-row{display:flex;justify-content:space-between;align-items:center;width:100%;font-weight:600;font-size:17px;text-align:left}
-
-.btn{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--plum);color:#fff;border-radius:999px;padding:18px;font-size:19px;font-weight:700;width:100%}
-.btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
-.btn.green{background:var(--green)}
-.soft{background:var(--peach-soft);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;width:100%;text-align:left}
-.soft b{font-size:17px;display:block}
-
-.list{display:flex;flex-direction:column;gap:12px}
-.opt{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;width:100%;text-align:left}
-.opt b{font-size:18px;font-weight:600;display:block}
-.opt span.d{font-size:14px;color:var(--muted)}
-.opt .grow{flex:1;min-width:0}
-.opt.sel{border-color:var(--plum);background:#F6F0FA}
-.pill{display:inline-block;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--peach);color:var(--plum-deep)}
-.pill.ok{background:var(--green-soft);color:var(--green)}
-.pill.new{background:#EEE6F5;color:var(--plum)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:10px 14px;font-weight:600}
-.chip.sel{background:var(--plum);color:#fff;border-color:var(--plum)}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:var(--peach-soft);border-radius:16px;padding:14px}
-.stat b{font-size:24px;display:block;font-variant-numeric:tabular-nums}
-.price{display:flex;justify-content:space-between;font-size:16px;padding:4px 0;font-variant-numeric:tabular-nums}
-.price.total{font-weight:800;border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
-.toggle-row{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 0;font-size:17px}
-.toggle-row + .toggle-row{border-top:1px solid var(--line)}
-.tg{width:48px;height:28px;border-radius:999px;background:#D9CFD9;position:relative;flex:none;transition:background .2s}
-.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
-.tg.on{background:var(--plum)}
-.tg.on::after{left:23px}
-.stars{color:#D69A2D;letter-spacing:2px}
-.map{border-radius:18px;overflow:hidden;border:1.5px solid var(--line);background:#F3EEE8;position:relative}
-.map svg{display:block;width:100%;height:auto}
-.note{font-size:13px;color:var(--muted);text-align:center}
-.toast{position:absolute;left:16px;right:16px;bottom:96px;background:var(--plum-deep);color:#fff;padding:14px 16px;border-radius:14px;font-weight:600;text-align:center}
-.phone-inner{position:relative;flex:1;display:flex;flex-direction:column;min-height:0}
-
-/* Større tekst */
-.phone.xl .screen{font-size:18px}
-.phone.xl h1{font-size:32px}
-.phone.xl .opt b,.phone.xl .link-row{font-size:20px}
-.phone.xl .small,.phone.xl .opt span.d{font-size:16px}
-
-/* Bunnmeny */
-.tabs{flex:none;background:var(--plum);display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 10px 14px}
-.tabs button{color:#fff;border-radius:16px;padding:9px 2px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:15px;font-weight:500}
-.tabs button[aria-current="page"]{background:var(--peach);color:var(--plum-deep);font-weight:700}
-.tabs svg{width:20px;height:20px}
-/* Overganger */
-.screen.a-fwd{animation:inFwd .38s cubic-bezier(.22,.8,.3,1) both}
-.screen.a-back{animation:inBack .38s cubic-bezier(.22,.8,.3,1) both}
-.screen.a-fade{animation:inFade .3s ease-out both}
-.screen.a-role{animation:inRole .45s cubic-bezier(.22,.8,.3,1) both}
-@keyframes inFwd{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-@keyframes inBack{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
-@keyframes inFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes inRole{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
-.screen.a-fwd > *,.screen.a-fade > *,.screen.a-role > *{animation:inFade .4s cubic-bezier(.22,.8,.3,1) both}
-.screen > *:nth-child(2){animation-delay:.03s}.screen > *:nth-child(3){animation-delay:.06s}
-.screen > *:nth-child(4){animation-delay:.09s}.screen > *:nth-child(n+5){animation-delay:.12s}
-.tabs button,.chip,.switch button,.opt,.btn,.soft{transition:background-color .25s ease,color .25s ease,border-color .25s ease,transform .15s ease}
-.opt:active,.btn:active,.soft:active,.chip:active,.tabs button:active{transform:scale(.97)}
-.toast{transition:opacity .25s ease,transform .25s ease}
-.toast.hide{opacity:0;transform:translateY(10px);pointer-events:none}
-@media (prefers-reduced-motion:reduce){.tg,.tg::after,.toast{transition:none}.screen,.screen > *{animation:none!important}}
-
-/* Innebygd på nettsiden: gjennomsiktig bakgrunn og fast høyde, så det ikke blir boks i boks */
-html.innebygd body{background:transparent;padding-block:4px 12px}
-html.innebygd .phone{height:740px;min-height:0}
-@media (max-width:380px){html.innebygd .phone{height:680px}}
+html,body{height:100%;margin:0}
+body{background:var(--side);color:var(--tekst);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;
+  padding:20px max(16px,env(safe-area-inset-left,0px)) 24px max(16px,env(safe-area-inset-right,0px))}
+.innebygd body{background:transparent;padding:4px 8px 8px}
+button{font:inherit;cursor:pointer;border:0;background:none;padding:0;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--lavendel);outline-offset:2px}
+.ramme{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+h1{font-size:24px;margin:0;text-align:center;color:var(--lilla-mork)}
+.innebygd h1{display:none}
+.bryter{display:grid;grid-template-columns:1fr 1fr;background:#E2D8CF;border-radius:999px;padding:4px;gap:4px}
+.bryter button{border-radius:999px;padding:9px 8px;font-weight:700;font-size:15px;color:var(--dempet);line-height:1.2}
+.bryter button small{display:block;font-weight:400;font-size:12px}
+.bryter button[aria-pressed="true"]{background:var(--lilla);color:#fff}
+.telefon{background:#FFF7EF;border:8px solid #1E1A21;border-radius:40px;overflow:hidden;
+  height:min(760px,calc(100dvh - 150px));min-height:560px;box-shadow:0 18px 40px rgba(62,47,75,.18)}
+.innebygd .telefon{height:760px}
+.telefon iframe{display:block;width:100%;height:100%;border:0;background:#FFF7EF}
+.under{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--dempet)}
+.under p{margin:0}
+.under button{font-weight:700;color:var(--lilla);text-decoration:underline;white-space:nowrap;font-size:13px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="switch" role="group" aria-label="Velg versjon">
-    <button id="r-senior" aria-pressed="true">Bestiller hjelp<small>Eldre · Anne</small></button>
-    <button id="r-youth" aria-pressed="false">Tar oppdrag<small>Ungdom · Emil</small></button>
+<main class="ramme">
+  <h1>Prøv Hverdagshelten</h1>
+  <div class="bryter" role="group" aria-label="Velg hvem du vil være">
+    <button type="button" data-rolle="eldre" aria-pressed="true">Jeg trenger hjelp<small>Kari, 81 år</small></button>
+    <button type="button" data-rolle="ungdom" aria-pressed="false">Jeg vil hjelpe<small>Jonas, 16 år</small></button>
   </div>
-  <p class="hint">Klikkbar testmodell. Alle navn og avtaler er eksempler.</p>
-
-  <div class="phone" id="phone">
-    <div class="status"><span>9:41</span><span class="ic">
-      <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13" y="0" width="3" height="11" rx="1"/></svg>
-      <svg width="22" height="11" viewBox="0 0 22 11" fill="none" stroke="currentColor"><rect x=".5" y=".5" width="18" height="10" rx="2.5"/><rect x="2.5" y="2.5" width="12" height="6" rx="1" fill="currentColor" stroke="none"/><path d="M20.5 4v3"/></svg>
-    </span></div>
-    <div class="phone-inner">
-      <main id="app" style="display:contents"></main>
-      <div class="toast hide" id="toast" role="status"></div>
-    </div>
-    <nav class="tabs" id="tabs" aria-label="Hovedmeny"></nav>
+  <div class="telefon">
+    <iframe id="app" title="Hverdagshelten-appen" src="app/?rolle=eldre"></iframe>
   </div>
-</div>
-
+  <div class="under">
+    <p>Legg ut en annonse som Kari, og bytt til Jonas for å takke ja. Alt er eksempler, og ingenting blir sendt.</p>
+    <button type="button" id="nullstill">Start på nytt</button>
+  </div>
+</main>
 <script>
-const I = {
-  home:'<path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/>',
-  cal:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
-  map:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
-  user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
-  chev:'<path d="M9 6l6 6-6 6"/>',
-  back:'<path d="M15 6l-6 6 6 6"/>',
-  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
-  plus:'<path d="M12 5v14M5 12h14"/>',
-  pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
-  house:'<path d="M4 11l8-6 8 6v9H4z"/>',
-  bag:'<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/>',
-  cup:'<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"/>',
-  walk:'<circle cx="13" cy="4" r="2"/><path d="M10 21l2-6-3-3 1-4 4 3 3 1M9 12l-3 2"/>',
-  phone:'<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
-  leaf:'<path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><path d="M5 19l8-8"/>',
-  dog:'<path d="M6 10l-2-4 4 2h6l4-2-2 4v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4z"/><circle cx="10" cy="12" r=".5"/><circle cx="14" cy="12" r=".5"/>',
-  call:'<path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
-  text:'<path d="M4 18L9 6l5 12M6 14h6M17 10v6M14 13h6"/>',
-  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
-  card:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>',
-  bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
-  people:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c1-3.5 3.5-5 6-5s5 1.5 6 5M15 14c2.5 0 4.5 1.3 5.5 4"/>',
-  coin:'<circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10.5c0-1 1-1.8 2.5-1.8s2.5.7 2.5 1.6c0 2-5 1.2-5 3.4 0 1 1.1 1.6 2.5 1.6s2.5-.6 2.5-1.6"/>'
-};
-const ic = (n, s=20) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
-const chev = `<span style="color:var(--muted)">${ic('chev',18)}</span>`;
-
-const S = {
-  role:'senior', tab:'hjem', view:null,
-  xl:false, notif:true,
-  order:{cat:null, day:'Torsdag 5. nov', time:'14.00–15.00'},
-  taken:[], booked:[]
-};
-
-const CATS = [
-  ['house','Hjelp hjemme','Enkle oppgaver i hjemmet'],
-  ['bag','Handling','Hjelp med dagligvarer'],
-  ['cup','Hyggelig besøk','En prat og litt selskap'],
-  ['walk','Tur sammen','En tur i nærområdet'],
-  ['leaf','Hagearbeid','Plenklipping og luking'],
-  ['dog','Lufte hunden','En runde med firbeinte'],
-  ['phone','Mobilhjelp','Hjelp med mobil og nettbrett']
-];
-const JOBS = [
-  {id:1, ic:'bag', t:'Handling på Kiwi', who:'Kari, 81 år', where:'Sagene · 600 m', when:'I morgen kl. 11.00', pay:150, dur:'1 time'},
-  {id:2, ic:'leaf', t:'Klippe plenen', who:'Arne, 77 år', where:'Frogner · 1,2 km', when:'Lørdag kl. 10.00', pay:300, dur:'2 timer'},
-  {id:3, ic:'dog', t:'Lufte Bella (labrador)', who:'Solveig, 84 år', where:'St. Hanshaugen · 900 m', when:'Søndag kl. 13.00', pay:100, dur:'45 min'},
-  {id:4, ic:'phone', t:'Sette opp FaceTime', who:'Per, 79 år', where:'Grünerløkka · 1,5 km', when:'Mandag kl. 17.00', pay:150, dur:'1 time'}
-];
-
-const $ = s => document.querySelector(s);
-const app = $('#app');
-
-function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.remove('hide');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.add('hide'),2400)}
-const ORDER=['hjem','avtaler','kart','profil'];
-function go(tab){
-  if(tab===S.tab && !S.view) return;
-  const anim = S.view ? 'back' : (ORDER.indexOf(tab) > ORDER.indexOf(S.tab) ? 'fwd' : 'back');
-  S.tab=tab;S.view=null;render(anim);
-}
-function open(v,anim='fwd'){S.view=v;render(anim)}
-
-function mapSvg(pins){
-  return `<div class="map"><svg viewBox="0 0 340 230" role="img" aria-label="Eksempelkart over Oslo sentrum">
-    <rect width="340" height="230" fill="#F3EEE8"/>
-    <g fill="none" stroke="#DCD2C8" stroke-width="1.3">
-      <path d="M0 40 Q80 60 140 30 T340 50"/><path d="M0 110 Q90 90 170 120 T340 100"/>
-      <path d="M0 170 Q100 150 180 180 T340 160"/><path d="M60 0 Q70 80 40 230"/>
-      <path d="M150 0 Q170 100 140 230"/><path d="M250 0 Q230 120 270 230"/>
-      <path d="M20 70 L120 90 L200 60 L320 80"/><path d="M30 200 L130 140 L230 150 L330 200"/>
-    </g>
-    <path d="M0 215 Q120 195 210 225 L210 230 L0 230z" fill="#DCE6EA"/>
-    <g font-family="Figtree,sans-serif" font-size="11" fill="#7A6E7E">
-      <text x="230" y="30">Sagene</text><text x="120" y="68">St. Hanshaugen</text>
-      <text x="30" y="98">Frogner</text><text x="230" y="125">Grønland</text>
-      <text x="255" y="160">Vålerenga</text><text x="110" y="212">Bispevika</text>
-    </g>
-    ${pins.map(p=>`<g transform="translate(${p.x} ${p.y})"><circle r="16" fill="#4D3B5C" stroke="#fff" stroke-width="3"/><text y="5" text-anchor="middle" font-family="Figtree,sans-serif" font-size="13" font-weight="700" fill="#fff">${p.l}</text></g>${p.name?`<text x="${p.x}" y="${p.y+32}" text-anchor="middle" font-family="Figtree,sans-serif" font-size="12" font-weight="700" fill="#2B2230">${p.name}</text>`:''}`).join('')}
-  </svg></div>`;
-}
-
-/* ---------- ELDRE ---------- */
-const senior = {
-  hjem(){
-    return `<div><h1>Hei, Anne.</h1><p class="sub">Her finner du hjelp i hverdagen.</p></div>
-    <div class="card">
-      <div class="label">${ic('cal',18)} Ditt neste besøk</div>
-      <div class="row" style="margin-top:12px"><div class="date-ic">${ic('cal')}</div><div class="big">Torsdag 29. oktober<br>Kl. 14.00–15.00</div></div>
-      <div class="row" style="margin-top:14px"><div class="avatar">E</div><div class="grow"><b style="font-size:17px;font-weight:600">Emil blir med deg på tur</b><div class="small">Avtalen er bekreftet</div></div></div>
-      <div class="divider"></div>
-      <button class="link-row" data-go="avtaler">Se avtalen ${ic('arrow',18)}</button>
-    </div>
-    ${S.booked.length?`<div class="card"><div class="label">${ic('bell',18)} Venter på svar</div>${S.booked.map(b=>`<div class="row" style="margin-top:10px"><div class="grow"><b>${b.cat}</b><div class="small">${b.day} kl. ${b.time}</div></div><span class="pill">Sendt</span></div>`).join('')}</div>`:''}
-    <button class="btn" data-open="bestill1">${ic('plus')} Bestill hjelp</button>
-    <button class="soft" data-go="kart">${ic('pin')}<span class="grow" style="flex:1"><b>Se møtestedet på kart</b><span class="small">Nationaltheatret · eksempel</span></span>${chev}</button>`;
-  },
-  bestill1(){
-    return `<button class="back" data-back>${ic('back',18)} Til forsiden</button>
-    <div><p class="step">Steg 1 av 3</p><h1>Hva trenger du hjelp med?</h1></div>
-    <div class="list">${CATS.map(c=>`<button class="opt" data-cat="${c[1]}">${ic(c[0])}<span class="grow"><b>${c[1]}</b><span class="d">${c[2]}</span></span>${chev}</button>`).join('')}</div>`;
-  },
-  bestill2(){
-    const days=['I morgen','Lørdag 31. okt','Mandag 2. nov','Torsdag 5. nov'];
-    const times=['10.00–11.00','12.00–13.00','14.00–15.00','17.00–18.00'];
-    return `<button class="back" data-open="bestill1">${ic('back',18)} Tilbake</button>
-    <div><p class="step">Steg 2 av 3</p><h1>Når passer det?</h1><p class="sub">${S.order.cat}</p></div>
-    <div><h2 style="margin-bottom:10px">Dag</h2><div class="chips">${days.map(d=>`<button class="chip ${S.order.day===d?'sel':''}" data-day="${d}">${d}</button>`).join('')}</div></div>
-    <div><h2 style="margin-bottom:10px">Tid</h2><div class="chips">${times.map(t=>`<button class="chip ${S.order.time===t?'sel':''}" data-time="${t}">${t}</button>`).join('')}</div></div>
-    <button class="btn" data-open="bestill3">Neste ${ic('arrow')}</button>`;
-  },
-  bestill3(){
-    return `<button class="back" data-open="bestill2">${ic('back',18)} Tilbake</button>
-    <div><p class="step">Steg 3 av 3</p><h1>Ser dette riktig ut?</h1></div>
-    <div class="card">
-      <div class="row"><div class="date-ic">${ic('cal')}</div><div><div class="big">${S.order.day}</div><div class="small">Kl. ${S.order.time}</div></div></div>
-      <div class="divider"></div>
-      <div class="row"><span style="color:var(--plum)">${ic('house')}</span><b style="font-size:17px">${S.order.cat}</b></div>
-      <div class="row" style="margin-top:8px"><span style="color:var(--plum)">${ic('pin')}</span><span>Hjemme hos deg, Thereses gate 12</span></div>
-    </div>
-    <div class="card">
-      <div class="price"><span>Hjelp, 1 time</span><span>150 kr</span></div>
-      <div class="price"><span>Hverdagshelten-gebyr</span><span>29 kr</span></div>
-      <div class="price total"><span>Å betale</span><span>179 kr</span></div>
-      <p class="small" style="margin:8px 0 0">Du betaler først når besøket er gjennomført. Eksempelpriser.</p>
-    </div>
-    <button class="btn" data-confirm>Send bestilling</button>`;
-  },
-  avtaler(){
-    return `<div><h1>Dine avtaler</h1><p class="sub">Kommende og tidligere besøk.</p></div>
-    <h2>Kommende</h2>
-    <div class="list">
-      <div class="card"><div class="row"><div class="avatar">E</div><div class="grow"><b style="font-size:18px">Tur sammen med Emil</b><div class="small">Torsdag 29. okt · 14.00–15.00</div></div><span class="pill ok">Bekreftet</span></div>
-        <div class="row" style="gap:10px;margin-top:14px"><button class="btn ghost" style="padding:12px;font-size:16px" data-toast="Ringer Emil (eksempel)">${ic('call',18)} Ring Emil</button><button class="btn ghost" style="padding:12px;font-size:16px" data-go="kart">${ic('pin',18)} Møtested</button></div></div>
-      ${S.booked.map(b=>`<div class="card"><div class="row"><div class="avatar" style="background:var(--peach);color:var(--plum)">?</div><div class="grow"><b style="font-size:18px">${b.cat}</b><div class="small">${b.day} · ${b.time}</div></div><span class="pill">Venter</span></div></div>`).join('')}
-      <div class="card"><div class="row"><div class="avatar">S</div><div class="grow"><b style="font-size:18px">Handling med Sara</b><div class="small">Mandag 2. nov · 11.00–12.00</div></div><span class="pill ok">Bekreftet</span></div></div>
-    </div>
-    <h2>Tidligere</h2>
-    <div class="card"><div class="row"><div class="avatar" style="background:#8C7A99">E</div><div class="grow"><b style="font-size:17px">Hyggelig besøk med Emil</b><div class="small">22. okt · <span class="stars">★★★★★</span></div></div></div></div>`;
-  },
-  kart(){
-    return `<div><h1>Her møtes dere</h1><p class="sub">Eksempelkart · Oslo</p></div>
-    ${mapSvg([{x:160,y:105,l:'E',name:'Nationaltheatret'}])}
-    <div class="card">
-      <div class="row">${ic('pin')}<div><b style="font-size:17px">Nationaltheatret</b><div class="small">Ved teaterbygningen i Oslo</div></div></div>
-      <div class="divider"></div>
-      <div class="row">${ic('cal')}<div><b style="font-size:17px">Torsdag kl. 14.00</b><div class="small">Tur sammen med Emil</div></div></div>
-    </div>
-    <button class="btn ghost" data-toast="Åpner veibeskrivelse (eksempel)">${ic('pin')} Vis veien dit</button>
-    <p class="note">Møtested og avtale er eksempeldata.</p>`;
-  },
-  profil(){
-    return `<div class="row" style="gap:16px"><div class="avatar lg">A</div><div><h1>Anne Hansen</h1><p class="sub" style="font-size:15px">Thereses gate 12, Oslo</p></div></div>
-    <div class="card">
-      <button class="toggle-row" data-xl><span class="row">${ic('text')} Større tekst</span><span class="tg ${S.xl?'on':''}"></span></button>
-      <button class="toggle-row" data-notif><span class="row">${ic('bell')} Påminnelse dagen før</span><span class="tg ${S.notif?'on':''}"></span></button>
-    </div>
-    <div class="card">
-      <div class="label">${ic('people',18)} Pårørende som får beskjed</div>
-      <div class="row" style="margin-top:10px"><div class="avatar" style="background:var(--peach);color:var(--plum)">L</div><div class="grow"><b>Lise (datter)</b><div class="small">922 45 678</div></div></div>
-    </div>
-    <div class="list">
-      <button class="opt">${ic('card')}<span class="grow"><b>Betaling</b><span class="d">Vipps · betaler etter besøket</span></span>${chev}</button>
-      <button class="opt">${ic('shield')}<span class="grow"><b>Trygghet</b><span class="d">Slik sjekker vi hjelperne</span></span>${chev}</button>
-    </div>
-    <button class="btn" data-toast="Ringer Hverdagshelten: 22 00 00 00 (eksempel)">${ic('call')} Kontakt oss</button>
-    <p class="note">Ring oss hverdager 09–16. Vi hjelper gjerne.</p>`;
+(function () {
+  var app = document.getElementById('app');
+  var knapper = document.querySelectorAll('.bryter button');
+  var rolle = 'eldre';
+  try { rolle = sessionStorage.getItem('modell-rolle') || 'eldre'; } catch (e) {}
+  function vis(ny, ekstra) {
+    rolle = ny;
+    try { sessionStorage.setItem('modell-rolle', ny); } catch (e) {}
+    knapper.forEach(function (k) { k.setAttribute('aria-pressed', String(k.dataset.rolle === ny)); });
+    app.src = 'app/?rolle=' + ny + (ekstra || '') + '&t=' + Date.now();
   }
-};
-
-/* ---------- UNGDOM ---------- */
-const youth = {
-  hjem(){
-    const open = JOBS.filter(j=>!S.taken.includes(j.id));
-    return `<div><h1>Hei, Emil.</h1><p class="sub">Klar for å gjøre noen glade i dag?</p></div>
-    <div class="card">
-      <div class="label">${ic('cal',18)} Ditt neste oppdrag</div>
-      <div class="row" style="margin-top:12px"><div class="date-ic">${ic('walk')}</div><div class="big">Tur med Anne<br><span style="font-size:17px;font-weight:600">I dag kl. 14.00–15.00</span></div></div>
-      <div class="divider"></div>
-      <button class="link-row" data-go="kart">Se møtestedet ${ic('arrow',18)}</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><span class="small">Tjent i oktober</span><b>${1250 + S.taken.reduce((s,id)=>s+JOBS.find(j=>j.id===id).pay,0)} kr</b></div>
-      <div class="stat"><span class="small">Vurdering</span><b>4,9 <span class="stars" style="font-size:16px">★</span></b></div>
-    </div>
-    <div class="row" style="justify-content:space-between"><h2>Ledige oppdrag nær deg</h2><span class="pill new">${open.length} nye</span></div>
-    <div class="list">${open.map(j=>`<button class="opt" data-job="${j.id}">${ic(j.ic)}<span class="grow"><b>${j.t}</b><span class="d">${j.when} · ${j.where}</span></span><b style="font-size:17px;white-space:nowrap">${j.pay} kr</b></button>`).join('') || '<p class="small">Du har tatt alle ledige oppdrag. Godt jobbet!</p>'}</div>`;
-  },
-  job(){
-    const j = JOBS.find(x=>x.id===S.jobId), taken=S.taken.includes(j.id);
-    return `<button class="back" data-back>${ic('back',18)} Tilbake</button>
-    <div><span class="pill new">${j.dur}</span><h1 style="margin-top:8px">${j.t}</h1><p class="sub">${j.who}</p></div>
-    <div class="card">
-      <div class="row">${ic('cal')}<div><b style="font-size:17px">${j.when}</b><div class="small">Varighet ca. ${j.dur}</div></div></div>
-      <div class="divider"></div>
-      <div class="row">${ic('pin')}<div><b style="font-size:17px">${j.where.split(' · ')[0]}</b><div class="small">${j.where.split(' · ')[1]} unna deg</div></div></div>
-      <div class="divider"></div>
-      <div class="row">${ic('coin')}<div><b style="font-size:17px">Du får ${j.pay} kr</b><div class="small">Utbetales til kontoen din etter oppdraget</div></div></div>
-    </div>
-    <div class="card"><div class="label">Beskjed fra ${j.who.split(',')[0]}</div><p style="margin:8px 0 0;line-height:1.5">«Hei! Jeg trenger litt hjelp, og det hadde vært hyggelig med en prat også. Ring på hos Hansen.»</p></div>
-    ${taken?`<div class="btn green" role="status">✓ Oppdraget er ditt</div>`:`<button class="btn" data-take="${j.id}">Ta oppdraget</button>`}`;
-  },
-  avtaler(){
-    const mine = JOBS.filter(j=>S.taken.includes(j.id));
-    return `<div><h1>Mine oppdrag</h1><p class="sub">Det du har sagt ja til.</p></div>
-    <div class="list">
-      <div class="card"><div class="row"><div class="avatar">A</div><div class="grow"><b style="font-size:18px">Tur med Anne</b><div class="small">I dag · 14.00–15.00 · 150 kr</div></div><span class="pill ok">Bekreftet</span></div>
-        <div class="row" style="gap:10px;margin-top:14px"><button class="btn ghost" style="padding:12px;font-size:16px" data-toast="Ringer Anne (eksempel)">${ic('call',18)} Ring Anne</button><button class="btn green" style="padding:12px;font-size:16px" data-toast="Oppdraget er markert som utført">Ferdig</button></div></div>
-      ${mine.map(j=>`<div class="card"><div class="row"><div class="avatar" style="background:var(--peach);color:var(--plum)">${j.who[0]}</div><div class="grow"><b style="font-size:18px">${j.t}</b><div class="small">${j.when} · ${j.pay} kr</div></div><span class="pill ok">Bekreftet</span></div></div>`).join('')}
-    </div>
-    <h2>Fullført</h2>
-    <div class="card"><div class="row"><div class="avatar" style="background:#8C7A99">A</div><div class="grow"><b style="font-size:17px">Hyggelig besøk hos Anne</b><div class="small">22. okt · 150 kr · <span class="stars">★★★★★</span></div></div></div></div>`;
-  },
-  kart(){
-    const pins=[{x:160,y:105,l:'A',name:'Ditt oppdrag'},{x:245,y:45,l:'1'},{x:55,y:118,l:'2'},{x:150,y:80,l:'3'},{x:285,y:110,l:'4'}]
-      .filter(p=>isNaN(+p.l)||!S.taken.includes(+p.l));
-    return `<div><h1>Oppdrag nær deg</h1><p class="sub">Eksempelkart · Oslo</p></div>
-    ${mapSvg(pins)}
-    <div class="list">${JOBS.filter(j=>!S.taken.includes(j.id)).map(j=>`<button class="opt" data-job="${j.id}"><span class="avatar" style="width:32px;height:32px;font-size:14px">${j.id}</span><span class="grow"><b>${j.t}</b><span class="d">${j.where}</span></span>${chev}</button>`).join('')}</div>
-    <p class="note">Oppdrag og steder er eksempeldata.</p>`;
-  },
-  profil(){
-    return `<div class="row" style="gap:16px"><div class="avatar lg">E</div><div><h1>Emil Berg</h1><p class="sub" style="font-size:15px">16 år · Sagene</p></div></div>
-    <div class="row" style="flex-wrap:wrap;gap:8px"><span class="pill ok">✓ Bekreftet med BankID</span><span class="pill ok">✓ Foresatt har godkjent</span></div>
-    <div class="stats">
-      <div class="stat"><span class="small">Oppdrag utført</span><b>12</b></div>
-      <div class="stat"><span class="small">Vurdering</span><b>4,9 <span class="stars" style="font-size:16px">★</span></b></div>
-    </div>
-    <div class="card">
-      <div class="label">Dette liker jeg å hjelpe med</div>
-      <div class="chips" style="margin-top:10px"><span class="chip sel">Tur sammen</span><span class="chip sel">Mobilhjelp</span><span class="chip sel">Lufte hunden</span><span class="chip">Hagearbeid</span></div>
-    </div>
-    <div class="card">
-      <button class="toggle-row" data-notif><span class="row">${ic('bell')} Varsel om nye oppdrag</span><span class="tg ${S.notif?'on':''}"></span></button>
-      <button class="toggle-row" data-xl><span class="row">${ic('text')} Større tekst</span><span class="tg ${S.xl?'on':''}"></span></button>
-    </div>
-    <div class="list">
-      <button class="opt">${ic('coin')}<span class="grow"><b>Utbetaling</b><span class="d">Kontonummer og historikk</span></span>${chev}</button>
-      <button class="opt">${ic('cal')}<span class="grow"><b>Når kan jeg hjelpe?</b><span class="d">Ettermiddager og helg</span></span>${chev}</button>
-      <button class="opt">${ic('shield')}<span class="grow"><b>Retningslinjer</b><span class="d">Slik er du en god hverdagshelt</span></span>${chev}</button>
-    </div>
-    <button class="btn ghost" data-toast="Ringer Hverdagshelten (eksempel)">${ic('call')} Kontakt oss</button>`;
-  }
-};
-
-const TABS=[['hjem','Hjem','home'],['avtaler','Avtaler','cal'],['kart','Kart','map'],['profil','Profil','user']];
-
-function render(anim){
-  const R = S.role==='senior'?senior:youth;
-  const v = S.view || S.tab;
-  const labels = S.role==='senior'?{avtaler:'Avtaler'}:{avtaler:'Oppdrag'};
-  const old = app.firstElementChild, keep = !anim && old ? old.scrollTop : 0;
-  app.innerHTML = `<section class="screen${anim?' a-'+anim:''}">${R[v]()}</section>`;
-  app.firstElementChild.scrollTop = keep;
-  // Bunnmenyen bygges bare på nytt ved rollebytte, slik at den aktive fanen glir mykt over
-  const tabs=$('#tabs');
-  if(tabs.dataset.role!==S.role){
-    tabs.dataset.role=S.role;
-    tabs.innerHTML = TABS.map(([k,l,i])=>`<button data-go="${k}">${ic(i)}${labels[k]||l}</button>`).join('');
-  }
-  tabs.querySelectorAll('button').forEach(b=>b.dataset.go===S.tab?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
-  $('#phone').classList.toggle('xl', S.xl);
-  $('#r-senior').setAttribute('aria-pressed', S.role==='senior');
-  $('#r-youth').setAttribute('aria-pressed', S.role==='youth');
-}
-
-document.addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
-  const d = b.dataset;
-  if(b.id==='r-senior'||b.id==='r-youth'){
-    const r=b.id==='r-senior'?'senior':'youth'; if(r===S.role) return;
-    S.role=r;S.tab='hjem';S.view=null;return render('role');
-  }
-  if(d.go) return go(d.go);
-  if('back' in d){S.view=null;return render('back')}
-  if(d.open){
-    const back = (d.open==='bestill1'&&S.view==='bestill2')||(d.open==='bestill2'&&S.view==='bestill3');
-    return open(d.open, back?'back':'fwd');
-  }
-  if(d.cat){S.order.cat=d.cat;return open('bestill2')}
-  // Valg og brytere oppdateres på stedet, så de animerer i stedet for å hoppe
-  if(d.day||d.time){
-    const k=d.day?'day':'time'; S.order[k]=d[k];
-    b.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c===b));
-    return;
-  }
-  if('confirm' in d){S.booked.push({...S.order});S.tab='hjem';S.view=null;render('fade');return toast('Bestillingen er sendt. Du får beskjed når en hjelper har sagt ja.')}
-  if(d.job){S.jobId=+d.job;return open('job')}
-  if(d.take){S.taken.push(+d.take);render();return toast('Oppdraget er ditt! Du finner det under Oppdrag.')}
-  if('xl' in d){S.xl=!S.xl;b.querySelector('.tg').classList.toggle('on',S.xl);$('#phone').classList.toggle('xl',S.xl);return}
-  if('notif' in d){S.notif=!S.notif;b.querySelector('.tg').classList.toggle('on',S.notif);return}
-  if(d.toast) return toast(d.toast);
-});
-render('fade');
+  knapper.forEach(function (k) { k.addEventListener('click', function () { vis(k.dataset.rolle); }); });
+  document.getElementById('nullstill').addEventListener('click', function () { vis(rolle, '&nullstill=1'); });
+  if (rolle !== 'eldre') vis(rolle);
+})();
 </script>
 </body>
 </html>
